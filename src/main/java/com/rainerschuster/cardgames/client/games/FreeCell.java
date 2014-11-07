@@ -124,9 +124,6 @@ public class FreeCell extends CardGame {
 		cells.add(cell4);
 
 		final BuildingBySteps buildingAdd = new BuildingInSequence(BuildingBySteps.Direction.DOWN, BuildingBySteps.Suit.ALTERNATING, false);
-		/*buildingAdd.setDirection(Building.Direction.DOWN);
-		buildingAdd.setSuit(Building.Suit.ALTERNATING);
-		buildingAdd.setWrap(false);*/
 
 		final BuildingBySteps buildingRemove = buildingAdd;
 
@@ -191,14 +188,14 @@ public class FreeCell extends CardGame {
 
 	@Override
 	public void layout() {
-		VerticalPanel vp = new VerticalPanel();
-		HorizontalPanel hp = new HorizontalPanel();
+		final VerticalPanel vp = new VerticalPanel();
+		final HorizontalPanel hp = new HorizontalPanel();
 		hp.add(cells);
 		// TODO Add spacing
 		hp.add(foundations);
 		vp.add(hp);
 		vp.add(tableaus);
-		
+
 		table.add(vp);
 	}
 
@@ -206,14 +203,14 @@ public class FreeCell extends CardGame {
 	public void firstDeal() {
 		// Load all cards
 		//Deck.generatePrototypeDeck(this);
-	  List<Card> allCards = deck.newDeck(this);
-		
+		final List<Card> allCards = deck.newDeck(this);
+
 		// Shuffle cards
 		// TODO Collections.shuffle(allCards);
 		int rindex;
 		for (int i = 0; i < allCards.size(); i++) {
 			rindex = Random.nextInt(allCards.size());
-			Card temp = allCards.get(rindex);
+			final Card temp = allCards.get(rindex);
 			allCards.set(rindex, allCards.get(i));
 			allCards.set(i, temp);
 		}
@@ -231,10 +228,9 @@ public class FreeCell extends CardGame {
 		// No stock left
 	}
 
-	//J5private void dealTableauCards(List<Card> deck, int begin, int end, TableauDeck target) {
 	private void dealTableauCards(List<Card> deck, int begin, int end, Tableau target) {
 		// TODO target.addAllCards(deck.subList(begin, end));
-	  List<Card> subList = new ArrayList<Card>();
+		final List<Card> subList = new ArrayList<Card>();
 		for (int i = begin; i <= end; i++) {
 			deck.get(i).showFront();
 			subList.add(deck.get(i));
@@ -243,7 +239,7 @@ public class FreeCell extends CardGame {
 		//target.setCgVisibility(Deck.CGVisibility.ALL);
 	}
 
-	PileListener dl = new PileListener() {
+	private final PileListener dl = new PileListener() {
 		@Override
 		public void onAdd() {
 			if (isWon()) {
@@ -332,4 +328,5 @@ public class FreeCell extends CardGame {
 	public int getFreeCellCount() {
 		return cells.getEmptyPileCount() + tableaus.getEmptyPileCount();
 	}
+
 }

@@ -65,7 +65,7 @@ public class Klondike extends CardGame {
 	public void init() {
 		foundations = new FoundationGroup();
 		tableaus = new TableauGroup();
-		
+
 		stock = new Stock(this);
 		stock.addCardListener(new CardListener() {
 			@Override
@@ -146,13 +146,8 @@ public class Klondike extends CardGame {
 		DNDManager.registerDropController(foundation4DropController);
 		foundations.add(foundation4);
 
-		BuildingBySteps buildingAdd = new BuildingInSequence(BuildingBySteps.Direction.DOWN, BuildingBySteps.Suit.ALTERNATING, false);
-		/*buildingAdd.setDirection(Building.Direction.DOWN);
-		buildingAdd.setSuit(Building.Suit.ALTERNATING);
-		buildingAdd.setWrap(false);
-
-		Building buildingRemove = buildingAdd;*/
-		BuildingBySteps buildingRemove = new BuildingInSequence(BuildingBySteps.Direction.DOWN, BuildingBySteps.Suit.ALTERNATING, false);
+		final BuildingBySteps buildingAdd = new BuildingInSequence(BuildingBySteps.Direction.DOWN, BuildingBySteps.Suit.ALTERNATING, false);
+		final BuildingBySteps buildingRemove = new BuildingInSequence(BuildingBySteps.Direction.DOWN, BuildingBySteps.Suit.ALTERNATING, false);
 
 		tableau1 = new Tableau(this, "tableau1", buildingAdd, buildingRemove); //$NON-NLS-1$
 		tableau1.setCgEmptyStart(Pile.CGEmptyStart.KING);
@@ -196,7 +191,6 @@ public class Klondike extends CardGame {
 //		filler.setWidth("100%");
 		hp.add(filler);
 		hp.setCellWidth(filler, "100%"); //$NON-NLS-1$
-//		hp.add(new HTML("<div style=\"width: 88px;\">&nbsp;</div>"));
 		hp.add(foundations);
 		hp.setCellHorizontalAlignment(foundations, HasHorizontalAlignment.ALIGN_RIGHT);
 		vp.add(hp);
@@ -204,7 +198,7 @@ public class Klondike extends CardGame {
 
 		table.add(vp);
 	}
-	
+
 	@Override
 	public void firstDeal() {
 		// Load all cards
@@ -229,7 +223,7 @@ public class Klondike extends CardGame {
 		dealTableauCards(allCards, 10, 14, tableau5);
 		dealTableauCards(allCards, 15, 20, tableau6);
 		dealTableauCards(allCards, 21, 27, tableau7);
-		
+
 		// Stock
 		// TODO stock.addAllCards(allCards.subList(begin, end));
 		final List<Card> subList = new ArrayList<Card>();
@@ -305,7 +299,7 @@ public class Klondike extends CardGame {
 		int count = 0;
 		boolean flag = true;
 		while (pile.getCardCount() > 0 && flag) {
-			Foundation fd = foundations.getFoundation(pile.getLastCard()/*.getSuit()*/);
+			final Foundation fd = foundations.getFoundation(pile.getLastCard()/*.getSuit()*/);
 			if (fd.acceptsAdd(pile.getLastCard())) {
 				pile.moveTo(fd, pile.getLastCard());
 				// TODO Show last card?
@@ -317,43 +311,5 @@ public class Klondike extends CardGame {
 		}
 		return count;
 	}
-
-	/** @return the {@link FoundationDeck} where the suit belongs to, or the first free stack (if it cannot be determined) */
-	/*private Foundation getFoundation(int suit) {
-		Foundation firstFree = null;
-		if (foundation1.getCardCount() > 0) {
-			if (foundation1.getCard(0).getSuit() == suit)
-				return foundation1;
-		} else {
-			if (firstFree == null)
-				firstFree = foundation1;
-		}
-
-		if (foundation2.getCardCount() > 0) {
-			if (foundation2.getCard(0).getSuit() == suit)
-				return foundation2;
-		} else {
-			if (firstFree == null)
-				firstFree = foundation2;
-		}
-
-		if (foundation3.getCardCount() > 0) {
-			if (foundation3.getCard(0).getSuit() == suit)
-				return foundation3;
-		} else {
-			if (firstFree == null)
-				firstFree = foundation3;
-		}
-
-		if (foundation4.getCardCount() > 0) {
-			if (foundation4.getCard(0).getSuit() == suit)
-				return foundation4;
-		} else {
-			if (firstFree == null)
-				firstFree = foundation4;
-		}
-		assert firstFree != null : "Every suit belongs to a Foundation-Stack that must not be null!";
-		return firstFree;
-	}*/
 
 }

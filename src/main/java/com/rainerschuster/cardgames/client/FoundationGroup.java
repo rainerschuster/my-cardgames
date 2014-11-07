@@ -9,7 +9,7 @@ public class FoundationGroup extends PileGroup {
 
 	@Override
 	String getPrefix() {
-		return "foundation";
+		return "foundation"; //$NON-NLS-1$
 	}
 
 	/** @return the {@link Foundation} where the card belongs to, or the first free pile (if it cannot be determined), or {@code null} if adding is not allowed. */
@@ -18,7 +18,7 @@ public class FoundationGroup extends PileGroup {
 		Foundation firstFree = null;
 
 		for (Widget w : this) {
-			Foundation foundation = (Foundation) w;
+			final Foundation foundation = (Foundation) w;
 			if (foundation.acceptsAdd(card)) {
 				if (foundation.getCardCount() > 0) {
 					return foundation;
@@ -30,13 +30,13 @@ public class FoundationGroup extends PileGroup {
 			}
 		}
 
-		// assert firstFree != null : "Every card belongs to a foundation-pile that must not be null!";
+		// assert firstFree != null : "Every card belongs to a foundation-pile that must not be null!"; //$NON-NLS-1$
 		return firstFree;
 	}
 
 	/** @return the {@link Foundation} where the suit belongs to, or the first free pile (if it cannot be determined) */
 	/*public Foundation getFoundation(int suit) {
-		// Hier wird suit als building-rule angenommen!
+		// Here suit is assumed as building-rule!
 		Foundation firstFree = null; // The first empty pile
 
 		for (Iterator it = iterator(); it.hasNext();) {
@@ -52,7 +52,7 @@ public class FoundationGroup extends PileGroup {
 			}
 		}
 
-		assert firstFree != null : "Every suit belongs to a foundation-pile that must not be null!";
+		assert firstFree != null : "Every suit belongs to a foundation-pile that must not be null!"; //$NON-NLS-1$
 		return firstFree;
 	}*/
 }

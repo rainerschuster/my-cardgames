@@ -30,8 +30,6 @@ public class Yukon extends CardGame {
 
 	private Messages messages = GWT.create(Messages.class);
 
-//	private Stock stock;
-//	private Waste waste;
 	private Foundation foundation1;
 	private Foundation foundation2;
 	private Foundation foundation3;
@@ -74,10 +72,6 @@ public class Yukon extends CardGame {
 				}
 			}
 		};
-
-		/*waste = new Waste(this);
-		waste.addCardListener(cardListener);
-		stock.setMoveTarget(waste);*/
 
 		foundation1 = new Foundation(this, "foundation1"); //$NON-NLS-1$
 		foundation1.addPileListener(dl);
@@ -133,10 +127,6 @@ public class Yukon extends CardGame {
 	public void layout() {
 		final VerticalPanel vp = new VerticalPanel();
 		final HorizontalPanel hp = new HorizontalPanel();
-		//hp.add(stock);
-		//hp.add(waste);
-		// Placeholder
-		//hp.add(new HTML("<div style=\"width: 88px;\">&nbsp;</div>"));
 		hp.add(foundations);
 		vp.add(hp);
 		vp.add(tableaus);
@@ -155,7 +145,7 @@ public class Yukon extends CardGame {
 		int rindex;
 		for (int i = 0; i < allCards.size(); i++) {
 			rindex = Random.nextInt(allCards.size());
-			Card temp = allCards.get(rindex);
+			final Card temp = allCards.get(rindex);
 			allCards.set(rindex, allCards.get(i));
 			allCards.set(i, temp);
 		}
@@ -185,12 +175,6 @@ public class Yukon extends CardGame {
 			cardList.add(card);
 		}
 		target.addAllCards(cardList);
-		/*Card card;
-		for (int i = 0; i < 4 ; i++) {
-			card = (Card)deck.get(begin + i);
-			card.showFront();
-			target.addCard(card);
-		}*/
 	}
 
 	private void dealTableauCards(List<Card> deck, int begin, int end, Tableau target) {
@@ -229,4 +213,5 @@ public class Yukon extends CardGame {
 				&& (foundation3.getCardCount() == 13)
 				&& (foundation4.getCardCount() == 13);
 	}
+
 }

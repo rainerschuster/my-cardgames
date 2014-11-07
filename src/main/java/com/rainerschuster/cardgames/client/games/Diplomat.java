@@ -63,9 +63,9 @@ public class Diplomat extends CardGame {
 	public void firstDeal() {
 		// Load all cards
 		//Deck.generatePrototypeDeck(this);
-		List<Card> deck1 = deck.newDeck(this);
-		List<Card> deck2 = deck.newDeck(this);
-		List<Card> allCards = deck1;
+		final List<Card> deck1 = deck.newDeck(this);
+		final List<Card> deck2 = deck.newDeck(this);
+		final List<Card> allCards = deck1;
 		allCards.addAll(deck2);
 		//ArrayList allCards = deck.newDeck();
 		
@@ -74,7 +74,7 @@ public class Diplomat extends CardGame {
 		int rindex;
 		for (int i = 0; i < allCards.size(); i++) {
 			rindex = Random.nextInt(allCards.size());
-			Card temp = allCards.get(rindex);
+			final Card temp = allCards.get(rindex);
 			allCards.set(rindex, allCards.get(i));
 			allCards.set(i, temp);
 		}
@@ -91,7 +91,7 @@ public class Diplomat extends CardGame {
 
 		// Stock
 		// TODO stock.addAllCards(allCards.subList(begin, end));
-		List<Card> subList = new ArrayList<Card>();
+		final List<Card> subList = new ArrayList<Card>();
 		for (int i = 40; i < allCards.size(); i++) {
 			subList.add(allCards.get(i));
 		}
@@ -114,7 +114,7 @@ public class Diplomat extends CardGame {
 	public void init() {
 		foundations = new FoundationGroup();
 		tableaus = new TableauGroup();
-		
+
 		stock = new Stock(this);
 		stock.addCardListener(new CardListener(){
 			@Override
@@ -125,9 +125,10 @@ public class Diplomat extends CardGame {
 
 			@Override
 			public void onCardDoubleClick(final Card sender) {
+				// Not used
 			}
 		});
-		
+
 		final CardListener cardListener = new CardListener(){
 			@Override
 			public void onCardClick(final Card sender) {

@@ -32,13 +32,6 @@ public class SpiderSolitaire extends CardGame {
 
 	private Stock stock;
 	private Foundation foundation1;
-	/*private Foundation foundation2;
-	private Foundation foundation3;
-	private Foundation foundation4;
-	private Foundation foundation5;
-	private Foundation foundation6;
-	private Foundation foundation7;
-	private Foundation foundation8;*/
 	private Tableau tableau1;
 	private Tableau tableau2;
 	private Tableau tableau3;
@@ -81,14 +74,8 @@ public class SpiderSolitaire extends CardGame {
 		new CGDropTarget(foundation1);*/
 
 		BuildingBySteps buildingAdd = new BuildingInSequence(BuildingBySteps.Direction.DOWN, BuildingBySteps.Suit.NULL, false);
-		/*buildingAdd.setDirection(Building.Direction.DOWN);
-		buildingAdd.setSuit(Building.Suit.NULL);
-		buildingAdd.setWrap(false);*/
 
 		BuildingBySteps buildingRemove = new BuildingInSequence(BuildingBySteps.Direction.DOWN, BuildingBySteps.Suit.SUIT, false);
-		/*buildingRemove.setDirection(Building.Direction.DOWN);
-		buildingRemove.setSuit(Building.Suit.SUIT);
-		buildingRemove.setWrap(false);*/
 
 		tableau1 = new Tableau(this, "tableau1", buildingAdd, buildingRemove); //$NON-NLS-1$
 		tableau1.setCgEmptyStart(Pile.CGEmptyStart.KING);
@@ -126,7 +113,7 @@ public class SpiderSolitaire extends CardGame {
 		setGameMode(GameMode.DEAL);
 		for (Iterator<Widget> iter = tableaus.iterator(); iter.hasNext();) {
 			if (stock.getCardCount() > 0) {
-				Card lastCard = stock.getLastCard();
+				final Card lastCard = stock.getLastCard();
 				stock.moveTo((Tableau) iter.next(), lastCard);
 				lastCard.showFront();
 			}
@@ -136,34 +123,14 @@ public class SpiderSolitaire extends CardGame {
 
 	@Override
 	public void layout() {
-		VerticalPanel vp = new VerticalPanel();
+		final VerticalPanel vp = new VerticalPanel();
 		tableaus.setHeight("480px"); //$NON-NLS-1$
 		vp.add(tableaus);
-		HorizontalPanel hp = new HorizontalPanel();
+		final HorizontalPanel hp = new HorizontalPanel();
 		hp.add(foundation1);
 		hp.add(stock);
 		vp.add(hp);
 		table.add(vp);
-
-		/*RootPanel.get("slot_stock").add(stock);
-		RootPanel.get("slot_foundation1").add(foundation1);
-		//RootPanel.get("slot_foundation2").add(foundation2);
-		//RootPanel.get("slot_foundation3").add(foundation3);
-		//RootPanel.get("slot_foundation4").add(foundation4);
-		//RootPanel.get("slot_foundation5").add(foundation5);
-		//RootPanel.get("slot_foundation6").add(foundation6);
-		//RootPanel.get("slot_foundation7").add(foundation7);
-		//RootPanel.get("slot_foundation8").add(foundation8);
-		RootPanel.get("slot_tableau1").add(tableau1);
-		RootPanel.get("slot_tableau2").add(tableau2);
-		RootPanel.get("slot_tableau3").add(tableau3);
-		RootPanel.get("slot_tableau4").add(tableau4);
-		RootPanel.get("slot_tableau5").add(tableau5);
-		RootPanel.get("slot_tableau6").add(tableau6);
-		RootPanel.get("slot_tableau7").add(tableau7);
-		RootPanel.get("slot_tableau8").add(tableau8);
-		RootPanel.get("slot_tableau9").add(tableau9);
-		RootPanel.get("slot_tableau10").add(tableau10);*/
 	}
 
 	@Override
@@ -212,7 +179,6 @@ public class SpiderSolitaire extends CardGame {
 		stock.addAllCards(subList);
 	}
 
-	//J5private void dealTableauCards(List<Card> deck, int begin, int end, TableauDeck target) {
 	private void dealTableauCards(List<Card> deck, int begin, int end, Tableau target) {
 		Card card;
 		// TODO target.addAllCards(deck.subList(begin, end));
@@ -245,13 +211,6 @@ public class SpiderSolitaire extends CardGame {
 	@Override
 	public boolean isWon() {
 		return foundation1.getCardCount() == 104;
-		/*return (foundation1.getCardCount() == 13)
-				&& (foundation2.getCardCount() == 13)
-				&& (foundation3.getCardCount() == 13)
-				&& (foundation4.getCardCount() == 13)
-				&& (foundation5.getCardCount() == 13)
-				&& (foundation6.getCardCount() == 13)
-				&& (foundation7.getCardCount() == 13)
-				&& (foundation8.getCardCount() == 13);*/
 	}
+
 }
