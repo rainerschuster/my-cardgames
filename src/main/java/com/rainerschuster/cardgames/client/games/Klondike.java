@@ -10,7 +10,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Random;
-import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -257,10 +257,10 @@ public class Klondike extends CardGame {
 		@Override
 		public void onAdd() {
 			if (isWon()) {
-//				Window.alert(messages.gameWon());
-				final DialogBox db = new DialogBox();
+				Window.alert(messages.gameWon());
+				/*final DialogBox db = new DialogBox();
 				db.setText(messages.gameWon());
-				db.show();
+				db.show();*/
 			}
 		}
 
