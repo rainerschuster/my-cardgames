@@ -23,7 +23,7 @@ import com.rainerschuster.cardgames.client.games.CardGame;
  */
 public class Card extends FocusPanel {
 
-	private final Logger logger = Logger.getLogger(Card.class.getName());
+	private static final Logger LOG = Logger.getLogger(Card.class.getName());
 	
 	/** Per default the back of the card is shown. */
 	private boolean backShowing = true;
@@ -75,7 +75,7 @@ public class Card extends FocusPanel {
 		addDomHandler(new DoubleClickHandler() {
 			@Override
 			public void onDoubleClick(final DoubleClickEvent event) {
-				logger.log(Level.INFO, "DoubleClickEvent"); //$NON-NLS-1$
+				LOG.log(Level.INFO, "DoubleClickEvent"); //$NON-NLS-1$
 				pile.onDoubleClick(Card.this);
 			}
 		}, DoubleClickEvent.getType());
@@ -83,7 +83,7 @@ public class Card extends FocusPanel {
 		addDomHandler(new ClickHandler() {
 			@Override
 			public void onClick(final ClickEvent event) {
-				logger.log(Level.INFO, "ClickEvent"); //$NON-NLS-1$
+				LOG.log(Level.INFO, "ClickEvent"); //$NON-NLS-1$
 				event.stopPropagation();
 				pile.onClick(Card.this);
 			}

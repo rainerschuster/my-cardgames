@@ -15,7 +15,7 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public final class DNDManager {
 
-	private static final Logger logger = Logger.getLogger(DNDManager.class.getName());
+	private static final Logger LOG = Logger.getLogger(DNDManager.class.getName());
 
 	private static List<DropController> dropControllers = new ArrayList<DropController>();
 	private static List<DragHandler> dragHandlers = new ArrayList<DragHandler>();
@@ -31,7 +31,7 @@ public final class DNDManager {
 	}
 
 	public static void unregisterAll() {
-		logger.log(Level.INFO, "unregisterAll"); //$NON-NLS-1$
+		LOG.log(Level.INFO, "unregisterAll"); //$NON-NLS-1$
 		for (DragHandler dragHandler : dragHandlers) {
 			dragController.removeDragHandler(dragHandler);
 		}
@@ -40,48 +40,48 @@ public final class DNDManager {
 	}
 
 	public static void registerDropController(final DropController dropController) {
-		logger.log(Level.INFO, "registerDropController"); //$NON-NLS-1$
+		LOG.log(Level.INFO, "registerDropController"); //$NON-NLS-1$
 		dragController.registerDropController(dropController);
 		dropControllers.add(dropController);
 	}
 
 	public static void unregisterDropController(final DropController dropController) {
-		logger.log(Level.INFO, "unregisterDropController"); //$NON-NLS-1$
+		LOG.log(Level.INFO, "unregisterDropController"); //$NON-NLS-1$
 		dragController.unregisterDropController(dropController);
 		dropControllers.remove(dropController);
 	}
 
 	public static void unregisterDropControllers() {
-		logger.log(Level.INFO, "unregisterDropControllers"); //$NON-NLS-1$
+		LOG.log(Level.INFO, "unregisterDropControllers"); //$NON-NLS-1$
 		dragController.unregisterDropControllers();
 		dropControllers.clear();
 	}
 
 	public static void addDragHandler(final DragHandler handler) {
-		logger.log(Level.INFO, "addDragHandler"); //$NON-NLS-1$
+		LOG.log(Level.INFO, "addDragHandler"); //$NON-NLS-1$
 		dragController.addDragHandler(handler);
 		dragHandlers.add(handler);
 	}
 	public static void removeDragHandler(final DragHandler handler) {
-		logger.log(Level.INFO, "removeDragHandler"); //$NON-NLS-1$
+		LOG.log(Level.INFO, "removeDragHandler"); //$NON-NLS-1$
 		dragController.removeDragHandler(handler);
 		dragHandlers.remove(handler);
 	}
 	public static void makeDraggable(final Widget draggable) {
-		logger.log(Level.INFO, "makeDraggable"); //$NON-NLS-1$
+		LOG.log(Level.INFO, "makeDraggable"); //$NON-NLS-1$
 		dragController.makeDraggable(draggable);
 	}
 	public static void makeDraggable(final Widget draggable, final Widget dragHandle) {
-		logger.log(Level.INFO, "makeDraggable"); //$NON-NLS-1$
+		LOG.log(Level.INFO, "makeDraggable"); //$NON-NLS-1$
 		dragController.makeDraggable(draggable, dragHandle);
 	}
 	public static void makeNotDraggable(final Widget draggable) {
-		logger.log(Level.INFO, "makeNotDraggable"); //$NON-NLS-1$
+		LOG.log(Level.INFO, "makeNotDraggable"); //$NON-NLS-1$
 		dragController.makeNotDraggable(draggable);
 	}
 
 	public static boolean isDropTarget(final Widget widget) {
-		logger.log(Level.INFO, "isDropTarget"); //$NON-NLS-1$
+		LOG.log(Level.INFO, "isDropTarget"); //$NON-NLS-1$
 		for (DropController dropController : dropControllers) {
 			if (dropController.getDropTarget() == widget) {
 				return true;
@@ -91,7 +91,7 @@ public final class DNDManager {
 	}
 
 	public static DropController getDropTarget(final Widget widget) {
-		logger.log(Level.INFO, "getDropTarget"); //$NON-NLS-1$
+		LOG.log(Level.INFO, "getDropTarget"); //$NON-NLS-1$
 		for (DropController dropController : dropControllers) {
 			if (dropController.getDropTarget() == widget) {
 				return dropController;

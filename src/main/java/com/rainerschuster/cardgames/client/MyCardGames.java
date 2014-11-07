@@ -27,7 +27,7 @@ import com.rainerschuster.cardgames.client.games.Yukon;
  */
 public class MyCardGames implements EntryPoint {
 
-	private final Logger logger = Logger.getLogger(MyCardGames.class.getName());
+	private static final Logger LOG = Logger.getLogger(MyCardGames.class.getName());
 
 	private Table table;
 	private PickupDragController dragController;
@@ -43,7 +43,7 @@ public class MyCardGames implements EntryPoint {
 			@Override
 			public void onUncaughtException(Throwable e) {
 				Throwable unwrapped = unwrap(e);
-				logger.log(Level.SEVERE, "Ex caught!", unwrapped);
+				LOG.log(Level.SEVERE, "Ex caught!", unwrapped);
 			}
 
 			public Throwable unwrap(Throwable e) {

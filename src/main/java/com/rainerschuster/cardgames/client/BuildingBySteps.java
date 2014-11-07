@@ -9,7 +9,7 @@ import java.util.logging.Logger;
  */
 public abstract class BuildingBySteps extends Building {
 
-	private final Logger logger = Logger.getLogger(BuildingBySteps.class.getName());
+	private static final Logger LOG = Logger.getLogger(BuildingBySteps.class.getName());
 
 	private int direction = 0;
 	private int suit = 0;
@@ -31,75 +31,75 @@ public abstract class BuildingBySteps extends Building {
 	@Override
 	protected boolean accepts(final Card card1, final Card card2) {
 		if (card1 == null) {
-			logger.log(Level.INFO, "Card 1 must not be null!"); //$NON-NLS-1$
+			LOG.log(Level.INFO, "Card 1 must not be null!"); //$NON-NLS-1$
 		}
 		if (card2 == null) {
-			logger.log(Level.INFO, "Card 2 must not be null!"); //$NON-NLS-1$
+			LOG.log(Level.INFO, "Card 2 must not be null!"); //$NON-NLS-1$
 		}
 		Objects.requireNonNull(card1);
 		Objects.requireNonNull(card2);
-		logger.log(Level.INFO, "Checking suit."); //$NON-NLS-1$
+		LOG.log(Level.INFO, "Checking suit."); //$NON-NLS-1$
 		// Check suit order
 		switch (suit) {
 		case Suit.NULL:
-			logger.log(Level.INFO, "Checking suit 'NULL'."); //$NON-NLS-1$
+			LOG.log(Level.INFO, "Checking suit 'NULL'."); //$NON-NLS-1$
 			break;
 		case Suit.SUIT:
-			logger.log(Level.INFO, "Checking suit 'SUIT'."); //$NON-NLS-1$
+			LOG.log(Level.INFO, "Checking suit 'SUIT'."); //$NON-NLS-1$
 			if (!suitOrderSuit(card1, card2)) {
 				return false;
 			}
 			break;
 		case Suit.COLOR:
-			logger.log(Level.INFO, "Checking suit 'COLOR'."); //$NON-NLS-1$
+			LOG.log(Level.INFO, "Checking suit 'COLOR'."); //$NON-NLS-1$
 			if (!suitOrderColor(card1, card2)) {
 				return false;
 			}
 			break;
 		case Suit.ALTERNATING:
-			logger.log(Level.INFO, "Checking suit 'ALTERNATING'."); //$NON-NLS-1$
+			LOG.log(Level.INFO, "Checking suit 'ALTERNATING'."); //$NON-NLS-1$
 			if (!suitOrderAlternating(card1, card2)) {
 				return false;
 			}
 			break;
 		case Suit.OTHERSUIT:
-			logger.log(Level.INFO, "Checking suit 'OTHERSUIT'."); //$NON-NLS-1$
+			LOG.log(Level.INFO, "Checking suit 'OTHERSUIT'."); //$NON-NLS-1$
 			if (!suitOrderOtherSuit(card1, card2)) {
 				return false;
 			}
 			break;
 		default:
-			logger.log(Level.INFO, "Invalid suit!"); //$NON-NLS-1$
+			LOG.log(Level.INFO, "Invalid suit!"); //$NON-NLS-1$
 			assert false;
 			break;
 		}
 
-		logger.log(Level.INFO, "Checking direction."); //$NON-NLS-1$
+		LOG.log(Level.INFO, "Checking direction."); //$NON-NLS-1$
 		// Check direction
 		switch (direction) {
 		case Direction.NULL:
-			logger.log(Level.INFO, "Checking direction 'NULL'."); //$NON-NLS-1$
+			LOG.log(Level.INFO, "Checking direction 'NULL'."); //$NON-NLS-1$
 			break;
 		case Direction.UP:
-			logger.log(Level.INFO, "Checking direction 'UP'."); //$NON-NLS-1$
+			LOG.log(Level.INFO, "Checking direction 'UP'."); //$NON-NLS-1$
 			if (card1.getCardValue() > card2.getCardValue()) {
 				return false;
 			}
 			break;
 		case Direction.DOWN:
-			logger.log(Level.INFO, "Checking direction 'DOWN'."); //$NON-NLS-1$
+			LOG.log(Level.INFO, "Checking direction 'DOWN'."); //$NON-NLS-1$
 			if (card1.getCardValue() < card2.getCardValue()) {
-				logger.log(Level.INFO, "Building in direction 'DOWN' denied."); //$NON-NLS-1$
+				LOG.log(Level.INFO, "Building in direction 'DOWN' denied."); //$NON-NLS-1$
 				return false;
 			}
 			break;
 		default:
-			logger.log(Level.INFO, "Invalid direction!"); //$NON-NLS-1$
+			LOG.log(Level.INFO, "Invalid direction!"); //$NON-NLS-1$
 			assert false;
 			break;
 		}
 
-		logger.log(Level.INFO, "Checking step."); //$NON-NLS-1$
+		LOG.log(Level.INFO, "Checking step."); //$NON-NLS-1$
 		// Check step (rank order)
 		return acceptsStep(card1, card2);
 	}

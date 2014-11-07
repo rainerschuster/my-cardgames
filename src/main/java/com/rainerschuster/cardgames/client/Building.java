@@ -9,18 +9,18 @@ import java.util.logging.Logger;
  */
 public abstract class Building {
 
-	private final Logger logger = Logger.getLogger(Building.class.getName());
+	private static final Logger LOG = Logger.getLogger(Building.class.getName());
 
 	private boolean checkAll = true;
 
 	public boolean accepts(final List<Card> cards) {
-		logger.log(Level.INFO, "Accepts list contains " + cards.size() + " cards."); //$NON-NLS-1$
+		LOG.log(Level.INFO, "Accepts list contains " + cards.size() + " cards."); //$NON-NLS-1$
 		Card prevCard = cards.get(0);
 		if (prevCard == null || prevCard.isBackShowing()) {
 			if (prevCard == null) {
-				logger.log(Level.INFO, "Not accepting because previous card is null."); //$NON-NLS-1$
+				LOG.log(Level.INFO, "Not accepting because previous card is null."); //$NON-NLS-1$
 			} else if (prevCard.isBackShowing()) {
-				logger.log(Level.INFO, "Not accepting because previous card shows the back."); //$NON-NLS-1$
+				LOG.log(Level.INFO, "Not accepting because previous card shows the back."); //$NON-NLS-1$
 			}
 			return false;
 		}
@@ -30,13 +30,13 @@ public abstract class Building {
 			// thisCard = (Card) it.next();
 			thisCard = cards.get(i);
 			if (thisCard == null || thisCard.isBackShowing() || !accepts(prevCard, thisCard)) {
-				logger.log(Level.INFO, "Checking card #" + i); //$NON-NLS-1$
+				LOG.log(Level.INFO, "Checking card #" + i); //$NON-NLS-1$
 				if (thisCard == null) {
-					logger.log(Level.INFO, "Not accepting because this card is null."); //$NON-NLS-1$
+					LOG.log(Level.INFO, "Not accepting because this card is null."); //$NON-NLS-1$
 				} else if (thisCard.isBackShowing()) {
-					logger.log(Level.INFO, "Not accepting because this card shows the back."); //$NON-NLS-1$
+					LOG.log(Level.INFO, "Not accepting because this card shows the back."); //$NON-NLS-1$
 				} else {
-					logger.log(Level.INFO, "Not accepting because this card is not accepted."); //$NON-NLS-1$
+					LOG.log(Level.INFO, "Not accepting because this card is not accepted."); //$NON-NLS-1$
 				}
 				return false;
 			}

@@ -37,7 +37,7 @@ import com.rainerschuster.cardgames.client.ui.PileListener;
  */
 public class Klondike extends CardGame {
 
-	private final Logger logger = Logger.getLogger(Klondike.class.getName());
+	private static final Logger LOG = Logger.getLogger(Klondike.class.getName());
 
 	private Messages messages = GWT.create(Messages.class);
 
@@ -70,7 +70,7 @@ public class Klondike extends CardGame {
 		stock.addCardListener(new CardListener() {
 			@Override
 			public void onCardClick(final Card sender) {
-				logger.log(Level.INFO, "Stock: onCardClick."); //$NON-NLS-1$
+				LOG.log(Level.INFO, "Stock: onCardClick."); //$NON-NLS-1$
 				stock.moveTo(waste, sender);
 				sender.showFront();
 			}
@@ -84,7 +84,7 @@ public class Klondike extends CardGame {
 		stock.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(final ClickEvent event) {
-				logger.log(Level.INFO, "Click on stock."); //$NON-NLS-1$
+				LOG.log(Level.INFO, "Click on stock."); //$NON-NLS-1$
 				if (waste.getCardCount() > 0) {
 					// Get back all cards from moveTarget
 					final List<Card> allCards = new ArrayList<Card>();
@@ -282,7 +282,7 @@ public class Klondike extends CardGame {
 		while ((temp = cleanUpRoundTrick()) > 0) {
 			count += temp;
 		}
-		logger.log(Level.INFO, count + " cards cleaned up"); //$NON-NLS-1$
+		LOG.log(Level.INFO, count + " cards cleaned up"); //$NON-NLS-1$
 		return count;
 	}
 
