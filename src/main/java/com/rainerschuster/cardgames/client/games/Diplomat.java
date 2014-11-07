@@ -216,7 +216,7 @@ public class Diplomat extends CardGame {
 	@Override
 	public void layout() {
 		final VerticalPanel vp = new VerticalPanel();
-		tableaus.setHeight("360px");
+		tableaus.setHeight("360px"); //$NON-NLS-1$
 		vp.add(foundations);
 		vp.add(tableaus);
 		final HorizontalPanel hp = new HorizontalPanel();

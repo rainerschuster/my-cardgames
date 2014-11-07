@@ -20,27 +20,27 @@ public class CGSimpleDropController extends SimpleDropController {
 
 	@Override
 	public void onDrop(DragContext context) {
-		logger.log(Level.INFO, "onDrop");
+		logger.log(Level.INFO, "onDrop"); //$NON-NLS-1$
 		super.onDrop(context);
 	}
 
 	@Override
 	public void onPreviewDrop(DragContext context) throws VetoDragException {
-		logger.log(Level.INFO, "onPreviewDrop");
+		logger.log(Level.INFO, "onPreviewDrop"); //$NON-NLS-1$
 		final Widget sender = context.draggable;
 		if (sender instanceof Card) {
 			Pile testDeck = null;
 			if (getDropTarget() instanceof Card) {
 				// Ensures that a move can be cancelled (drop over original pile)
 				if (sender.getParent() == getDropTarget().getParent()) {
-					logger.log(Level.INFO, "Dropping on original pile is OK.");
+					logger.log(Level.INFO, "Dropping on original pile is OK."); //$NON-NLS-1$
 					return;
 				}
 				testDeck = ((Card)getDropTarget()).getPile();
 			} else if (getDropTarget() instanceof Pile) {
 				// Ensures that the move can be cancelled (drop over same pile later)
 				if (sender.getParent() == getDropTarget()) {
-					logger.log(Level.INFO, "Dropping on same pile is OK.");
+					logger.log(Level.INFO, "Dropping on same pile is OK."); //$NON-NLS-1$
 					return;
 				}
 				testDeck = (Pile)getDropTarget();
@@ -51,17 +51,17 @@ public class CGSimpleDropController extends SimpleDropController {
 //				cards.add((Card) sender);
 				//cards.addAll((Collection<? extends Card>) context.selectedWidgets);
 				for (Widget w : context.selectedWidgets) {
-					logger.log(Level.INFO, "Card widget " + w.getElement().getId());
+					logger.log(Level.INFO, "Card widget " + w.getElement().getId() + "."); //$NON-NLS-1$ //$NON-NLS-2$
 					cards.add((Card) w);
 				}
 				if (testDeck.acceptsDropAll(cards)) {
-					logger.log(Level.INFO, "onPreviewDrop accepted.");
+					logger.log(Level.INFO, "onPreviewDrop accepted."); //$NON-NLS-1$
 					return;
 				}
-				logger.log(Level.INFO, "onPreviewDrop did not accept drop all!");
+				logger.log(Level.INFO, "onPreviewDrop did not accept drop all!"); //$NON-NLS-1$
 			}
 		}
-		logger.log(Level.INFO, "Drag source must be a card!");
+		logger.log(Level.INFO, "Drag source must be a card!"); //$NON-NLS-1$
 		throw new VetoDragException();
 	}
 

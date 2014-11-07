@@ -34,7 +34,7 @@ public class Waste extends Pile {
 	}
 
 	public Waste(CardGame cardGame) {
-		this(cardGame, "waste");
+		this(cardGame, "waste"); //$NON-NLS-1$
 	}
 
 	public boolean correctOrder(final Card card1, final Card card2) {

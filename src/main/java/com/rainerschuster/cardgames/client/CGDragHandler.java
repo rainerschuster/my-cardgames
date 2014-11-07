@@ -19,10 +19,10 @@ public class CGDragHandler extends DragHandlerAdapter {
 
 	@Override
 	public void onPreviewDragStart(DragStartEvent event) throws VetoDragException {
-		logger.log(Level.INFO, "onPreviewDragStart");
+		logger.log(Level.INFO, "onPreviewDragStart"); //$NON-NLS-1$
 
 		final Widget sender = event.getContext().draggable;
-		logger.log(Level.INFO, "Sender is " + sender.getElement().getId());
+		logger.log(Level.INFO, "Sender is " + sender.getElement().getId() + "."); //$NON-NLS-1$ //$NON-NLS-2$
 
 		if (sender instanceof Card) {
 			final Card card = (Card) sender;
@@ -30,7 +30,7 @@ public class CGDragHandler extends DragHandlerAdapter {
 			final Pile pile = card.getPile();
 			for (int i = pile.getCardIndex(card) + 1; i < pile.getCardCount(); i++) {
 				// add drag object
-				logger.log(Level.INFO, "Toggle card #" + i);
+				logger.log(Level.INFO, "Toggle card #" + i + "."); //$NON-NLS-1$ //$NON-NLS-2$
 				event.getContext().selectedWidgets.add(pile.getCard(i));
 //				event.getContext().dragController.toggleSelection(pile.getCard(i));
 			}
@@ -39,30 +39,30 @@ public class CGDragHandler extends DragHandlerAdapter {
 //			cards.add(card);
 			// cards.addAll((Collection<? extends Card>)getDragObjects());
 			for (Widget w : event.getContext().selectedWidgets) {
-				logger.log(Level.INFO, "Additional selected card widget " + w.getElement().getId());
+				logger.log(Level.INFO, "Additional selected card widget " + w.getElement().getId() + "."); //$NON-NLS-1$ //$NON-NLS-2$
 				cards.add((Card) w);
 			}
 			if (!pile.acceptsDragAll(cards)) {
-				logger.log(Level.INFO, "Pile does not accept to drag all selected cards!");
+				logger.log(Level.INFO, "Pile does not accept to drag all selected cards!"); //$NON-NLS-1$
 				throw new VetoDragException();
 			}
 		} else {
-			logger.log(Level.INFO, "Drag source must be a card!");
+			logger.log(Level.INFO, "Drag source must be a card!"); //$NON-NLS-1$
 			throw new VetoDragException();
 		}
 	}
 
 	@Override
 	public void onDragEnd(DragEndEvent event) {
-		logger.log(Level.INFO, "onDragEnd");
+		logger.log(Level.INFO, "onDragEnd"); //$NON-NLS-1$
 
 		final DragContext context = event.getContext();
 		if (context.vetoException == null) {
 			final Card sender = (Card)context.selectedWidgets.get(0);
 
-			logger.log(Level.INFO, "Getting previous pile");
+			logger.log(Level.INFO, "Getting previous pile"); //$NON-NLS-1$
 			final Pile oldPile = sender.getPile();
-			logger.log(Level.INFO, "Previous pile " + oldPile.getElement().getId());
+			logger.log(Level.INFO, "Previous pile " + oldPile.getElement().getId() + "."); //$NON-NLS-1$ //$NON-NLS-2$
 			Pile newPile;
 			final Widget dropTarget = context.finalDropController.getDropTarget();
 			if (dropTarget instanceof Card) {
@@ -74,7 +74,7 @@ public class CGDragHandler extends DragHandlerAdapter {
 			final List<Card> cards = new ArrayList<Card>(context.selectedWidgets.size());
 //			cards.addAll((Collection<? extends Card>) widgets);
 			for (Widget w : context.selectedWidgets) {
-				logger.log(Level.INFO, "Card widget " + w.getElement().getId());
+				logger.log(Level.INFO, "Card widget " + w.getElement().getId() + "."); //$NON-NLS-1$ //$NON-NLS-2$
 				cards.add((Card) w);
 			}
 			oldPile.moveTo(newPile, cards);
@@ -83,7 +83,7 @@ public class CGDragHandler extends DragHandlerAdapter {
 		// clear drag objects
 		final List<Widget> selected = new ArrayList<Widget>(context.selectedWidgets);
 		for (Widget w : selected) {
-			logger.log(Level.INFO, "Unselecting widget " + w.getElement().getId());
+			logger.log(Level.INFO, "Unselecting widget " + w.getElement().getId() + "."); //$NON-NLS-1$ //$NON-NLS-2$
 //			event.getContext().dragController.toggleSelection(w);
 			w.removeStyleName(DragClientBundle.INSTANCE.css().selected());
 		}

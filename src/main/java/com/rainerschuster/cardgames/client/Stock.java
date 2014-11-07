@@ -40,7 +40,7 @@ public class Stock extends Pile implements HasClickHandlers {
 	}
 	
 	public Stock(CardGame cardGame) {
-		this(cardGame, "stock");
+		this(cardGame, "stock"); //$NON-NLS-1$
 	}
 	
 	public boolean correctOrder(final Card card1, final Card card2) {

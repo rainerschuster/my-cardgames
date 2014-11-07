@@ -9,6 +9,6 @@ public class TableauGroup extends PileGroup {
 
 	@Override
 	String getPrefix() {
-		return "tableau";
+		return "tableau"; //$NON-NLS-1$
 	}
 }

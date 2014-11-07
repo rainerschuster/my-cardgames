@@ -9,7 +9,7 @@ public class CellGroup extends PileGroup {
 
 	@Override
 	String getPrefix() {
-		return "cell";
+		return "cell"; //$NON-NLS-1$
 	}
 
 }

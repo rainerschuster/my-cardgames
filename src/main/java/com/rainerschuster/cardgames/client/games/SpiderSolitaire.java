@@ -69,7 +69,7 @@ public class SpiderSolitaire extends CardGame {
 				// Not used
 			}
 		});
-		foundation1 = new Foundation(this, "foundation1");
+		foundation1 = new Foundation(this, "foundation1"); //$NON-NLS-1$
 		// NOTE foundation1 is no DropTarget!
 		((BuildingBySteps)foundation1.getBuildingAdd()).setWrap(true);
 		foundation1.setBuildingRemove(buildingForbidden);
@@ -90,34 +90,34 @@ public class SpiderSolitaire extends CardGame {
 		buildingRemove.setSuit(Building.Suit.SUIT);
 		buildingRemove.setWrap(false);*/
 
-		tableau1 = new Tableau(this, "tableau1", buildingAdd, buildingRemove);
+		tableau1 = new Tableau(this, "tableau1", buildingAdd, buildingRemove); //$NON-NLS-1$
 		tableau1.setCgEmptyStart(Pile.CGEmptyStart.KING);
 		tableaus.add(tableau1);
-		tableau2 = new Tableau(this, "tableau2", buildingAdd, buildingRemove);
+		tableau2 = new Tableau(this, "tableau2", buildingAdd, buildingRemove); //$NON-NLS-1$
 		tableau2.setCgEmptyStart(Pile.CGEmptyStart.KING);
 		tableaus.add(tableau2);
-		tableau3 = new Tableau(this, "tableau3", buildingAdd, buildingRemove);
+		tableau3 = new Tableau(this, "tableau3", buildingAdd, buildingRemove); //$NON-NLS-1$
 		tableau3.setCgEmptyStart(Pile.CGEmptyStart.KING);
 		tableaus.add(tableau3);
-		tableau4 = new Tableau(this, "tableau4", buildingAdd, buildingRemove);
+		tableau4 = new Tableau(this, "tableau4", buildingAdd, buildingRemove); //$NON-NLS-1$
 		tableau4.setCgEmptyStart(Pile.CGEmptyStart.KING);
 		tableaus.add(tableau4);
-		tableau5 = new Tableau(this, "tableau5", buildingAdd, buildingRemove);
+		tableau5 = new Tableau(this, "tableau5", buildingAdd, buildingRemove); //$NON-NLS-1$
 		tableau5.setCgEmptyStart(Pile.CGEmptyStart.KING);
 		tableaus.add(tableau5);
-		tableau6 = new Tableau(this, "tableau6", buildingAdd, buildingRemove);
+		tableau6 = new Tableau(this, "tableau6", buildingAdd, buildingRemove); //$NON-NLS-1$
 		tableau6.setCgEmptyStart(Pile.CGEmptyStart.KING);
 		tableaus.add(tableau6);
-		tableau7 = new Tableau(this, "tableau7", buildingAdd, buildingRemove);
+		tableau7 = new Tableau(this, "tableau7", buildingAdd, buildingRemove); //$NON-NLS-1$
 		tableau7.setCgEmptyStart(Pile.CGEmptyStart.KING);
 		tableaus.add(tableau7);
-		tableau8 = new Tableau(this, "tableau8", buildingAdd, buildingRemove);
+		tableau8 = new Tableau(this, "tableau8", buildingAdd, buildingRemove); //$NON-NLS-1$
 		tableau8.setCgEmptyStart(Pile.CGEmptyStart.KING);
 		tableaus.add(tableau8);
-		tableau9 = new Tableau(this, "tableau9", buildingAdd, buildingRemove);
+		tableau9 = new Tableau(this, "tableau9", buildingAdd, buildingRemove); //$NON-NLS-1$
 		tableau9.setCgEmptyStart(Pile.CGEmptyStart.KING);
 		tableaus.add(tableau9);
-		tableau10 = new Tableau(this, "tableau10", buildingAdd, buildingRemove);
+		tableau10 = new Tableau(this, "tableau10", buildingAdd, buildingRemove); //$NON-NLS-1$
 		tableau10.setCgEmptyStart(Pile.CGEmptyStart.KING);
 		tableaus.add(tableau10);
 	}
@@ -137,7 +137,7 @@ public class SpiderSolitaire extends CardGame {
 	@Override
 	public void layout() {
 		VerticalPanel vp = new VerticalPanel();
-		tableaus.setHeight("480px");
+		tableaus.setHeight("480px"); //$NON-NLS-1$
 		vp.add(tableaus);
 		HorizontalPanel hp = new HorizontalPanel();
 		hp.add(foundation1);

@@ -41,11 +41,11 @@ public class Card extends FocusPanel {
 		this.cardGame = cardGame;
 		this.rank = rank;
 		this.suit = suit;
-		this.frontImage = new Image("./img/" + Suit.shortNames()[suit] + Rank.names()[rank] + ".png");
+		this.frontImage = new Image("./img/" + Suit.shortNames()[suit] + Rank.names()[rank] + ".png"); //$NON-NLS-1$ //$NON-NLS-2$
 		frontImage.setPixelSize(88, 125);
 		frontImage.getElement().getStyle().setWidth(88, Unit.PX);
 		frontImage.getElement().getStyle().setHeight(125, Unit.PX);
-		getElement().setId(Suit.values()[suit] + "_" + Rank.names()[rank]);
+		getElement().setId(Suit.values()[suit] + "_" + Rank.names()[rank]); //$NON-NLS-1$
 
 		setStylePrimaryName(MyResources.INSTANCE.css().cgCard());
 		setPixelSize(88, 125);
@@ -75,7 +75,7 @@ public class Card extends FocusPanel {
 		addDomHandler(new DoubleClickHandler() {
 			@Override
 			public void onDoubleClick(final DoubleClickEvent event) {
-				logger.log(Level.INFO, "DoubleClickEvent");
+				logger.log(Level.INFO, "DoubleClickEvent"); //$NON-NLS-1$
 				pile.onDoubleClick(Card.this);
 			}
 		}, DoubleClickEvent.getType());
@@ -83,7 +83,7 @@ public class Card extends FocusPanel {
 		addDomHandler(new ClickHandler() {
 			@Override
 			public void onClick(final ClickEvent event) {
-				logger.log(Level.INFO, "ClickEvent");
+				logger.log(Level.INFO, "ClickEvent"); //$NON-NLS-1$
 				event.stopPropagation();
 				pile.onClick(Card.this);
 			}

@@ -65,22 +65,22 @@ public class FreeCell extends CardGame {
 		foundations = new FoundationGroup();
 		tableaus = new TableauGroup();
 
-		foundation1 = new Foundation(this, "foundation1");
+		foundation1 = new Foundation(this, "foundation1"); //$NON-NLS-1$
 		foundation1.setBuildingRemove(buildingForbidden);
 		foundation1.addPileListener(dl);
 		new CGSimpleDropController(foundation1);
 		foundations.add(foundation1);
-		foundation2 = new Foundation(this, "foundation2");
+		foundation2 = new Foundation(this, "foundation2"); //$NON-NLS-1$
 		foundation2.setBuildingRemove(buildingForbidden);
 		foundation2.addPileListener(dl);
 		new CGSimpleDropController(foundation2);
 		foundations.add(foundation2);
-		foundation3 = new Foundation(this, "foundation3");
+		foundation3 = new Foundation(this, "foundation3"); //$NON-NLS-1$
 		foundation3.setBuildingRemove(buildingForbidden);
 		foundation3.addPileListener(dl);
 		new CGSimpleDropController(foundation3);
 		foundations.add(foundation3);
-		foundation4 = new Foundation(this, "foundation4");
+		foundation4 = new Foundation(this, "foundation4"); //$NON-NLS-1$
 		foundation4.setBuildingRemove(buildingForbidden);
 		foundation4.addPileListener(dl);
 		new CGSimpleDropController(foundation4);
@@ -106,19 +106,19 @@ public class FreeCell extends CardGame {
 			}
 		};
 
-		cell1 = new Cell(this, "cell1");
+		cell1 = new Cell(this, "cell1"); //$NON-NLS-1$
 		new CGSimpleDropController(cell1);
 		cell1.addCardListener(cellCardListener);
 		cells.add(cell1);
-		cell2 = new Cell(this, "cell2");
+		cell2 = new Cell(this, "cell2"); //$NON-NLS-1$
 		new CGSimpleDropController(cell2);
 		cell2.addCardListener(cellCardListener);
 		cells.add(cell2);
-		cell3 = new Cell(this, "cell3");
+		cell3 = new Cell(this, "cell3"); //$NON-NLS-1$
 		new CGSimpleDropController(cell3);
 		cell3.addCardListener(cellCardListener);
 		cells.add(cell3);
-		cell4 = new Cell(this, "cell4");
+		cell4 = new Cell(this, "cell4"); //$NON-NLS-1$
 		new CGSimpleDropController(cell4);
 		cell4.addCardListener(cellCardListener);
 		cells.add(cell4);

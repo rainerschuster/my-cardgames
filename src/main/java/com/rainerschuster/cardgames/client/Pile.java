@@ -166,14 +166,14 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
 		Card card = null;
 		for (int i = 0; i < widgets.size(); i++) {
 			card = widgets.get(i);
-			logger.log(Level.INFO, "card is " + card.getElement().getId());
+			logger.log(Level.INFO, "Card is " + card.getElement().getId() + "."); //$NON-NLS-1$ //$NON-NLS-2$
 
 			final Style style = card.getElement().getStyle();
 			style.setZIndex(zIndex);
 		    style.setMarginTop(topPos, Style.Unit.PX);
 		    style.setMarginLeft(leftPos, Style.Unit.PX);
 
-			logger.log(Level.INFO, "marginTop: " + topPos);
+			logger.log(Level.INFO, "marginTop: " + topPos + "."); //$NON-NLS-1$ //$NON-NLS-2$
 
 			if (cardGame.getGameMode() != GameMode.DEAL) {
 				switch (cgVisibility) {
@@ -196,7 +196,7 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
 			card.setPile(this);
 
 			zIndex++;
-			logger.log(Level.INFO, "Layout: " + layout.name());
+			logger.log(Level.INFO, "Layout: " + layout.name() + "."); //$NON-NLS-1$ //$NON-NLS-2$
 			if (layout == CGLayout.CASCADE) {
 				// position for next card
 				switch (buildingDirection) {
@@ -248,7 +248,7 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
 	public boolean removeAllCards(final List<Card> widgets) {
 		// Empty list means nothing to do
 		if (widgets.isEmpty()) {
-			logger.log(Level.INFO, "Cannot remove because list is empty!");
+			logger.log(Level.INFO, "Cannot remove because list is empty!"); //$NON-NLS-1$
 			return false;
 		}
 
@@ -259,17 +259,17 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
 		for (int i = widgets.size(); i > 0; i--) {
 			final Card cardToRemove = widgets.get(i - 1);
 			if (!remove(cardToRemove)) {
-				logger.log(Level.INFO, "Could not remove card " + cardToRemove.getElement().getId() + "!");
+				logger.log(Level.INFO, "Could not remove card " + cardToRemove.getElement().getId() + "!"); //$NON-NLS-1$ //$NON-NLS-2$
 				// This was removed since gwt-dnd removed the card before!
 				// return false;
 			}
 		}
 
 		if (getChildren().size() > 0) {
-			logger.log(Level.INFO, "Pile is not empty.");
+			logger.log(Level.INFO, "Pile is not empty."); //$NON-NLS-1$
 			// Card lastCard = (Card)cards.lastElement();
 			final Card lastCard = getLastCard();
-			logger.log(Level.INFO, "cgVisibility: " + cgVisibility.name());
+			logger.log(Level.INFO, "cgVisibility: " + cgVisibility.name() + "."); //$NON-NLS-1$ //$NON-NLS-2$
 			switch (cgVisibility) {
 			case ALL:
 			case TOP:
@@ -399,14 +399,14 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
 				}
 				break;
 			default:
-				logger.log(Level.INFO, "Empty start rule invalid or not set!");
-				assert false : "cgEmptyStart value invalid or not set";
+				logger.log(Level.INFO, "Empty start rule invalid or not set!"); //$NON-NLS-1$
+				assert false : "cgEmptyStart value invalid or not set"; //$NON-NLS-1$
 				break;
 			}
 		}
 
 		final boolean result = buildingAdd.accepts(list);
-		logger.log(Level.INFO, "Result of acceptsAddAll is " + result);
+		logger.log(Level.INFO, "Result of acceptsAddAll is " + result + "."); //$NON-NLS-1$ //$NON-NLS-2$
 		return result;
 	}
 
@@ -419,24 +419,24 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
 	/** Basic acceptsRemove function. */
 	public boolean acceptsRemoveAll(final List<Card> cards) {
 		if (cards.isEmpty()) {
-			logger.log(Level.INFO, "List of cards must not be empty!");
+			logger.log(Level.INFO, "List of cards must not be empty!"); //$NON-NLS-1$
 			return false;
 		}
 
 		if (cardGame.getGameMode() == CardGame.GameMode.DEAL) {
-			logger.log(Level.INFO, "Accepted while in 'DEAL' mode.");
+			logger.log(Level.INFO, "Accepted while in 'DEAL' mode."); //$NON-NLS-1$
 			return true;
 		}
 
 		// More cards would be removed than there are on the pile
 		if (cards.size() > getCardCount()) {
-			logger.log(Level.INFO, "Cannot remove more cards than there are on the pile!");
+			logger.log(Level.INFO, "Cannot remove more cards than there are on the pile!"); //$NON-NLS-1$
 			return false;
 		}
 
 		switch (cgRuleRemove) {
 		case ANY:
-			logger.log(Level.INFO, "Removing allowed because of remove rule 'ANY'.");
+			logger.log(Level.INFO, "Removing allowed because of remove rule 'ANY'."); //$NON-NLS-1$
 			return true;
 		case TOP:
 			final boolean resultTop = cards.size() == 1 && cards.get(0) == getLastCard();
@@ -447,11 +447,11 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
 			logger.log(Level.INFO, "Removing" + (resultBuilding ? " " : " not ") + "allowed in remove rule 'BUILDING'.");
 			return resultBuilding;
 		case NONE:
-			logger.log(Level.INFO, "Removing not allowed because of remove rule 'NONE'.");
+			logger.log(Level.INFO, "Removing not allowed because of remove rule 'NONE'."); //$NON-NLS-1$
 			return false;
 		default:
-			logger.log(Level.INFO, "Removing not allowed because no (or invalid) remove rule specified.");
-			assert false : "No (or invalid) remove rule specified.";
+			logger.log(Level.INFO, "Removing not allowed because no (or invalid) remove rule specified."); //$NON-NLS-1$
+			assert false : "No (or invalid) remove rule specified."; //$NON-NLS-1$
 			return false;
 		}
 	}
@@ -478,10 +478,10 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
 		if (getChildren().size() > 0) {
 			final Card lastCard = (Card) getChildren().get(
 					getChildren().size() - 1);
-			logger.log(Level.INFO, "Last card is " + lastCard.getElement().getId() + ".");
+			logger.log(Level.INFO, "Last card is " + lastCard.getElement().getId() + "."); //$NON-NLS-1$ //$NON-NLS-2$
 			return lastCard;
 		} else {
-			logger.log(Level.INFO, "Last card is null.");
+			logger.log(Level.INFO, "Last card is null."); //$NON-NLS-1$
 			return null;
 		}
 	}

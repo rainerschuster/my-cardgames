@@ -70,7 +70,7 @@ public class Klondike extends CardGame {
 		stock.addCardListener(new CardListener() {
 			@Override
 			public void onCardClick(final Card sender) {
-				logger.log(Level.INFO, "Stock: onCardClick.");
+				logger.log(Level.INFO, "Stock: onCardClick."); //$NON-NLS-1$
 				stock.moveTo(waste, sender);
 				sender.showFront();
 			}
@@ -84,7 +84,7 @@ public class Klondike extends CardGame {
 		stock.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(final ClickEvent event) {
-				logger.log(Level.INFO, "Click on stock.");
+				logger.log(Level.INFO, "Click on stock."); //$NON-NLS-1$
 				if (waste.getCardCount() > 0) {
 					// Get back all cards from moveTarget
 					final List<Card> allCards = new ArrayList<Card>();
@@ -188,14 +188,14 @@ public class Klondike extends CardGame {
 	public void layout() {
 		final VerticalPanel vp = new VerticalPanel();
 		final HorizontalPanel hp = new HorizontalPanel();
-		hp.setWidth("100%");
+		hp.setWidth("100%"); //$NON-NLS-1$
 		hp.add(stock);
 		hp.add(waste);
 		// Placeholder
-		final HTML filler = new HTML("&nbsp;");
+		final HTML filler = new HTML("&nbsp;"); //$NON-NLS-1$
 //		filler.setWidth("100%");
 		hp.add(filler);
-		hp.setCellWidth(filler, "100%");
+		hp.setCellWidth(filler, "100%"); //$NON-NLS-1$
 //		hp.add(new HTML("<div style=\"width: 88px;\">&nbsp;</div>"));
 		hp.add(foundations);
 		hp.setCellHorizontalAlignment(foundations, HasHorizontalAlignment.ALIGN_RIGHT);
@@ -275,14 +275,14 @@ public class Klondike extends CardGame {
 				&& (foundation4.getCardCount() == 13);
 	}
 
-	/** @return how many cards could be "cleaned up" in one take (loopes until nothing can be cleaned up anymore) */
+	/** @return how many cards could be "cleaned up" in one take (loops until nothing can be cleaned up anymore) */
 	public int cleanUpTrick() {
 		int count = 0;
 		int temp;
 		while ((temp = cleanUpRoundTrick()) > 0) {
 			count += temp;
 		}
-		System.out.println(count + " cards cleaned up");
+		logger.log(Level.INFO, count + " cards cleaned up"); //$NON-NLS-1$
 		return count;
 	}
 
