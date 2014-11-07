@@ -1,0 +1,28 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+	</ui:style>
+	<g:DockLayoutPanel unit='EM'>
+		<g:north size='5'>
+			<g:MenuBar>
+				<g:MenuItem>Game</g:MenuItem>
+				<g:MenuItem>View</g:MenuItem>
+				<g:MenuItem>Select Game</g:MenuItem>
+				<g:MenuItem>Help</g:MenuItem>
+			</g:MenuBar>
+		</g:north>
+		<g:center>
+			<g:Label>Body</g:Label>
+		</g:center>
+		<g:west size='192'>
+			<g:HTML>Placeholder for Menu</g:HTML>
+		</g:west>
+		<g:east size='192'>
+			<g:HTML>Placeholder for Ads</g:HTML>
+		</g:east>
+	</g:DockLayoutPanel>
+</ui:UiBinder> 
