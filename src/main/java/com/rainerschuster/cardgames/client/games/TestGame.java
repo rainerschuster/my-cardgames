@@ -42,13 +42,11 @@ public class TestGame extends CardGame {
 		}
 
 		// Hand(s)
-		List<Card> subList = new ArrayList<Card>();
-		for (int i = 0; i < 7; i++) {
-			final Card card = allCards.get(i);
-			subList.add(card);
+		final List<Card> handSubList = allCards.subList(0, 7);
+		hand.addAllCards(handSubList);
+		for (Card card : handSubList) {
 			card.showFront();
 		}
-		hand.addAllCards(subList);
 
 		// Tableau
 		final Card card = allCards.get(7);
@@ -56,12 +54,7 @@ public class TestGame extends CardGame {
 		card.showFront();
 
 		// Stock
-		// TODO stock.addAllCards(allCards.subList(begin, end));
-		subList = new ArrayList<Card>();
-		for (int i = 8; i < allCards.size(); i++) {
-			subList.add(allCards.get(i));
-		}
-		stock.addAllCards(subList);
+		stock.addAllCards(allCards.subList(8, allCards.size()));
 	}
 
 	@Override

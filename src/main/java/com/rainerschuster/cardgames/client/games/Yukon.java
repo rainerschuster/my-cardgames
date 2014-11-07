@@ -178,15 +178,9 @@ public class Yukon extends CardGame {
 	}
 
 	private void dealTableauCards(List<Card> deck, int begin, int end, Tableau target) {
-		Card card;
-		// TODO target.addAllCards(deck.subList(begin, end));
-		final List<Card> subList = new ArrayList<Card>();
-		for (int i = begin; i < end; i++) {
-			subList.add(deck.get(i));
-		}
-		target.addAllCards(subList);
+		target.addAllCards(deck.subList(begin, end));
 
-		card = deck.get(end);
+		final Card card = deck.get(end);
 		card.showFront();
 		target.addCard(card);
 //		target.setCgVisibility(Pile.CGVisibility.ALL);

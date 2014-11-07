@@ -90,24 +90,15 @@ public class Diplomat extends CardGame {
 		dealTableauCards(allCards, 35, tableau8);
 
 		// Stock
-		// TODO stock.addAllCards(allCards.subList(begin, end));
-		final List<Card> subList = new ArrayList<Card>();
-		for (int i = 40; i < allCards.size(); i++) {
-			subList.add(allCards.get(i));
-		}
-		stock.addAllCards(subList);
+		stock.addAllCards(allCards.subList(40, allCards.size()));
 	}
 
 	private void dealTableauCards(List<Card> deck, int begin, Tableau target) {
-		Card card;
-		// TODO target.addAllCards(deck.subList(begin, end));
-		final List<Card> subList = new ArrayList<Card>();
-		for (int i = begin; i < begin + 5; i++) {
-			card = deck.get(i);
-			card.showFront();
-			subList.add(card);
-		}
+		final List<Card> subList = deck.subList(begin, begin + 5);
 		target.addAllCards(subList);
+		for (Card card : subList) {
+			card.showFront();
+		}
 	}
 
 	@Override

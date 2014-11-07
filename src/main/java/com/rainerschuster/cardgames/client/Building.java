@@ -1,5 +1,6 @@
 package com.rainerschuster.cardgames.client;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,12 +26,12 @@ public abstract class Building {
 			return false;
 		}
 		Card thisCard = null;
-		// for (Iterator it = cards.listIterator(1); it.hasNext();) {
-		for (int i = 1; i < cards.size(); i++) {
-			// thisCard = (Card) it.next();
-			thisCard = cards.get(i);
+		 for (Iterator<Card> it = cards.listIterator(1); it.hasNext();) {
+//		for (int i = 1; i < cards.size(); i++) {
+			 thisCard = it.next();
+//			thisCard = cards.get(i);
 			if (thisCard == null || thisCard.isBackShowing() || !accepts(prevCard, thisCard)) {
-				LOG.log(Level.INFO, "Checking card #" + i); //$NON-NLS-1$
+//				LOG.log(Level.INFO, "Checking card " + thisCard.getElement().getId() + "."); //$NON-NLS-1$ //$NON-NLS-2$
 				if (thisCard == null) {
 					LOG.log(Level.INFO, "Not accepting because this card is null."); //$NON-NLS-1$
 				} else if (thisCard.isBackShowing()) {

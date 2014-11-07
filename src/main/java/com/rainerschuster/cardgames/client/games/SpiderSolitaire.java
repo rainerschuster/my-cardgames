@@ -171,24 +171,13 @@ public class SpiderSolitaire extends CardGame {
 		dealTableauCards(allCards, 49, 53, tableau10);
 
 		// Stock
-		// TODO stock.addAllCards(allCards.subList(begin, end));
-		final List<Card> subList = new ArrayList<Card>();
-		for (int i = 54; i < allCards.size(); i++) {
-			subList.add(allCards.get(i));
-		}
-		stock.addAllCards(subList);
+		stock.addAllCards(allCards.subList(54, allCards.size()));
 	}
 
 	private void dealTableauCards(List<Card> deck, int begin, int end, Tableau target) {
-		Card card;
-		// TODO target.addAllCards(deck.subList(begin, end));
-		final List<Card> subList = new ArrayList<Card>();
-		for (int i = begin; i < end; i++) {
-			subList.add(deck.get(i));
-		}
-		target.addAllCards(subList);
-		
-		card = deck.get(end);
+		target.addAllCards(deck.subList(begin, end));
+
+		final Card card = deck.get(end);
 		card.showFront();
 		target.addCard(card);
 		target.setCgVisibility(Pile.CGVisibility.ALL);

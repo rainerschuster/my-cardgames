@@ -225,24 +225,13 @@ public class Klondike extends CardGame {
 		dealTableauCards(allCards, 21, 27, tableau7);
 
 		// Stock
-		// TODO stock.addAllCards(allCards.subList(begin, end));
-		final List<Card> subList = new ArrayList<Card>();
-		for (int i = 28; i < allCards.size(); i++) {
-			subList.add(allCards.get(i));
-		}
-		stock.addAllCards(subList);
+		stock.addAllCards(allCards.subList(28, allCards.size()));
 	}
 
 	private void dealTableauCards(List<Card> deck, int begin, int end, Tableau target) {
-		Card card;
-		// TODO target.addAllCards(deck.subList(begin, end));
-		final List<Card> subList = new ArrayList<Card>();
-		for (int i = begin; i < end; i++) {
-			subList.add(deck.get(i));
-		}
-		target.addAllCards(subList);
+		target.addAllCards(deck.subList(begin, end));
 
-		card = deck.get(end);
+		final Card card = deck.get(end);
 		card.showFront();
 		target.addCard(card);
 	}
