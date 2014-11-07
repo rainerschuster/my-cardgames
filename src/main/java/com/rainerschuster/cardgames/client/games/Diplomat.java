@@ -33,7 +33,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 public class Diplomat extends CardGame {
 
 	private Messages messages = GWT.create(Messages.class);
-	
+
 	private Stock stock;
 	private Waste waste;
 	private Foundation foundation1;
@@ -78,7 +78,7 @@ public class Diplomat extends CardGame {
 			allCards.set(rindex, allCards.get(i));
 			allCards.set(i, temp);
 		}
-		
+
 		// Tableau
 		dealTableauCards(allCards, 0, tableau1);
 		dealTableauCards(allCards, 5, tableau2);
@@ -88,7 +88,7 @@ public class Diplomat extends CardGame {
 		dealTableauCards(allCards, 25, tableau6);
 		dealTableauCards(allCards, 30, tableau7);
 		dealTableauCards(allCards, 35, tableau8);
-		
+
 		// Stock
 		// TODO stock.addAllCards(allCards.subList(begin, end));
 		List<Card> subList = new ArrayList<Card>();
@@ -97,11 +97,11 @@ public class Diplomat extends CardGame {
 		}
 		stock.addAllCards(subList);
 	}
-	
+
 	private void dealTableauCards(List<Card> deck, int begin, Tableau target) {
 		Card card;
 		// TODO target.addAllCards(deck.subList(begin, end));
-		List<Card> subList = new ArrayList<Card>();
+		final List<Card> subList = new ArrayList<Card>();
 		for (int i = begin; i < begin + 5; i++) {
 			card = deck.get(i);
 			card.showFront();
@@ -118,39 +118,40 @@ public class Diplomat extends CardGame {
 		stock = new Stock(this);
 		stock.addCardListener(new CardListener(){
 			@Override
-			public void onCardClick(Card sender) {
+			public void onCardClick(final Card sender) {
 				stock.moveTo(waste, sender);
 				sender.showFront();
 			}
 
 			@Override
-			public void onCardDoubleClick(Card sender) {
+			public void onCardDoubleClick(final Card sender) {
 			}
 		});
 		
-		CardListener cardListener = new CardListener(){
+		final CardListener cardListener = new CardListener(){
 			@Override
-			public void onCardClick(Card sender) {
+			public void onCardClick(final Card sender) {
+				// Not used
 			}
 
 			// Move to foundation if allowed
 			@Override
-			public void onCardDoubleClick(Card sender) {
-				if ((sender.getPile()).acceptsRemove(sender)) {
+			public void onCardDoubleClick(final Card sender) {
+				if (sender.getPile().acceptsRemove(sender)) {
 					Foundation foundation = foundations.getFoundation(sender/*.getSuit()*/);
 					if (foundation != null) {
 						if (foundation.acceptsAdd(sender)) {
-							(sender.getPile()).moveTo(foundation, sender);
+							sender.getPile().moveTo(foundation, sender);
 						}
 					}
 				}
 			}
 		};
-		
+
 		waste = new Waste(this);
 		waste.addCardListener(cardListener);
 		stock.setMoveTarget(waste);
-		
+
 		foundation1 = new Foundation(this, "foundation1"); //$NON-NLS-1$
 		foundation1.addPileListener(pl);
 		new CGSimpleDropController(foundation1);
@@ -183,10 +184,9 @@ public class Diplomat extends CardGame {
 		foundation8.addPileListener(pl);
 		new CGSimpleDropController(foundation8);
 		foundations.add(foundation8);
-		
-		
-		BuildingBySteps buildingAdd = new BuildingInSequence(BuildingBySteps.Direction.DOWN, BuildingBySteps.Suit.NULL, false);
-		
+
+		final BuildingBySteps buildingAdd = new BuildingInSequence(BuildingBySteps.Direction.DOWN, BuildingBySteps.Suit.NULL, false);
+
 		tableau1 = new Tableau(this, "tableau1", CGLayout.CASCADE, CGVisibility.ALL, CGEmptyStart.NULL, buildingAdd, CGRemoveRule.TOP); //$NON-NLS-1$
 		tableau1.addCardListener(cardListener);
 		tableaus.add(tableau1);
@@ -215,18 +215,18 @@ public class Diplomat extends CardGame {
 
 	@Override
 	public void layout() {
-		VerticalPanel vp = new VerticalPanel();
+		final VerticalPanel vp = new VerticalPanel();
 		tableaus.setHeight("360px");
 		vp.add(foundations);
 		vp.add(tableaus);
-		HorizontalPanel hp = new HorizontalPanel();
+		final HorizontalPanel hp = new HorizontalPanel();
 		hp.add(stock);
 		hp.add(waste);
 		vp.add(hp);
 		table.add(vp);
 	}
-	
-	PileListener pl = new PileListener() {
+
+	private final PileListener pl = new PileListener() {
 		@Override
 		public void onAdd() {
 			if (isWon()) {
@@ -239,6 +239,7 @@ public class Diplomat extends CardGame {
 
 		@Override
 		public void onRemove() {
+			// Not used
 		}
 	};
 

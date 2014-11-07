@@ -18,25 +18,25 @@ import com.rainerschuster.cardgames.client.ui.CardListener;
 
 public class TestGame extends CardGame {
 
-  private Stock stock;
-  private Hand hand;
-  private Tableau tableau;
+	private Stock stock;
+	private Hand hand;
+	private Tableau tableau;
 
-  public TestGame(Table table) {
-    super(table);
-  }
+	public TestGame(Table table) {
+		super(table);
+	}
 
   @Override
   public void firstDeal() {
     // Load all cards
-    List<Card> allCards = deck.newDeck(this);
+	  final List<Card> allCards = deck.newDeck(this);
 
     // Shuffle cards
     // TODO Collections.shuffle(allCards);
     int rindex;
     for (int i = 0; i < allCards.size(); i++) {
       rindex = Random.nextInt(allCards.size());
-      Card temp = allCards.get(rindex);
+      final Card temp = allCards.get(rindex);
       allCards.set(rindex, allCards.get(i));
       allCards.set(i, temp);
     }
@@ -44,14 +44,14 @@ public class TestGame extends CardGame {
     // Hand(s)
     List<Card> subList = new ArrayList<Card>();
     for (int i = 0; i < 7; i++) {
-      Card card = allCards.get(i);
+      final Card card = allCards.get(i);
       subList.add(card);
       card.showFront();
     }
     hand.addAllCards(subList);
 
     // Tableau
-    Card card = allCards.get(7);
+    final Card card = allCards.get(7);
     tableau.addCard(card);
     card.showFront();
 
@@ -73,13 +73,14 @@ public class TestGame extends CardGame {
 
     stock.addCardListener(new CardListener() {
       @Override
-      public void onCardClick(Card sender) {
+      public void onCardClick(final Card sender) {
         stock.moveTo(hand, sender);
         sender.showFront();
       }
 
       @Override
-      public void onCardDoubleClick(Card sender) {
+      public void onCardDoubleClick(final Card sender) {
+    	  // Not used
       }
     });
 
@@ -90,7 +91,7 @@ public class TestGame extends CardGame {
 
     hand.addCardListener(new CardListener() {
       @Override
-      public void onCardClick(Card sender) {
+      public void onCardClick(final Card sender) {
         if (tableau.acceptsAdd(sender)) {
           hand.moveTo(tableau, sender);
           sender.showFront();
@@ -98,21 +99,22 @@ public class TestGame extends CardGame {
       }
 
       @Override
-      public void onCardDoubleClick(Card sender) {
+      public void onCardDoubleClick(final Card sender) {
+    	  // Not used
       }
     });
   }
 
-  @Override
-  public void layout() {
-    VerticalPanel vp = new VerticalPanel();
-    HorizontalPanel hp = new HorizontalPanel();
-    hp.add(stock);
-    hp.add(tableau);
-    vp.add(hp);
-    vp.add(hand);
+	@Override
+	public void layout() {
+		final VerticalPanel vp = new VerticalPanel();
+		final HorizontalPanel hp = new HorizontalPanel();
+		hp.add(stock);
+		hp.add(tableau);
+		vp.add(hp);
+		vp.add(hand);
 
-    table.add(vp);
-  }
+		table.add(vp);
+	}
 
 }

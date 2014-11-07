@@ -50,58 +50,25 @@ public class Yukon extends CardGame {
 		super(table);
 	}
 
-	/*@Override
-	public void onModuleLoad() {
-		super.onModuleLoad();
-		cleanUpTrick();
-	}*/
-
 	@Override
 	public void init() {
 		foundations = new FoundationGroup();
 		tableaus = new TableauGroup();
 
-		/*stock = new Stock(this);
-		stock.addCardListener(new CardListener(){
-			public void onCardClick(Card sender) {
-				stock.moveTo(waste, sender);
-				sender.showFront();
-			}
-
-			public void onCardDoubleClick(Card sender) {
-			}
-		});
-		stock.addClickListener(new ClickListener(){
-			public void onClick(Widget sender) {
-				if (waste.getCardCount() > 0) {
-					// Get back all cards from moveTarget
-					ArrayList allCards = new ArrayList();
-					for(int i = 0; i < waste.getCardCount(); i++) {
-						allCards.add(waste.getCard(i));
-						//allCards.add(moveTarget.getCards().get(i));
-					}
-					waste.removeAllCards(allCards);
-					Collections.reverse(allCards);
-					stock.addAllCards(allCards);
-					// HINT moveTo ist hier nicht anwendbar aufgrund der umgekehrten Reihenfolge
-					// moveTo(this, allCards);
-				}
-			}
-		});*/
-
-		CardListener cardListener = new CardListener(){
+		final CardListener cardListener = new CardListener(){
 			@Override
-			public void onCardClick(Card sender) {
+			public void onCardClick(final Card sender) {
+				// Not used
 			}
 
 			// Move to foundation if allowed
 			@Override
-			public void onCardDoubleClick(Card sender) {
-				if ((sender.getPile()).acceptsRemove(sender)) {
-					Foundation foundation = foundations.getFoundation(sender/*.getSuit()*/);
+			public void onCardDoubleClick(final Card sender) {
+				if (sender.getPile().acceptsRemove(sender)) {
+					final Foundation foundation = foundations.getFoundation(sender/*.getSuit()*/);
 					if (foundation != null) {
 						if (foundation.acceptsAdd(sender)) {
-							(sender.getPile()).moveTo(foundation, sender);
+							sender.getPile().moveTo(foundation, sender);
 						}
 					}
 				}
@@ -129,8 +96,8 @@ public class Yukon extends CardGame {
 		new CGSimpleDropController(foundation4);
 		foundations.add(foundation4);
 
-		Building buildingAdd = new BuildingInSequence(BuildingBySteps.Direction.DOWN, BuildingBySteps.Suit.ALTERNATING, false);
-		Building buildingRemove = buildingAllowed;
+		final Building buildingAdd = new BuildingInSequence(BuildingBySteps.Direction.DOWN, BuildingBySteps.Suit.ALTERNATING, false);
+		final Building buildingRemove = buildingAllowed;
 
 		tableau1 = new Tableau(this, "tableau1", buildingAdd, buildingRemove); //$NON-NLS-1$
 		tableau1.setCgEmptyStart(Pile.CGEmptyStart.KING);
@@ -164,8 +131,8 @@ public class Yukon extends CardGame {
 
 	@Override
 	public void layout() {
-		VerticalPanel vp = new VerticalPanel();
-		HorizontalPanel hp = new HorizontalPanel();
+		final VerticalPanel vp = new VerticalPanel();
+		final HorizontalPanel hp = new HorizontalPanel();
 		//hp.add(stock);
 		//hp.add(waste);
 		// Placeholder
@@ -180,8 +147,8 @@ public class Yukon extends CardGame {
 	@Override
 	public void firstDeal() {
 		// Load all cards
-		//Deck.generatePrototypeDeck(this);
-	  List<Card> allCards = deck.newDeck(this);
+//		Deck.generatePrototypeDeck(this);
+		final List<Card> allCards = deck.newDeck(this);
 
 		// Shuffle cards
 		// TODO Collections.shuffle(allCards);
@@ -211,9 +178,9 @@ public class Yukon extends CardGame {
 	}
 
 	private void dealTableauCards2(List<Card> deck, int begin, Tableau target) {
-	  List<Card> cardList = new ArrayList<Card>();
+		final List<Card> cardList = new ArrayList<Card>();
 		for (int i = 0; i < 4 ; i++) {
-			Card card = deck.get(begin + i);
+			final Card card = deck.get(begin + i);
 			card.showFront();
 			cardList.add(card);
 		}
@@ -229,7 +196,7 @@ public class Yukon extends CardGame {
 	private void dealTableauCards(List<Card> deck, int begin, int end, Tableau target) {
 		Card card;
 		// TODO target.addAllCards(deck.subList(begin, end));
-		List<Card> subList = new ArrayList<Card>();
+		final List<Card> subList = new ArrayList<Card>();
 		for (int i = begin; i < end; i++) {
 			subList.add(deck.get(i));
 		}
@@ -238,10 +205,10 @@ public class Yukon extends CardGame {
 		card = deck.get(end);
 		card.showFront();
 		target.addCard(card);
-		//target.setCgVisibility(Pile.CGVisibility.ALL);
+//		target.setCgVisibility(Pile.CGVisibility.ALL);
 	}
 
-	PileListener dl = new PileListener() {
+	private final PileListener dl = new PileListener() {
 		@Override
 		public void onAdd() {
 			if (isWon()) {
@@ -254,6 +221,7 @@ public class Yukon extends CardGame {
 
 		@Override
 		public void onRemove() {
+			// Not used
 		}
 	};
 

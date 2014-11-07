@@ -55,23 +55,18 @@ public class SpiderSolitaire extends CardGame {
 		super(table);
 	}
 
-	/*@Override
-	public void onModuleLoad() {
-		super.onModuleLoad();
-		cleanUpTrick();
-	}*/
-
 	@Override
 	public void init() {
 		stock = new Stock(this);
 		stock.addCardListener(new CardListener(){
 			@Override
-			public void onCardClick(Card sender) {
+			public void onCardClick(final Card sender) {
 				gameDeal();
 			}
 
 			@Override
-			public void onCardDoubleClick(Card sender) {
+			public void onCardDoubleClick(final Card sender) {
+				// Not used
 			}
 		});
 		foundation1 = new Foundation(this, "foundation1");
@@ -180,9 +175,9 @@ public class SpiderSolitaire extends CardGame {
 		// 2 suits
 		//deck.newDeck(Deck.Rank.values(), new int[]{Deck.Suit.SPADES, Deck.Suit.HEARTS});
 		// 4 suits
-	  List<Card> deck1 = deck.newDeck(this);
-	  List<Card> deck2 = deck.newDeck(this);
-	  List<Card> allCards = deck1;
+		final List<Card> deck1 = deck.newDeck(this);
+		final List<Card> deck2 = deck.newDeck(this);
+		final List<Card> allCards = deck1;
 		allCards.addAll(deck2);
 		//ArrayList allCards = deck.newDeck();
 
@@ -191,7 +186,7 @@ public class SpiderSolitaire extends CardGame {
 		int rindex;
 		for (int i = 0; i < allCards.size(); i++) {
 			rindex = Random.nextInt(allCards.size());
-			Card temp = allCards.get(rindex);
+			final Card temp = allCards.get(rindex);
 			allCards.set(rindex, allCards.get(i));
 			allCards.set(i, temp);
 		}
@@ -210,7 +205,7 @@ public class SpiderSolitaire extends CardGame {
 
 		// Stock
 		// TODO stock.addAllCards(allCards.subList(begin, end));
-		List<Card> subList = new ArrayList<Card>();
+		final List<Card> subList = new ArrayList<Card>();
 		for (int i = 54; i < allCards.size(); i++) {
 			subList.add(allCards.get(i));
 		}
@@ -221,7 +216,7 @@ public class SpiderSolitaire extends CardGame {
 	private void dealTableauCards(List<Card> deck, int begin, int end, Tableau target) {
 		Card card;
 		// TODO target.addAllCards(deck.subList(begin, end));
-		List<Card> subList = new ArrayList<Card>();
+		final List<Card> subList = new ArrayList<Card>();
 		for (int i = begin; i < end; i++) {
 			subList.add(deck.get(i));
 		}
@@ -233,7 +228,7 @@ public class SpiderSolitaire extends CardGame {
 		target.setCgVisibility(Pile.CGVisibility.ALL);
 	}
 
-	PileListener dl = new PileListener() {
+	private final PileListener dl = new PileListener() {
 		@Override
 		public void onAdd() {
 			if (isWon()) {
@@ -246,6 +241,7 @@ public class SpiderSolitaire extends CardGame {
 
 		@Override
 		public void onRemove() {
+			// Not used
 		}
 	};
 

@@ -10,7 +10,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Random;
-import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -61,12 +61,6 @@ public class Klondike extends CardGame {
 		super(table);
 	}
 
-	/*@Override
-	public void onModuleLoad() {
-		super.onModuleLoad();
-		cleanUpTrick();
-	}*/
-
 	@Override
 	public void init() {
 		foundations = new FoundationGroup();
@@ -75,14 +69,15 @@ public class Klondike extends CardGame {
 		stock = new Stock(this);
 		stock.addCardListener(new CardListener() {
 			@Override
-			public void onCardClick(Card sender) {
+			public void onCardClick(final Card sender) {
 				logger.log(Level.INFO, "Stock: onCardClick.");
 				stock.moveTo(waste, sender);
 				sender.showFront();
 			}
 
 			@Override
-			public void onCardDoubleClick(Card sender) {
+			public void onCardDoubleClick(final Card sender) {
+				// Not used
 			}
 		});
 
@@ -105,30 +100,31 @@ public class Klondike extends CardGame {
 				}
 			}
 		});
-		
-		CardListener cardListener = new CardListener(){
+
+		final CardListener cardListener = new CardListener(){
 			@Override
-			public void onCardClick(Card sender) {
+			public void onCardClick(final Card sender) {
+				// Not used
 			}
 
 			// Move to foundation if allowed
 			@Override
-			public void onCardDoubleClick(Card sender) {
-				if ((sender.getPile()).acceptsRemove(sender)) {
+			public void onCardDoubleClick(final Card sender) {
+				if (sender.getPile().acceptsRemove(sender)) {
 					final Foundation foundation = foundations.getFoundation(sender/*.getSuit()*/);
 					if (foundation != null) {
 						if (foundation.acceptsAdd(sender)) {
-							(sender.getPile()).moveTo(foundation, sender);
+							sender.getPile().moveTo(foundation, sender);
 						}
 					}
 				}
 			}
 		};
-		
+
 		waste = new Waste(this);
 		waste.addCardListener(cardListener);
 		stock.setMoveTarget(waste);
-		
+
 		foundation1 = new Foundation(this, "foundation1"); //$NON-NLS-1$
 		foundation1.addPileListener(pl);
 		final CGSimpleDropController foundation1DropController = new CGSimpleDropController(foundation1);
@@ -149,12 +145,12 @@ public class Klondike extends CardGame {
 		final CGSimpleDropController foundation4DropController = new CGSimpleDropController(foundation4);
 		DNDManager.registerDropController(foundation4DropController);
 		foundations.add(foundation4);
-		
+
 		BuildingBySteps buildingAdd = new BuildingInSequence(BuildingBySteps.Direction.DOWN, BuildingBySteps.Suit.ALTERNATING, false);
 		/*buildingAdd.setDirection(Building.Direction.DOWN);
 		buildingAdd.setSuit(Building.Suit.ALTERNATING);
 		buildingAdd.setWrap(false);
-		
+
 		Building buildingRemove = buildingAdd;*/
 		BuildingBySteps buildingRemove = new BuildingInSequence(BuildingBySteps.Direction.DOWN, BuildingBySteps.Suit.ALTERNATING, false);
 
@@ -187,7 +183,7 @@ public class Klondike extends CardGame {
 		tableau7.addCardListener(cardListener);
 		tableaus.add(tableau7);
 	}
-	
+
 	@Override
 	public void layout() {
 		final VerticalPanel vp = new VerticalPanel();
@@ -205,11 +201,10 @@ public class Klondike extends CardGame {
 		hp.setCellHorizontalAlignment(foundations, HasHorizontalAlignment.ALIGN_RIGHT);
 		vp.add(hp);
 		vp.add(tableaus);
-		
+
 		table.add(vp);
 	}
 	
-
 	@Override
 	public void firstDeal() {
 		// Load all cards
@@ -243,7 +238,7 @@ public class Klondike extends CardGame {
 		}
 		stock.addAllCards(subList);
 	}
-	
+
 	private void dealTableauCards(List<Card> deck, int begin, int end, Tableau target) {
 		Card card;
 		// TODO target.addAllCards(deck.subList(begin, end));
@@ -252,25 +247,26 @@ public class Klondike extends CardGame {
 			subList.add(deck.get(i));
 		}
 		target.addAllCards(subList);
-		
+
 		card = deck.get(end);
 		card.showFront();
 		target.addCard(card);
 	}
 
-	PileListener pl = new PileListener() {
+	private final PileListener pl = new PileListener() {
 		@Override
 		public void onAdd() {
 			if (isWon()) {
-				Window.alert(messages.gameWon());
-				/*DialogBox db = new DialogBox();
+//				Window.alert(messages.gameWon());
+				final DialogBox db = new DialogBox();
 				db.setText(messages.gameWon());
-				db.show();*/
+				db.show();
 			}
 		}
 
 		@Override
 		public void onRemove() {
+			// Not used
 		}
 	};
 
@@ -324,7 +320,7 @@ public class Klondike extends CardGame {
 		}
 		return count;
 	}
-	
+
 	/** @return the {@link FoundationDeck} where the suit belongs to, or the first free stack (if it cannot be determined) */
 	/*private Foundation getFoundation(int suit) {
 		Foundation firstFree = null;
@@ -335,7 +331,7 @@ public class Klondike extends CardGame {
 			if (firstFree == null)
 				firstFree = foundation1;
 		}
-		
+
 		if (foundation2.getCardCount() > 0) {
 			if (foundation2.getCard(0).getSuit() == suit)
 				return foundation2;
@@ -343,7 +339,7 @@ public class Klondike extends CardGame {
 			if (firstFree == null)
 				firstFree = foundation2;
 		}
-		
+
 		if (foundation3.getCardCount() > 0) {
 			if (foundation3.getCard(0).getSuit() == suit)
 				return foundation3;
@@ -351,7 +347,7 @@ public class Klondike extends CardGame {
 			if (firstFree == null)
 				firstFree = foundation3;
 		}
-		
+
 		if (foundation4.getCardCount() > 0) {
 			if (foundation4.getCard(0).getSuit() == suit)
 				return foundation4;
@@ -362,4 +358,5 @@ public class Klondike extends CardGame {
 		assert firstFree != null : "Every suit belongs to a Foundation-Stack that must not be null!";
 		return firstFree;
 	}*/
+
 }

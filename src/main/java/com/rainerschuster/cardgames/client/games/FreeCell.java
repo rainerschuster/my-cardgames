@@ -34,7 +34,7 @@ public class FreeCell extends CardGame {
 	private Messages messages = GWT.create(Messages.class);
 
 	// HINT "Free" is a keyword that usually means Cell or Tableau (so xxxFreeCell doesn't only mean piles of type Cell)
-	
+
 	private Cell cell1;
 	private Cell cell2;
 	private Cell cell3;
@@ -58,19 +58,13 @@ public class FreeCell extends CardGame {
 	public FreeCell(Table table) {
 		super(table);
 	}
-	
-	/*@Override
-	public void onModuleLoad() {
-		super.onModuleLoad();
-		cleanUpTrick();
-	}*/
 
 	@Override
 	public void init() {
 		cells = new CellGroup();
 		foundations = new FoundationGroup();
 		tableaus = new TableauGroup();
-		
+
 		foundation1 = new Foundation(this, "foundation1");
 		foundation1.setBuildingRemove(buildingForbidden);
 		foundation1.addPileListener(dl);
@@ -92,19 +86,20 @@ public class FreeCell extends CardGame {
 		new CGSimpleDropController(foundation4);
 		foundations.add(foundation4);
 
-		CardListener cellCardListener = new CardListener(){
+		final CardListener cellCardListener = new CardListener(){
 			@Override
-			public void onCardClick(Card sender) {
+			public void onCardClick(final Card sender) {
+				// Not used
 			}
 
 			// Move to foundation if allowed
 			@Override
-			public void onCardDoubleClick(Card sender) {
-				if ((sender.getPile()).acceptsRemove(sender)) {
-					Foundation foundation = foundations.getFoundation(sender/*.getSuit()*/);
+			public void onCardDoubleClick(final Card sender) {
+				if (sender.getPile().acceptsRemove(sender)) {
+					final Foundation foundation = foundations.getFoundation(sender/*.getSuit()*/);
 					if (foundation != null) {
 						if (foundation.acceptsAdd(sender)) {
-							(sender.getPile()).moveTo(foundation, sender);
+							sender.getPile().moveTo(foundation, sender);
 						}
 					}
 				}
@@ -128,31 +123,32 @@ public class FreeCell extends CardGame {
 		cell4.addCardListener(cellCardListener);
 		cells.add(cell4);
 
-		BuildingBySteps buildingAdd = new BuildingInSequence(BuildingBySteps.Direction.DOWN, BuildingBySteps.Suit.ALTERNATING, false);
+		final BuildingBySteps buildingAdd = new BuildingInSequence(BuildingBySteps.Direction.DOWN, BuildingBySteps.Suit.ALTERNATING, false);
 		/*buildingAdd.setDirection(Building.Direction.DOWN);
 		buildingAdd.setSuit(Building.Suit.ALTERNATING);
 		buildingAdd.setWrap(false);*/
 
-		BuildingBySteps buildingRemove = buildingAdd;
+		final BuildingBySteps buildingRemove = buildingAdd;
 
-		CardListener tableauCardListener = new CardListener(){
+		final CardListener tableauCardListener = new CardListener(){
 			@Override
-			public void onCardClick(Card sender) {
+			public void onCardClick(final Card sender) {
+				// Not used
 			}
 
 			// Move to foundation or to cell if allowed
 			@Override
-			public void onCardDoubleClick(Card sender) {
-				if ((sender.getPile()).acceptsRemove(sender)) {
-					Foundation foundation = foundations.getFoundation(sender/*.getSuit()*/);
+			public void onCardDoubleClick(final Card sender) {
+				if (sender.getPile().acceptsRemove(sender)) {
+					final Foundation foundation = foundations.getFoundation(sender/*.getSuit()*/);
 					if (foundation != null) {
 						if (foundation.acceptsAdd(sender)) {
-							(sender.getPile()).moveTo(foundation, sender);
+							sender.getPile().moveTo(foundation, sender);
 						}
 					} else {
-						Pile pile = getNextFreeCell();
+						final Pile pile = getNextFreeCell();
 						if (pile != null) {
-							(sender.getPile()).moveTo(pile, sender);
+							sender.getPile().moveTo(pile, sender);
 						}
 					}
 				}
@@ -260,6 +256,7 @@ public class FreeCell extends CardGame {
 
 		@Override
 		public void onRemove() {
+			// Not used
 		}
 	};
 
@@ -317,7 +314,7 @@ public class FreeCell extends CardGame {
 	public Pile getNextFreeCell() {
 		// Search in cells
 		for (Iterator<Widget> it = cells.iterator(); it.hasNext();) {
-			Pile pile = (Pile) it.next();
+			final Pile pile = (Pile) it.next();
 			if (pile.getCardCount() == 0) {
 				return pile;
 			}
@@ -325,7 +322,7 @@ public class FreeCell extends CardGame {
 
 		// Search in tableaus
 		for (Iterator<Widget> it = tableaus.iterator(); it.hasNext();) {
-			Pile pile = (Pile) it.next();
+			final Pile pile = (Pile) it.next();
 			if (pile.getCardCount() == 0) {
 				return pile;
 			}
