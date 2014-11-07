@@ -258,9 +258,6 @@ public class Klondike extends CardGame {
 		public void onAdd() {
 			if (isWon()) {
 				Window.alert(messages.gameWon());
-				/*final DialogBox db = new DialogBox();
-				db.setText(messages.gameWon());
-				db.show();*/
 			}
 		}
 

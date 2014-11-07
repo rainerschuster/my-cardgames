@@ -233,9 +233,6 @@ public class SpiderSolitaire extends CardGame {
 		public void onAdd() {
 			if (isWon()) {
 				Window.alert(messages.gameWon());
-				/*DialogBox db = new DialogBox();
-				db.setText(messages.gameWon());
-				db.show();*/
 			}
 		}
 
