@@ -1,8 +1,11 @@
 package com.rainerschuster.cardgames.client.games;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.rainerschuster.cardgames.client.Building;
 import com.rainerschuster.cardgames.client.BuildingBySteps;
 import com.rainerschuster.cardgames.client.BuildingInSequence;
@@ -15,13 +18,9 @@ import com.rainerschuster.cardgames.client.Pile;
 import com.rainerschuster.cardgames.client.Table;
 import com.rainerschuster.cardgames.client.Tableau;
 import com.rainerschuster.cardgames.client.TableauGroup;
+import com.rainerschuster.cardgames.client.Utils;
 import com.rainerschuster.cardgames.client.ui.CardListener;
 import com.rainerschuster.cardgames.client.ui.PileListener;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.Random;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
  * @author Rainer Schuster
@@ -142,13 +141,7 @@ public class Yukon extends CardGame {
 
 		// Shuffle cards
 		// TODO Collections.shuffle(allCards);
-		int rindex;
-		for (int i = 0; i < allCards.size(); i++) {
-			rindex = Random.nextInt(allCards.size());
-			final Card temp = allCards.get(rindex);
-			allCards.set(rindex, allCards.get(i));
-			allCards.set(i, temp);
-		}
+		Utils.fisherYates(allCards);
 
 		// Tableau
 		dealTableauCards(allCards, 0, 0, tableau1);

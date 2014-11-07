@@ -1,8 +1,11 @@
 package com.rainerschuster.cardgames.client.games;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.rainerschuster.cardgames.client.BuildingBySteps;
 import com.rainerschuster.cardgames.client.BuildingInSequence;
 import com.rainerschuster.cardgames.client.CGSimpleDropController;
@@ -10,22 +13,18 @@ import com.rainerschuster.cardgames.client.Card;
 import com.rainerschuster.cardgames.client.Foundation;
 import com.rainerschuster.cardgames.client.FoundationGroup;
 import com.rainerschuster.cardgames.client.Messages;
+import com.rainerschuster.cardgames.client.Pile.CGEmptyStart;
+import com.rainerschuster.cardgames.client.Pile.CGLayout;
+import com.rainerschuster.cardgames.client.Pile.CGRemoveRule;
+import com.rainerschuster.cardgames.client.Pile.CGVisibility;
 import com.rainerschuster.cardgames.client.Stock;
 import com.rainerschuster.cardgames.client.Table;
 import com.rainerschuster.cardgames.client.Tableau;
 import com.rainerschuster.cardgames.client.TableauGroup;
+import com.rainerschuster.cardgames.client.Utils;
 import com.rainerschuster.cardgames.client.Waste;
-import com.rainerschuster.cardgames.client.Pile.CGEmptyStart;
-import com.rainerschuster.cardgames.client.Pile.CGRemoveRule;
-import com.rainerschuster.cardgames.client.Pile.CGVisibility;
-import com.rainerschuster.cardgames.client.Pile.CGLayout;
 import com.rainerschuster.cardgames.client.ui.CardListener;
 import com.rainerschuster.cardgames.client.ui.PileListener;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.Random;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
  * @author Rainer Schuster
@@ -71,13 +70,7 @@ public class Diplomat extends CardGame {
 		
 		// Shuffle cards
 		// TODO Collections.shuffle(allCards);
-		int rindex;
-		for (int i = 0; i < allCards.size(); i++) {
-			rindex = Random.nextInt(allCards.size());
-			final Card temp = allCards.get(rindex);
-			allCards.set(rindex, allCards.get(i));
-			allCards.set(i, temp);
-		}
+		Utils.fisherYates(allCards);
 
 		// Tableau
 		dealTableauCards(allCards, 0, tableau1);

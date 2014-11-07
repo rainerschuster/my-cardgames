@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Random;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
@@ -27,6 +26,7 @@ import com.rainerschuster.cardgames.client.Stock;
 import com.rainerschuster.cardgames.client.Table;
 import com.rainerschuster.cardgames.client.Tableau;
 import com.rainerschuster.cardgames.client.TableauGroup;
+import com.rainerschuster.cardgames.client.Utils;
 import com.rainerschuster.cardgames.client.Waste;
 import com.rainerschuster.cardgames.client.dnd.DNDManager;
 import com.rainerschuster.cardgames.client.ui.CardListener;
@@ -207,13 +207,7 @@ public class Klondike extends CardGame {
 
 		// Shuffle cards
 		// TODO Collections.shuffle(allCards);
-		int rindex;
-		for (int i = 0; i < allCards.size(); i++) {
-			rindex = Random.nextInt(allCards.size());
-			final Card temp = allCards.get(rindex);
-			allCards.set(rindex, allCards.get(i));
-			allCards.set(i, temp);
-		}
+		Utils.fisherYates(allCards);
 
 		// Tableau
 		dealTableauCards(allCards, 0, 0, tableau1);
