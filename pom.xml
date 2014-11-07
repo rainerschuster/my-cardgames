@@ -9,7 +9,7 @@
   <artifactId>my-cardgames-gwt</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>GWT Maven Archetype</name>
+  <name>My Cardgames</name>
 
   <properties>
     <!-- Convenience property to set the GWT version -->
