@@ -229,13 +229,11 @@ public class FreeCell extends CardGame {
 	}
 
 	private void dealTableauCards(List<Card> deck, int begin, int end, Tableau target) {
-		// TODO target.addAllCards(deck.subList(begin, end));
-		final List<Card> subList = new ArrayList<Card>();
-		for (int i = begin; i <= end; i++) {
-			deck.get(i).showFront();
-			subList.add(deck.get(i));
-		}
+		final List<Card> subList = deck.subList(begin, end);
 		target.addAllCards(subList);
+		for (Card card : subList) {
+			card.showFront();
+		}
 		//target.setCgVisibility(Deck.CGVisibility.ALL);
 	}
 

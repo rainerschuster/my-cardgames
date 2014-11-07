@@ -27,11 +27,8 @@ public abstract class Building {
 		}
 		Card thisCard = null;
 		 for (Iterator<Card> it = cards.listIterator(1); it.hasNext();) {
-//		for (int i = 1; i < cards.size(); i++) {
 			 thisCard = it.next();
-//			thisCard = cards.get(i);
 			if (thisCard == null || thisCard.isBackShowing() || !accepts(prevCard, thisCard)) {
-//				LOG.log(Level.INFO, "Checking card " + thisCard.getElement().getId() + "."); //$NON-NLS-1$ //$NON-NLS-2$
 				if (thisCard == null) {
 					LOG.log(Level.INFO, "Not accepting because this card is null."); //$NON-NLS-1$
 				} else if (thisCard.isBackShowing()) {

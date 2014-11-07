@@ -163,9 +163,7 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
 			}
 		}
 
-		Card card = null;
-		for (int i = 0; i < widgets.size(); i++) {
-			card = widgets.get(i);
+		for (Card card : widgets) {
 			LOG.log(Level.INFO, "Card is " + card.getElement().getId() + "."); //$NON-NLS-1$ //$NON-NLS-2$
 
 			final Style style = card.getElement().getStyle();
@@ -218,6 +216,8 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
 				}
 			}
 		}
+
+		final Card card = widgets.get(widgets.size() - 1);
 
 		// parameters for last card
 		if (cardGame.getGameMode() != GameMode.DEAL && cgVisibility == CGVisibility.TOP) {
@@ -328,18 +328,30 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
 		return true;
 	}
 
-	/*
-	 * public boolean acceptsRemoveFrom(Card card) { // Wenn R�ckseite gezeigt
-	 * wird if (card.isBackShowing()) { return false; } // Wenn letzte Karte if
-	 * (getChildren().indexOf(card) + 1 == getChildren().size()) { return true;
-	 * } Card prevCard = card; for (int i = getChildren().indexOf(card) + 1; i <
-	 * getChildren().size(); i++) { Card myCard = (Card)getChildren().get(i); if
-	 * (!correctOrder(prevCard, myCard)) { return false; } prevCard = myCard; }
-	 * // Wenn Stapel leer und es wird das abgefragt ist ein Fehler aufgetreten
-	 * if (getChildren().size() == 0) {
-	 * System.err.println("Can't drag from an empty pile!"); return false; }
-	 * return true; }
-	 */
+//	public boolean acceptsRemoveFrom(Card card) {
+//		// If back side is shown
+//		if (card.isBackShowing()) {
+//			return false;
+//		}
+//		// If last card
+//		if (getChildren().indexOf(card) + 1 == getChildren().size()) {
+//			return true;
+//		}
+//		Card prevCard = card;
+//		for (int i = getChildren().indexOf(card) + 1; i < getChildren().size(); i++) {
+//			Card myCard = (Card) getChildren().get(i);
+//			if (!correctOrder(prevCard, myCard)) {
+//				return false;
+//			}
+//			prevCard = myCard;
+//		}
+//		// Wenn Stapel leer und es wird das abgefragt ist ein Fehler aufgetreten
+//		if (getChildren().size() == 0) {
+//			System.err.println("Can't drag from an empty pile!");
+//			return false;
+//		}
+//		return true;
+//	}
 
 	public boolean acceptsAdd(final Card card) {
 		final List<Card> cards = new ArrayList<Card>();
