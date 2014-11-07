@@ -23,6 +23,7 @@ import com.rainerschuster.cardgames.client.ui.CardListener;
 import com.rainerschuster.cardgames.client.ui.PileListener;
 
 /**
+ * http://en.wikipedia.org/wiki/Yukon_(solitaire)
  * @author Rainer Schuster
  */
 public class Yukon extends CardGame {
@@ -160,14 +161,6 @@ public class Yukon extends CardGame {
 		dealTableauCards2(allCards, 48, tableau7);
 	}
 
-	private void dealTableauCards2(List<Card> deck, int begin, Tableau target) {
-		final List<Card> cardList = deck.subList(begin, begin + 4);
-		for (Card card : cardList) {
-			card.showFront();
-		}
-		target.addAllCards(cardList);
-	}
-
 	private void dealTableauCards(List<Card> deck, int begin, int end, Tableau target) {
 		target.addAllCards(deck.subList(begin, end));
 
@@ -175,6 +168,14 @@ public class Yukon extends CardGame {
 		card.showFront();
 		target.addCard(card);
 //		target.setCgVisibility(Pile.CGVisibility.ALL);
+	}
+
+	private void dealTableauCards2(List<Card> deck, int begin, Tableau target) {
+		final List<Card> cardList = deck.subList(begin, begin + 4);
+		for (Card card : cardList) {
+			card.showFront();
+		}
+		target.addAllCards(cardList);
 	}
 
 	private final PileListener dl = new PileListener() {
