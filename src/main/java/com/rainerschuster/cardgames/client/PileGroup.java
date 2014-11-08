@@ -13,7 +13,7 @@ public abstract class PileGroup extends HorizontalPanel /* Vector */{
 
 //	// synchronized?
 //	@Override
-//	public boolean add(Object o) {
+//	public boolean add(final Object o) {
 //		((Pile) o).getElement().setId(getPrefix() + (size() + 1));
 //		return super.add(o);
 //	}

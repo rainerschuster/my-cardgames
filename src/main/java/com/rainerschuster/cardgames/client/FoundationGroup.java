@@ -35,7 +35,7 @@ public class FoundationGroup extends PileGroup {
     }
 
     /** @return the {@link Foundation} where the suit belongs to, or the first free pile (if it cannot be determined) */
-    /*public Foundation getFoundation(int suit) {
+    /*public Foundation getFoundation(final int suit) {
 		// Here suit is assumed as building-rule!
 		Foundation firstFree = null; // The first empty pile
 

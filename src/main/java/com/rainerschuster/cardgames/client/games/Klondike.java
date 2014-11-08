@@ -90,13 +90,13 @@ public class Klondike extends CardGame {
                     final List<Card> allCards = new ArrayList<Card>();
                     for (int i = 0; i < waste.getCardCount(); i++) {
                         allCards.add(waste.getCard(i));
-                        // allCards.add(moveTarget.getCards().get(i));
+//                        allCards.add(moveTarget.getCards().get(i));
                     }
                     waste.removeAllCards(allCards);
                     Collections.reverse(allCards);
                     stock.addAllCards(allCards);
                     // HINT moveTo cannot be used here because of the reversed order
-                    // moveTo(this, allCards);
+//                    moveTo(this, allCards);
                 }
             }
         });
@@ -188,7 +188,6 @@ public class Klondike extends CardGame {
         hp.add(waste);
         // Placeholder
         final HTML filler = new HTML("&nbsp;"); //$NON-NLS-1$
-        //		filler.setWidth("100%");
         hp.add(filler);
         hp.setCellWidth(filler, "100%"); //$NON-NLS-1$
         hp.add(foundations);
@@ -202,7 +201,7 @@ public class Klondike extends CardGame {
     @Override
     public void firstDeal() {
         // Load all cards
-        //Deck.generatePrototypeDeck(this);
+//        Deck.generatePrototypeDeck(this);
         final List<Card> allCards = deck.newDeck(this);
 
         // Shuffle cards
@@ -222,7 +221,7 @@ public class Klondike extends CardGame {
         stock.addAllCards(allCards.subList(28, allCards.size()));
     }
 
-    private void dealTableauCards(List<Card> deck, int begin, int end, Tableau target) {
+    private void dealTableauCards(final List<Card> deck, final int begin, final int end, final Tableau target) {
         target.addAllCards(deck.subList(begin, end));
 
         final Card card = deck.get(end);
@@ -278,7 +277,7 @@ public class Klondike extends CardGame {
     }
 
     /** @return how many cards could be "cleaned up" at a pile */
-    private int cleanUpTrickStack(Pile pile) {
+    private int cleanUpTrickStack(final Pile pile) {
         int count = 0;
         boolean flag = true;
         while (pile.getCardCount() > 0 && flag) {
@@ -286,7 +285,7 @@ public class Klondike extends CardGame {
             if (fd.acceptsAdd(pile.getLastCard())) {
                 pile.moveTo(fd, pile.getLastCard());
                 // TODO Show last card?
-                //if (deck.getCardCount() > 0) deck.getLastCard().showFront();
+//                if (deck.getCardCount() > 0) deck.getLastCard().showFront();
                 count++;
             } else {
                 flag = false;

@@ -86,7 +86,7 @@ public class Diplomat extends CardGame {
         stock.addAllCards(allCards.subList(40, allCards.size()));
     }
 
-    private void dealTableauCards(List<Card> deck, int begin, Tableau target) {
+    private void dealTableauCards(final List<Card> deck, final int begin, final Tableau target) {
         final List<Card> subList = deck.subList(begin, begin + 5);
         target.addAllCards(subList);
         for (Card card : subList) {
@@ -123,7 +123,7 @@ public class Diplomat extends CardGame {
             @Override
             public void onCardDoubleClick(final Card sender) {
                 if (sender.getPile().acceptsRemove(sender)) {
-                    Foundation foundation = foundations.getFoundation(sender/*.getSuit()*/);
+                    final Foundation foundation = foundations.getFoundation(sender/*.getSuit()*/);
                     if (foundation != null) {
                         if (foundation.acceptsAdd(sender)) {
                             sender.getPile().moveTo(foundation, sender);

@@ -10,7 +10,7 @@ public class DefaultCardValues extends CardValues {
     }
 
     @Override
-    public int getCardValue(Card card) {
+    public int getCardValue(final Card card) {
         return card.getRank();
     }
 
@@ -26,7 +26,7 @@ public class DefaultCardValues extends CardValues {
 	}
 
 	@Override
-	public int getCardValue(Card card) {
+	public int getCardValue(final Card card) {
 		return defaultCardValues.get(card.getRank());
 	}*/
 

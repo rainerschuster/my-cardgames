@@ -72,9 +72,9 @@ public class SpiderSolitaire extends CardGame {
 		foundation1.addDeckListener(dl);
 		new CGDropTarget(foundation1);*/
 
-        BuildingBySteps buildingAdd = new BuildingInSequence(BuildingBySteps.Direction.DOWN, BuildingBySteps.Suit.NULL, false);
+        final BuildingBySteps buildingAdd = new BuildingInSequence(BuildingBySteps.Direction.DOWN, BuildingBySteps.Suit.NULL, false);
 
-        BuildingBySteps buildingRemove = new BuildingInSequence(BuildingBySteps.Direction.DOWN, BuildingBySteps.Suit.SUIT, false);
+        final BuildingBySteps buildingRemove = new BuildingInSequence(BuildingBySteps.Direction.DOWN, BuildingBySteps.Suit.SUIT, false);
 
         tableau1 = new Tableau(this, "tableau1", buildingAdd, buildingRemove); //$NON-NLS-1$
         tableau1.setCgEmptyStart(Pile.CGEmptyStart.KING);
@@ -167,7 +167,7 @@ public class SpiderSolitaire extends CardGame {
         stock.addAllCards(allCards.subList(54, allCards.size()));
     }
 
-    private void dealTableauCards(List<Card> deck, int begin, int end, Tableau target) {
+    private void dealTableauCards(final List<Card> deck, final int begin, final int end, final Tableau target) {
         target.addAllCards(deck.subList(begin, end));
 
         final Card card = deck.get(end);

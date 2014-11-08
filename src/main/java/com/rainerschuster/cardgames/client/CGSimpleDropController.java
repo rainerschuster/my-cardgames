@@ -19,13 +19,13 @@ public class CGSimpleDropController extends SimpleDropController {
     }
 
     @Override
-    public void onDrop(DragContext context) {
+    public void onDrop(final DragContext context) {
         LOG.log(Level.INFO, "onDrop"); //$NON-NLS-1$
         super.onDrop(context);
     }
 
     @Override
-    public void onPreviewDrop(DragContext context) throws VetoDragException {
+    public void onPreviewDrop(final DragContext context) throws VetoDragException {
         LOG.log(Level.INFO, "onPreviewDrop"); //$NON-NLS-1$
         final Widget sender = context.draggable;
         if (sender instanceof Card) {
@@ -48,8 +48,8 @@ public class CGSimpleDropController extends SimpleDropController {
 
             if (testDeck != null) {
                 final List<Card> cards = new ArrayList<Card>();
-                //				cards.add((Card) sender);
-                //cards.addAll((Collection<? extends Card>) context.selectedWidgets);
+//                cards.add((Card) sender);
+//                cards.addAll((Collection<? extends Card>) context.selectedWidgets);
                 for (Widget w : context.selectedWidgets) {
                     LOG.log(Level.INFO, "Card widget " + w.getElement().getId() + "."); //$NON-NLS-1$ //$NON-NLS-2$
                     cards.add((Card) w);

@@ -18,7 +18,7 @@ public class CGDragHandler extends DragHandlerAdapter {
     private static final Logger LOG = Logger.getLogger(CGDragHandler.class.getName());
 
     @Override
-    public void onPreviewDragStart(DragStartEvent event) throws VetoDragException {
+    public void onPreviewDragStart(final DragStartEvent event) throws VetoDragException {
         LOG.log(Level.INFO, "onPreviewDragStart"); //$NON-NLS-1$
 
         final Widget sender = event.getContext().draggable;
@@ -37,7 +37,7 @@ public class CGDragHandler extends DragHandlerAdapter {
 
             final List<Card> cards = new ArrayList<Card>();
 //            cards.add(card);
-            // cards.addAll((Collection<? extends Card>)getDragObjects());
+//            cards.addAll((Collection<? extends Card>)getDragObjects());
             for (Widget w : event.getContext().selectedWidgets) {
                 LOG.log(Level.INFO, "Additional selected card widget " + w.getElement().getId() + "."); //$NON-NLS-1$ //$NON-NLS-2$
                 cards.add((Card) w);
@@ -53,7 +53,7 @@ public class CGDragHandler extends DragHandlerAdapter {
     }
 
     @Override
-    public void onDragEnd(DragEndEvent event) {
+    public void onDragEnd(final DragEndEvent event) {
         LOG.log(Level.INFO, "onDragEnd"); //$NON-NLS-1$
 
         final DragContext context = event.getContext();

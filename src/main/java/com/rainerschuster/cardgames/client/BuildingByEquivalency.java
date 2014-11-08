@@ -10,7 +10,7 @@ public class BuildingByEquivalency extends Building {
     }
 
     @Override
-    protected boolean accepts(Card card1, Card card2) {
+    protected boolean accepts(final Card card1, final Card card2) {
         return card1.getSuit() == card2.getSuit()
                 || card1.getRank() == card2.getRank();
     }

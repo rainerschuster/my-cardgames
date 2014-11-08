@@ -190,7 +190,6 @@ public class FreeCell extends CardGame {
         final VerticalPanel vp = new VerticalPanel();
         final HorizontalPanel hp = new HorizontalPanel();
         hp.add(cells);
-        // TODO Add spacing
         hp.add(foundations);
         vp.add(hp);
         vp.add(tableaus);
@@ -201,7 +200,7 @@ public class FreeCell extends CardGame {
     @Override
     public void firstDeal() {
         // Load all cards
-        //Deck.generatePrototypeDeck(this);
+//        Deck.generatePrototypeDeck(this);
         final List<Card> allCards = deck.newDeck(this);
 
         // Shuffle cards
@@ -221,13 +220,13 @@ public class FreeCell extends CardGame {
         // No stock left
     }
 
-    private void dealTableauCards(List<Card> deck, int begin, int end, Tableau target) {
+    private void dealTableauCards(final List<Card> deck, final int begin, final int end, final Tableau target) {
         final List<Card> subList = deck.subList(begin, end);
         target.addAllCards(subList);
         for (Card card : subList) {
             card.showFront();
         }
-        //target.setCgVisibility(Deck.CGVisibility.ALL);
+//        target.setCgVisibility(Deck.CGVisibility.ALL);
     }
 
     private final PileListener dl = new PileListener() {

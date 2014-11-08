@@ -28,9 +28,9 @@ public class Hand extends Pile {
         setBuildingDirection(CGBuildingDirection.RIGHT);
     }
 
-    Comparator<Card> cardComparator = new Comparator<Card>() {
+    private final Comparator<Card> cardComparator = new Comparator<Card>() {
         @Override
-        public int compare(Card card1, Card card2) {
+        public int compare(final Card card1, final Card card2) {
             if (card1.getSuit() < card2.getSuit()) {
                 return -1;
             }
@@ -48,7 +48,7 @@ public class Hand extends Pile {
     };
 
     @Override
-    public boolean addAllCards(List<Card> widgets) {
+    public boolean addAllCards(final List<Card> widgets) {
         super.addAllCards(widgets);
         final List<Card> list = new ArrayList<Card>();
         for (Iterator<Widget> iter = getChildren().iterator(); iter.hasNext();) {
@@ -60,10 +60,10 @@ public class Hand extends Pile {
     }
 
     @Override
-    public boolean removeAllCards(List<Card> widgets) {
+    public boolean removeAllCards(final List<Card> widgets) {
         // After removing sorting is not necessary, only the empty spaces have to be filled
         if (super.removeAllCards(widgets)) {
-            List<Card> list = new ArrayList<Card>();
+            final List<Card> list = new ArrayList<Card>();
             for (Iterator<Widget> iter = getChildren().iterator(); iter.hasNext();) {
                 list.add((Card) iter.next());
                 iter.remove();

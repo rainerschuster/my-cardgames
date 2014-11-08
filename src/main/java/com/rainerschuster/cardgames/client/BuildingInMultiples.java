@@ -13,7 +13,7 @@ public class BuildingInMultiples extends BuildingBySteps {
     }
 
     @Override
-    protected boolean acceptsStep(int cardRankValue1, int cardRankValue2) {
+    protected boolean acceptsStep(final int cardRankValue1, final int cardRankValue2) {
         return Math.abs(cardRankValue1 - cardRankValue2) == step;
     }
 

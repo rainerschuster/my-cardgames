@@ -121,8 +121,7 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
             // Card lastCard = (Card)cards.lastElement();
             Card lastCard = getLastCard();
 
-            if (cardGame.getGameMode() != GameMode.DEAL
-                    && cgVisibility == CGVisibility.ALL) {
+            if (cardGame.getGameMode() != GameMode.DEAL && cgVisibility == CGVisibility.ALL) {
                 lastCard.showFront();
             } else {
                 lastCard.showBack();
@@ -630,4 +629,5 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
     public void setBuildingDirection(CGBuildingDirection buildingDirection) {
         this.buildingDirection = buildingDirection;
     }
+
 }

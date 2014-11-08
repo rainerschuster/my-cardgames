@@ -12,7 +12,7 @@ public class Schnapsen extends CardGame {
 //    private Cell cell; // "Atout"
 
     // TODO combination-pile
-    // TODO "Ablage" vgl Hearts
+    // TODO "Ablage" cf. Hearts
 
     public Schnapsen(Table table) {
         super(table);

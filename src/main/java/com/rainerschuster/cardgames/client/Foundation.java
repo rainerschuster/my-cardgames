@@ -32,7 +32,7 @@ public class Foundation extends Pile {
     }
 
     //@Override
-    /*public boolean correctOrder(Card card1, Card card2) {
+    /*public boolean correctOrder(final Card card1, final Card card2) {
 		return suitOrderEqual(card1, card2) && rankOrderAceToKing(card1, card2);
 	}*/
 

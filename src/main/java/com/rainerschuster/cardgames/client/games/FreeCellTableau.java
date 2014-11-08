@@ -23,7 +23,7 @@ public class FreeCellTableau extends Tableau {
     }
 
     @Override
-    public boolean acceptsRemoveAll(List<Card> cards) {
+    public boolean acceptsRemoveAll(final List<Card> cards) {
         return super.acceptsRemoveAll(cards)
                 && ((FreeCell) getCardGame()).getFreeCellCount() >= cards.size();
     }
