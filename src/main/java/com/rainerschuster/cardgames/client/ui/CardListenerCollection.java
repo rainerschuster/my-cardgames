@@ -13,29 +13,29 @@ import com.rainerschuster.cardgames.client.Card;
  */
 public class CardListenerCollection extends ArrayList<CardListener> {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * Fires a click event to all listeners.
-	 * 
-	 * @param sender
-	 *            the card sending the event.
-	 */
-	public void fireCardClick(Card sender) {
-		for (CardListener listener : this) {
-			listener.onCardClick(sender);
-		}
-	}
+    /**
+     * Fires a click event to all listeners.
+     * 
+     * @param sender
+     *            the card sending the event.
+     */
+    public void fireCardClick(Card sender) {
+        for (CardListener listener : this) {
+            listener.onCardClick(sender);
+        }
+    }
 
-	/**
-	 * Fires a doubleclick event to all listeners.
-	 * 
-	 * @param sender
-	 *            the card sending the event.
-	 */
-	public void fireCardDoubleClick(Card sender) {
-		for (CardListener listener : this) {
-			listener.onCardDoubleClick(sender);
-		}
-	}
+    /**
+     * Fires a doubleclick event to all listeners.
+     * 
+     * @param sender
+     *            the card sending the event.
+     */
+    public void fireCardDoubleClick(Card sender) {
+        for (CardListener listener : this) {
+            listener.onCardDoubleClick(sender);
+        }
+    }
 }

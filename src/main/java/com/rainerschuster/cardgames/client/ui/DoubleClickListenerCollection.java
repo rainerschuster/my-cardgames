@@ -12,20 +12,19 @@ import com.google.gwt.user.client.ui.Widget;
  * 
  * @author Rainer Schuster
  */
-public class DoubleClickListenerCollection extends
-		ArrayList<DoubleClickListener> {
+public class DoubleClickListenerCollection extends ArrayList<DoubleClickListener> {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * Fires a doubleclick event to all listeners.
-	 * 
-	 * @param sender
-	 *            the widget sending the event.
-	 */
-	public void fireDoubleClick(Widget sender) {
-		for (DoubleClickListener listener : this) {
-			listener.onDoubleClick(sender);
-		}
-	}
+    /**
+     * Fires a doubleclick event to all listeners.
+     * 
+     * @param sender
+     *            the widget sending the event.
+     */
+    public void fireDoubleClick(Widget sender) {
+        for (DoubleClickListener listener : this) {
+            listener.onDoubleClick(sender);
+        }
+    }
 }

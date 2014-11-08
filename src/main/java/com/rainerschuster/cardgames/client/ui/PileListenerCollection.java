@@ -11,23 +11,23 @@ import java.util.ArrayList;
  */
 public class PileListenerCollection extends ArrayList<PileListener> {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * Fires an add event to all listeners.
-	 */
-	public void fireAdd() {
-		for (PileListener listener : this) {
-			listener.onAdd();
-		}
-	}
+    /**
+     * Fires an add event to all listeners.
+     */
+    public void fireAdd() {
+        for (PileListener listener : this) {
+            listener.onAdd();
+        }
+    }
 
-	/**
-	 * Fires a remove event to all listeners.
-	 */
-	public void fireRemove() {
-		for (PileListener listener : this) {
-			listener.onRemove();
-		}
-	}
+    /**
+     * Fires a remove event to all listeners.
+     */
+    public void fireRemove() {
+        for (PileListener listener : this) {
+            listener.onRemove();
+        }
+    }
 }

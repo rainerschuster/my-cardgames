@@ -8,19 +8,19 @@ package com.rainerschuster.cardgames.client.ui;
  */
 public interface SourcesPileEvents {
 
-	/**
-	 * Adds a listener interface to receive pile events.
-	 * 
-	 * @param listener
-	 *            the listener interface to add
-	 */
-	void addPileListener(PileListener listener);
+    /**
+     * Adds a listener interface to receive pile events.
+     * 
+     * @param listener
+     *            the listener interface to add
+     */
+    void addPileListener(PileListener listener);
 
-	/**
-	 * Removes a previously added listener interface.
-	 * 
-	 * @param listener
-	 *            the listener interface to remove
-	 */
-	void removePileListener(PileListener listener);
+    /**
+     * Removes a previously added listener interface.
+     * 
+     * @param listener
+     *            the listener interface to remove
+     */
+    void removePileListener(PileListener listener);
 }

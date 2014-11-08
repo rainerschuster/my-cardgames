@@ -23,130 +23,130 @@ import com.rainerschuster.cardgames.client.games.CardGame;
  */
 public class Card extends FocusPanel {
 
-	private static final Logger LOG = Logger.getLogger(Card.class.getName());
-	
-	/** Per default the back of the card is shown. */
-	private boolean backShowing = true;
-	
-	private Image frontImage;
-	private CardGame cardGame;
-	private Pile pile;
+    private static final Logger LOG = Logger.getLogger(Card.class.getName());
 
-	private final int rank;
+    /** Per default the back of the card is shown. */
+    private boolean backShowing = true;
 
-	private final int suit;
+    private Image frontImage;
+    private CardGame cardGame;
+    private Pile pile;
 
-	public Card(CardGame cardGame, int rank, int suit) {
-		super();
-		this.cardGame = cardGame;
-		this.rank = rank;
-		this.suit = suit;
-		this.frontImage = new Image("./img/" + Suit.shortNames()[suit] + Rank.names()[rank] + ".png"); //$NON-NLS-1$ //$NON-NLS-2$
-		frontImage.setPixelSize(88, 125);
-		frontImage.getElement().getStyle().setWidth(88, Unit.PX);
-		frontImage.getElement().getStyle().setHeight(125, Unit.PX);
-		getElement().setId(Suit.values()[suit] + "_" + Rank.names()[rank]); //$NON-NLS-1$
+    private final int rank;
 
-		setStylePrimaryName(MyResources.INSTANCE.css().cgCard());
-		setPixelSize(88, 125);
-		getElement().getStyle().setOverflow(Overflow.VISIBLE);
+    private final int suit;
 
-		// This is required for FireFox. Otherwise on dragging a click event is additionally fired
-		// see also https://code.google.com/p/gwt-dnd/wiki/GettingStarted
-		// Quote: "In Firefox the handler will always fire when the mouse is clicked, even at the the end of drag operation"
-		Event.addNativePreviewHandler(new Event.NativePreviewHandler() {
+    public Card(CardGame cardGame, int rank, int suit) {
+        super();
+        this.cardGame = cardGame;
+        this.rank = rank;
+        this.suit = suit;
+        this.frontImage = new Image("./img/" + Suit.shortNames()[suit] + Rank.names()[rank] + ".png"); //$NON-NLS-1$ //$NON-NLS-2$
+        frontImage.setPixelSize(88, 125);
+        frontImage.getElement().getStyle().setWidth(88, Unit.PX);
+        frontImage.getElement().getStyle().setHeight(125, Unit.PX);
+        getElement().setId(Suit.values()[suit] + "_" + Rank.names()[rank]); //$NON-NLS-1$
 
-			@Override
-			public void onPreviewNativeEvent(NativePreviewEvent event) {
-				switch (event.getTypeInt()) {
-				case Event.ONMOUSEDOWN:
-				case Event.ONMOUSEMOVE:
-				case Event.ONMOUSEUP:
-					event.getNativeEvent().preventDefault();
-					break;
-				default:
-					break;
-				}
-			}
-		});
+        setStylePrimaryName(MyResources.INSTANCE.css().cgCard());
+        setPixelSize(88, 125);
+        getElement().getStyle().setOverflow(Overflow.VISIBLE);
 
-		DNDManager.makeDraggable(this/*, frontImage*/);
+        // This is required for FireFox. Otherwise on dragging a click event is additionally fired
+        // see also https://code.google.com/p/gwt-dnd/wiki/GettingStarted
+        // Quote: "In Firefox the handler will always fire when the mouse is clicked, even at the the end of drag operation"
+        Event.addNativePreviewHandler(new Event.NativePreviewHandler() {
 
-		addDomHandler(new DoubleClickHandler() {
-			@Override
-			public void onDoubleClick(final DoubleClickEvent event) {
-				LOG.log(Level.INFO, "DoubleClickEvent"); //$NON-NLS-1$
-				pile.onDoubleClick(Card.this);
-			}
-		}, DoubleClickEvent.getType());
+            @Override
+            public void onPreviewNativeEvent(NativePreviewEvent event) {
+                switch (event.getTypeInt()) {
+                case Event.ONMOUSEDOWN:
+                case Event.ONMOUSEMOVE:
+                case Event.ONMOUSEUP:
+                    event.getNativeEvent().preventDefault();
+                    break;
+                default:
+                    break;
+                }
+            }
+        });
 
-		addDomHandler(new ClickHandler() {
-			@Override
-			public void onClick(final ClickEvent event) {
-				LOG.log(Level.INFO, "ClickEvent"); //$NON-NLS-1$
-				event.stopPropagation();
-				pile.onClick(Card.this);
-			}
-		}, ClickEvent.getType());
-	}
+        DNDManager.makeDraggable(this/*, frontImage*/);
 
-	/** Shows the front of the card. */
-	public void showFront() {
-		setWidget(frontImage);
-		backShowing = false;
-	}
+        addDomHandler(new DoubleClickHandler() {
+            @Override
+            public void onDoubleClick(final DoubleClickEvent event) {
+                LOG.log(Level.INFO, "DoubleClickEvent"); //$NON-NLS-1$
+                pile.onDoubleClick(Card.this);
+            }
+        }, DoubleClickEvent.getType());
 
-	/** Shows the back of the card. */
-	public void showBack() {
-		setWidget(null);
-		backShowing = true;
-	}
+        addDomHandler(new ClickHandler() {
+            @Override
+            public void onClick(final ClickEvent event) {
+                LOG.log(Level.INFO, "ClickEvent"); //$NON-NLS-1$
+                event.stopPropagation();
+                pile.onClick(Card.this);
+            }
+        }, ClickEvent.getType());
+    }
 
-	/** Turns around the card. */
-	public void toggle() {
-		if (isFrontShowing()) {
-			showBack();
-		} else {
-			showFront();
-		}
-	}
+    /** Shows the front of the card. */
+    public void showFront() {
+        setWidget(frontImage);
+        backShowing = false;
+    }
 
-	/** @return {@code true} if the front of the card is currently shown. */
-	public boolean isFrontShowing() {
-		return !backShowing;
-	}
+    /** Shows the back of the card. */
+    public void showBack() {
+        setWidget(null);
+        backShowing = true;
+    }
 
-	/** @return {@code true} if the back of the card is currently shown. */
-	public boolean isBackShowing() {
-		return backShowing;
-	}
+    /** Turns around the card. */
+    public void toggle() {
+        if (isFrontShowing()) {
+            showBack();
+        } else {
+            showFront();
+        }
+    }
 
-	public int getRank() {
-		return rank;
-	}
+    /** @return {@code true} if the front of the card is currently shown. */
+    public boolean isFrontShowing() {
+        return !backShowing;
+    }
 
-	public int getSuit() {
-		return suit;
-	}
-	
-	public Pile getPile() {
-		return pile;
-	}
+    /** @return {@code true} if the back of the card is currently shown. */
+    public boolean isBackShowing() {
+        return backShowing;
+    }
 
-	public void setPile(Pile pile) {
-		this.pile = pile;
-	}
+    public int getRank() {
+        return rank;
+    }
 
-	public int getCardValue() {
-		return cardGame.getCardValues().getCardValue(this);
-	}
+    public int getSuit() {
+        return suit;
+    }
 
-	public boolean isBlack() {
-		return (suit == Suit.CLUBS) || (suit == Suit.SPADES);
-	}
+    public Pile getPile() {
+        return pile;
+    }
 
-	public boolean isRed() {
-		return (suit == Suit.DIAMONDS) || (suit == Suit.HEARTS);
-	}
+    public void setPile(Pile pile) {
+        this.pile = pile;
+    }
+
+    public int getCardValue() {
+        return cardGame.getCardValues().getCardValue(this);
+    }
+
+    public boolean isBlack() {
+        return (suit == Suit.CLUBS) || (suit == Suit.SPADES);
+    }
+
+    public boolean isRed() {
+        return (suit == Suit.DIAMONDS) || (suit == Suit.HEARTS);
+    }
 
 }

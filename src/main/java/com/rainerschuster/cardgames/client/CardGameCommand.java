@@ -9,19 +9,19 @@ import com.google.gwt.user.client.Command;
  */
 public class CardGameCommand implements Command {
 
-	private final CardGame cardGame;
-	
-	public CardGameCommand(CardGame cardGame) {
-		super();
-		this.cardGame = cardGame;
-	}
+    private final CardGame cardGame;
 
-	/* (non-Javadoc)
-	 * @see com.google.gwt.user.client.Command#execute()
-	 */
-	@Override
-	public void execute() {
-		cardGame.start();
-	}
+    public CardGameCommand(CardGame cardGame) {
+        super();
+        this.cardGame = cardGame;
+    }
+
+    /* (non-Javadoc)
+     * @see com.google.gwt.user.client.Command#execute()
+     */
+    @Override
+    public void execute() {
+        cardGame.start();
+    }
 
 }

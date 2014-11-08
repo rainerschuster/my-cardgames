@@ -5,16 +5,16 @@ package com.rainerschuster.cardgames.client;
  */
 public class DefaultCardValues extends CardValues {
 
-	public DefaultCardValues(Deck deck) {
-		super(deck);
-	}
+    public DefaultCardValues(Deck deck) {
+        super(deck);
+    }
 
-	@Override
-	public int getCardValue(Card card) {
-		return card.getRank();
-	}
+    @Override
+    public int getCardValue(Card card) {
+        return card.getRank();
+    }
 
-	/*private Map<Deck.Rank, Integer> defaultCardValues;
+    /*private Map<Deck.Rank, Integer> defaultCardValues;
 
 	public DefaultCardValues(Deck deck) {
 		super(deck);

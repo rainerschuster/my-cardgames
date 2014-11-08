@@ -11,21 +11,21 @@ import com.rainerschuster.cardgames.client.Tableau;
  */
 public class FreeCellTableau extends Tableau {
 
-	public FreeCellTableau(CardGame cardGame, String id, Building buildingAdd, Building buildingRemove) {
-		super(cardGame, id, buildingAdd, buildingRemove);
-	}
+    public FreeCellTableau(CardGame cardGame, String id, Building buildingAdd, Building buildingRemove) {
+        super(cardGame, id, buildingAdd, buildingRemove);
+    }
 
-	public FreeCellTableau(CardGame cardGame, String id, CGLayout layout,
-			CGVisibility visibility, CGEmptyStart emptyStart,
-			Building buildingAdd, Building buildingRemove) {
-		super(cardGame, id, layout, visibility, emptyStart, buildingAdd,
-				buildingRemove);
-	}
+    public FreeCellTableau(CardGame cardGame, String id, CGLayout layout,
+            CGVisibility visibility, CGEmptyStart emptyStart,
+            Building buildingAdd, Building buildingRemove) {
+        super(cardGame, id, layout, visibility, emptyStart, buildingAdd,
+                buildingRemove);
+    }
 
-	@Override
-	public boolean acceptsRemoveAll(List<Card> cards) {
-		return super.acceptsRemoveAll(cards)
-				&& ((FreeCell) getCardGame()).getFreeCellCount() >= cards.size();
-	}
+    @Override
+    public boolean acceptsRemoveAll(List<Card> cards) {
+        return super.acceptsRemoveAll(cards)
+                && ((FreeCell) getCardGame()).getFreeCellCount() >= cards.size();
+    }
 
 }

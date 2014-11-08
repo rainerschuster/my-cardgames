@@ -6,10 +6,10 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
  * @author Rainer Schuster
  */
 public abstract class PileGroup extends HorizontalPanel /* Vector */{
-	static final long serialVersionUID = 1L;
+    static final long serialVersionUID = 1L;
 
-	/** @return Prefix of the <code>id</code> argument. */
-	abstract String getPrefix();
+    /** @return Prefix of the <code>id</code> argument. */
+    abstract String getPrefix();
 
 //	// synchronized?
 //	@Override
@@ -18,16 +18,16 @@ public abstract class PileGroup extends HorizontalPanel /* Vector */{
 //		return super.add(o);
 //	}
 
-	/** @return Number of empty piles. */
-	public int getEmptyPileCount() {
-		int count = 0;
-		for (int i = 0; i < getWidgetCount(); i++) {
-			if (((Pile) getWidget(i)).getCardCount() == 0) {
-				count++;
-			}
-		}
+    /** @return Number of empty piles. */
+    public int getEmptyPileCount() {
+        int count = 0;
+        for (int i = 0; i < getWidgetCount(); i++) {
+            if (((Pile) getWidget(i)).getCardCount() == 0) {
+                count++;
+            }
+        }
 
-		return count;
-	}
+        return count;
+    }
 
 }

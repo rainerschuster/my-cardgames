@@ -8,19 +8,19 @@ package com.rainerschuster.cardgames.client.ui;
  */
 public interface SourcesDoubleClickEvents {
 
-	/**
-	 * Adds a listener interface to receive doubleclick events.
-	 * 
-	 * @param listener
-	 *            the listener interface to add
-	 */
-	void addDoubleClickListener(DoubleClickListener listener);
+    /**
+     * Adds a listener interface to receive doubleclick events.
+     * 
+     * @param listener
+     *            the listener interface to add
+     */
+    void addDoubleClickListener(DoubleClickListener listener);
 
-	/**
-	 * Removes a previously added listener interface.
-	 * 
-	 * @param listener
-	 *            the listener interface to remove
-	 */
-	void removeDoubleClickListener(DoubleClickListener listener);
+    /**
+     * Removes a previously added listener interface.
+     * 
+     * @param listener
+     *            the listener interface to remove
+     */
+    void removeDoubleClickListener(DoubleClickListener listener);
 }

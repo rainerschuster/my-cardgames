@@ -11,11 +11,11 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public interface DoubleClickListener extends EventListener {
 
-	/**
-	 * Fired when the user doubleclicks on a widget.
-	 * 
-	 * @param sender
-	 *            the widget sending the event.
-	 */
-	void onDoubleClick(Widget sender);
+    /**
+     * Fired when the user doubleclicks on a widget.
+     * 
+     * @param sender
+     *            the widget sending the event.
+     */
+    void onDoubleClick(Widget sender);
 }

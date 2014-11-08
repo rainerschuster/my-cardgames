@@ -5,14 +5,14 @@ package com.rainerschuster.cardgames.client;
  */
 public class BuildingByEquivalency extends Building {
 
-	public BuildingByEquivalency() {
-		super();
-	}
+    public BuildingByEquivalency() {
+        super();
+    }
 
-	@Override
-	protected boolean accepts(Card card1, Card card2) {
-		return card1.getSuit() == card2.getSuit()
-				|| card1.getRank() == card2.getRank();
-	}
+    @Override
+    protected boolean accepts(Card card1, Card card2) {
+        return card1.getSuit() == card2.getSuit()
+                || card1.getRank() == card2.getRank();
+    }
 
 }

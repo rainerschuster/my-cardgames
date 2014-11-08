@@ -5,10 +5,10 @@ package com.rainerschuster.cardgames.client;
  */
 public class TableauGroup extends PileGroup {
 
-	static final long serialVersionUID = 1L;
+    static final long serialVersionUID = 1L;
 
-	@Override
-	String getPrefix() {
-		return "tableau"; //$NON-NLS-1$
-	}
+    @Override
+    String getPrefix() {
+        return "tableau"; //$NON-NLS-1$
+    }
 }

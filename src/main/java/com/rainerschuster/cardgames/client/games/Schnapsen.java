@@ -7,33 +7,33 @@ import com.rainerschuster.cardgames.client.Table;
  */
 public class Schnapsen extends CardGame {
 
-//	private Stock stock;
-//	private Hand hand;
-//	private Cell cell; // "Atout"
+//    private Stock stock;
+//    private Hand hand;
+//    private Cell cell; // "Atout"
 
-	// TODO combination-pile
-	// TODO "Ablage" vgl Hearts
+    // TODO combination-pile
+    // TODO "Ablage" vgl Hearts
 
-	public Schnapsen(Table table) {
-		super(table);
-	}
+    public Schnapsen(Table table) {
+        super(table);
+    }
 
-	@Override
-	public void firstDeal() {
-		// TODO Auto-generated method stub
+    @Override
+    public void firstDeal() {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
+    @Override
+    public void init() {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
-	@Override
-	public void layout() {
-		// TODO Auto-generated method stub
+    @Override
+    public void layout() {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
 }

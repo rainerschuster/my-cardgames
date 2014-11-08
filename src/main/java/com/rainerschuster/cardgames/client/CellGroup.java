@@ -5,11 +5,11 @@ package com.rainerschuster.cardgames.client;
  */
 public class CellGroup extends PileGroup {
 
-	static final long serialVersionUID = 1L;
+    static final long serialVersionUID = 1L;
 
-	@Override
-	String getPrefix() {
-		return "cell"; //$NON-NLS-1$
-	}
+    @Override
+    String getPrefix() {
+        return "cell"; //$NON-NLS-1$
+    }
 
 }

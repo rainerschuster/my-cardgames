@@ -8,19 +8,19 @@ package com.rainerschuster.cardgames.client.ui;
  */
 public interface SourcesCardEvents {
 
-	/**
-	 * Adds a listener interface to receive card events.
-	 * 
-	 * @param listener
-	 *            the listener interface to add
-	 */
-	void addCardListener(CardListener listener);
+    /**
+     * Adds a listener interface to receive card events.
+     * 
+     * @param listener
+     *            the listener interface to add
+     */
+    void addCardListener(CardListener listener);
 
-	/**
-	 * Removes a previously added listener interface.
-	 * 
-	 * @param listener
-	 *            the listener interface to remove
-	 */
-	void removeCardListener(CardListener listener);
+    /**
+     * Removes a previously added listener interface.
+     * 
+     * @param listener
+     *            the listener interface to remove
+     */
+    void removeCardListener(CardListener listener);
 }

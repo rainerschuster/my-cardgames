@@ -8,11 +8,11 @@ import com.google.gwt.user.client.ui.AbsolutePanel;
  */
 public class Table extends AbsolutePanel {
 
-	public Table() {
-		super();
+    public Table() {
+        super();
 
-		setStylePrimaryName(MyResources.INSTANCE.css().cgTable());
-		setPixelSize(1077, 666);
-		getElement().getStyle().setOverflow(Overflow.VISIBLE);
-	}
+        setStylePrimaryName(MyResources.INSTANCE.css().cgTable());
+        setPixelSize(1077, 666);
+        getElement().getStyle().setOverflow(Overflow.VISIBLE);
+    }
 }
