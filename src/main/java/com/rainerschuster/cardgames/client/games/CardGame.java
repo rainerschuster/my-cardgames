@@ -20,7 +20,10 @@ public abstract class CardGame {
     CardValues cardValues = new DefaultCardValues(deck);
 
     public static class GameMode {
-        public static final int DEAL = 0; // cards are added as they come
+        /**
+         * Cards are added as they come.
+         */
+        public static final int DEAL = 0;
         public static final int PLAY = 1;
     }
 
@@ -28,7 +31,9 @@ public abstract class CardGame {
         this.table = table;
     }
 
-    /** Initializes the game. */
+    /**
+     * Initializes the game.
+     */
     public void start() {
         DNDManager.unregisterDropControllers();
 
@@ -41,15 +46,21 @@ public abstract class CardGame {
         setGameMode(GameMode.PLAY);
     }
 
-    /** Initializes the game-specific components. */
+    /**
+     * Initializes the game-specific components.
+     */
     public abstract void init();
 
-    /** Sets the areas on the table. */
+    /**
+     * Sets the areas on the table.
+     */
     public abstract void layout();
 
     public abstract void firstDeal();
 
-    /** @return {@code true} if the player has won the game */
+    /**
+     * @return {@code true} if the player has won the game.
+     */
     public boolean isWon() {
         return false;
     }
@@ -70,7 +81,9 @@ public abstract class CardGame {
         return cardValues;
     }
 
-    /** Convenience-constant to deny building. */
+    /**
+     * Convenience-constant to deny building.
+     */
     public static final Building buildingForbidden = new Building(){
         @Override
         public boolean accepts(final List<Card> cards) {
@@ -83,7 +96,9 @@ public abstract class CardGame {
         }
     };
 
-    /** Convenience-constant to allow building (in nearly any case). */
+    /**
+     * Convenience-constant to allow building (in nearly any case).
+     */
     public static final Building buildingAllowed = new Building(){
         @Override
         protected boolean accepts(final Card card1, final Card card2) {

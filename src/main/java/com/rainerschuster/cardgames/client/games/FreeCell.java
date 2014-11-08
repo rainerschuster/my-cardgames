@@ -22,6 +22,7 @@ import com.rainerschuster.cardgames.client.Table;
 import com.rainerschuster.cardgames.client.Tableau;
 import com.rainerschuster.cardgames.client.TableauGroup;
 import com.rainerschuster.cardgames.client.Utils;
+import com.rainerschuster.cardgames.client.dnd.DNDManager;
 import com.rainerschuster.cardgames.client.ui.CardListener;
 import com.rainerschuster.cardgames.client.ui.PileListener;
 
@@ -67,22 +68,26 @@ public class FreeCell extends CardGame {
         foundation1 = new Foundation(this, "foundation1"); //$NON-NLS-1$
         foundation1.setBuildingRemove(buildingForbidden);
         foundation1.addPileListener(dl);
-        new CGSimpleDropController(foundation1);
+        final CGSimpleDropController foundation1DropController = new CGSimpleDropController(foundation1);
+        DNDManager.registerDropController(foundation1DropController);
         foundations.add(foundation1);
         foundation2 = new Foundation(this, "foundation2"); //$NON-NLS-1$
         foundation2.setBuildingRemove(buildingForbidden);
         foundation2.addPileListener(dl);
-        new CGSimpleDropController(foundation2);
+        final CGSimpleDropController foundation2DropController = new CGSimpleDropController(foundation2);
+        DNDManager.registerDropController(foundation2DropController);
         foundations.add(foundation2);
         foundation3 = new Foundation(this, "foundation3"); //$NON-NLS-1$
         foundation3.setBuildingRemove(buildingForbidden);
         foundation3.addPileListener(dl);
-        new CGSimpleDropController(foundation3);
+        final CGSimpleDropController foundation3DropController = new CGSimpleDropController(foundation3);
+        DNDManager.registerDropController(foundation3DropController);
         foundations.add(foundation3);
         foundation4 = new Foundation(this, "foundation4"); //$NON-NLS-1$
         foundation4.setBuildingRemove(buildingForbidden);
         foundation4.addPileListener(dl);
-        new CGSimpleDropController(foundation4);
+        final CGSimpleDropController foundation4DropController = new CGSimpleDropController(foundation4);
+        DNDManager.registerDropController(foundation4DropController);
         foundations.add(foundation4);
 
         final CardListener cellCardListener = new CardListener(){
@@ -106,19 +111,23 @@ public class FreeCell extends CardGame {
         };
 
         cell1 = new Cell(this, "cell1"); //$NON-NLS-1$
-        new CGSimpleDropController(cell1);
+        final CGSimpleDropController cell1DropController = new CGSimpleDropController(cell1);
+        DNDManager.registerDropController(cell1DropController);
         cell1.addCardListener(cellCardListener);
         cells.add(cell1);
         cell2 = new Cell(this, "cell2"); //$NON-NLS-1$
-        new CGSimpleDropController(cell2);
+        final CGSimpleDropController cell2DropController = new CGSimpleDropController(cell2);
+        DNDManager.registerDropController(cell2DropController);
         cell2.addCardListener(cellCardListener);
         cells.add(cell2);
         cell3 = new Cell(this, "cell3"); //$NON-NLS-1$
-        new CGSimpleDropController(cell3);
+        final CGSimpleDropController cell3DropController = new CGSimpleDropController(cell3);
+        DNDManager.registerDropController(cell3DropController);
         cell3.addCardListener(cellCardListener);
         cells.add(cell3);
         cell4 = new Cell(this, "cell4"); //$NON-NLS-1$
-        new CGSimpleDropController(cell4);
+        final CGSimpleDropController cell4DropController = new CGSimpleDropController(cell4);
+        DNDManager.registerDropController(cell4DropController);
         cell4.addCardListener(cellCardListener);
         cells.add(cell4);
 

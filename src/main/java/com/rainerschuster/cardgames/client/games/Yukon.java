@@ -19,6 +19,7 @@ import com.rainerschuster.cardgames.client.Table;
 import com.rainerschuster.cardgames.client.Tableau;
 import com.rainerschuster.cardgames.client.TableauGroup;
 import com.rainerschuster.cardgames.client.Utils;
+import com.rainerschuster.cardgames.client.dnd.DNDManager;
 import com.rainerschuster.cardgames.client.ui.CardListener;
 import com.rainerschuster.cardgames.client.ui.PileListener;
 
@@ -75,19 +76,23 @@ public class Yukon extends CardGame {
 
         foundation1 = new Foundation(this, "foundation1"); //$NON-NLS-1$
         foundation1.addPileListener(dl);
-        new CGSimpleDropController(foundation1);
+        final CGSimpleDropController foundation1DropController = new CGSimpleDropController(foundation1);
+        DNDManager.registerDropController(foundation1DropController);
         foundations.add(foundation1);
         foundation2 = new Foundation(this, "foundation2"); //$NON-NLS-1$
         foundation2.addPileListener(dl);
-        new CGSimpleDropController(foundation2);
+        final CGSimpleDropController foundation2DropController = new CGSimpleDropController(foundation2);
+        DNDManager.registerDropController(foundation2DropController);
         foundations.add(foundation2);
         foundation3 = new Foundation(this, "foundation3"); //$NON-NLS-1$
         foundation3.addPileListener(dl);
-        new CGSimpleDropController(foundation3);
+        final CGSimpleDropController foundation3DropController = new CGSimpleDropController(foundation3);
+        DNDManager.registerDropController(foundation3DropController);
         foundations.add(foundation3);
         foundation4 = new Foundation(this, "foundation4"); //$NON-NLS-1$
         foundation4.addPileListener(dl);
-        new CGSimpleDropController(foundation4);
+        final CGSimpleDropController foundation4DropController = new CGSimpleDropController(foundation4);
+        DNDManager.registerDropController(foundation4DropController);
         foundations.add(foundation4);
 
         final Building buildingAdd = new BuildingInSequence(BuildingBySteps.Direction.DOWN, BuildingBySteps.Suit.ALTERNATING, false);

@@ -16,9 +16,6 @@ public class CardGameCommand implements Command {
         this.cardGame = cardGame;
     }
 
-    /* (non-Javadoc)
-     * @see com.google.gwt.user.client.Command#execute()
-     */
     @Override
     public void execute() {
         cardGame.start();

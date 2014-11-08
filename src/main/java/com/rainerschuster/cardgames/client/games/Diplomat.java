@@ -23,6 +23,7 @@ import com.rainerschuster.cardgames.client.Tableau;
 import com.rainerschuster.cardgames.client.TableauGroup;
 import com.rainerschuster.cardgames.client.Utils;
 import com.rainerschuster.cardgames.client.Waste;
+import com.rainerschuster.cardgames.client.dnd.DNDManager;
 import com.rainerschuster.cardgames.client.ui.CardListener;
 import com.rainerschuster.cardgames.client.ui.PileListener;
 
@@ -61,12 +62,12 @@ public class Diplomat extends CardGame {
     @Override
     public void firstDeal() {
         // Load all cards
-        //Deck.generatePrototypeDeck(this);
+//        Deck.generatePrototypeDeck(this);
         final List<Card> deck1 = deck.newDeck(this);
         final List<Card> deck2 = deck.newDeck(this);
         final List<Card> allCards = deck1;
         allCards.addAll(deck2);
-        //ArrayList allCards = deck.newDeck();
+//        final ArrayList allCards = deck.newDeck();
 
         // Shuffle cards
         // TODO Collections.shuffle(allCards);
@@ -139,35 +140,43 @@ public class Diplomat extends CardGame {
 
         foundation1 = new Foundation(this, "foundation1"); //$NON-NLS-1$
         foundation1.addPileListener(pl);
-        new CGSimpleDropController(foundation1);
+        final CGSimpleDropController foundation1DropController = new CGSimpleDropController(foundation1);
+        DNDManager.registerDropController(foundation1DropController);
         foundations.add(foundation1);
         foundation2 = new Foundation(this, "foundation2"); //$NON-NLS-1$
         foundation2.addPileListener(pl);
-        new CGSimpleDropController(foundation2);
+        final CGSimpleDropController foundation2DropController = new CGSimpleDropController(foundation2);
+        DNDManager.registerDropController(foundation2DropController);
         foundations.add(foundation2);
         foundation3 = new Foundation(this, "foundation3"); //$NON-NLS-1$
         foundation3.addPileListener(pl);
-        new CGSimpleDropController(foundation3);
+        final CGSimpleDropController foundation3DropController = new CGSimpleDropController(foundation3);
+        DNDManager.registerDropController(foundation3DropController);
         foundations.add(foundation3);
         foundation4 = new Foundation(this, "foundation4"); //$NON-NLS-1$
         foundation4.addPileListener(pl);
-        new CGSimpleDropController(foundation4);
+        final CGSimpleDropController foundation4DropController = new CGSimpleDropController(foundation4);
+        DNDManager.registerDropController(foundation4DropController);
         foundations.add(foundation4);
         foundation5 = new Foundation(this, "foundation5"); //$NON-NLS-1$
         foundation5.addPileListener(pl);
-        new CGSimpleDropController(foundation5);
+        final CGSimpleDropController foundation5DropController = new CGSimpleDropController(foundation5);
+        DNDManager.registerDropController(foundation5DropController);
         foundations.add(foundation5);
         foundation6 = new Foundation(this, "foundation6"); //$NON-NLS-1$
         foundation6.addPileListener(pl);
-        new CGSimpleDropController(foundation6);
+        final CGSimpleDropController foundation6DropController = new CGSimpleDropController(foundation6);
+        DNDManager.registerDropController(foundation6DropController);
         foundations.add(foundation6);
         foundation7 = new Foundation(this, "foundation7"); //$NON-NLS-1$
         foundation7.addPileListener(pl);
-        new CGSimpleDropController(foundation7);
+        final CGSimpleDropController foundation7DropController = new CGSimpleDropController(foundation7);
+        DNDManager.registerDropController(foundation7DropController);
         foundations.add(foundation7);
         foundation8 = new Foundation(this, "foundation8"); //$NON-NLS-1$
         foundation8.addPileListener(pl);
-        new CGSimpleDropController(foundation8);
+        final CGSimpleDropController foundation8DropController = new CGSimpleDropController(foundation8);
+        DNDManager.registerDropController(foundation8DropController);
         foundations.add(foundation8);
 
         final BuildingBySteps buildingAdd = new BuildingInSequence(BuildingBySteps.Direction.DOWN, BuildingBySteps.Suit.NULL, false);

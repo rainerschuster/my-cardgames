@@ -5,20 +5,17 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 /**
  * @author Rainer Schuster
  */
-public abstract class PileGroup extends HorizontalPanel /* Vector */{
+public abstract class PileGroup extends HorizontalPanel {
     static final long serialVersionUID = 1L;
 
-    /** @return Prefix of the <code>id</code> argument. */
+    /**
+     * @return The prefix of the <code>id</code> argument.
+     */
     abstract String getPrefix();
 
-//	// synchronized?
-//	@Override
-//	public boolean add(final Object o) {
-//		((Pile) o).getElement().setId(getPrefix() + (size() + 1));
-//		return super.add(o);
-//	}
-
-    /** @return Number of empty piles. */
+    /**
+     * @return The number of empty piles.
+     */
     public int getEmptyPileCount() {
         int count = 0;
         for (int i = 0; i < getWidgetCount(); i++) {
