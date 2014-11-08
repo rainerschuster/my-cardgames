@@ -25,7 +25,9 @@ public class Card extends FocusPanel {
 
     private static final Logger LOG = Logger.getLogger(Card.class.getName());
 
-    /** Per default the back of the card is shown. */
+    /**
+     * Per default the back of the card is shown.
+     */
     private boolean backShowing = true;
 
     private Image frontImage;
@@ -90,19 +92,25 @@ public class Card extends FocusPanel {
         }, ClickEvent.getType());
     }
 
-    /** Shows the front of the card. */
+    /**
+     * Shows the front of the card.
+     */
     public void showFront() {
         setWidget(frontImage);
         backShowing = false;
     }
 
-    /** Shows the back of the card. */
+    /**
+     * Shows the back of the card.
+     */
     public void showBack() {
         setWidget(null);
         backShowing = true;
     }
 
-    /** Turns around the card. */
+    /**
+     * Turns around the card.
+     */
     public void toggle() {
         if (isFrontShowing()) {
             showBack();
@@ -111,12 +119,16 @@ public class Card extends FocusPanel {
         }
     }
 
-    /** @return {@code true} if the front of the card is currently shown. */
+    /**
+     * @return {@code true} if the front of the card is currently shown.
+     */
     public boolean isFrontShowing() {
         return !backShowing;
     }
 
-    /** @return {@code true} if the back of the card is currently shown. */
+    /**
+     * @return {@code true} if the back of the card is currently shown.
+     */
     public boolean isBackShowing() {
         return backShowing;
     }

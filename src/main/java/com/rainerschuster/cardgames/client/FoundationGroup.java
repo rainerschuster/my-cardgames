@@ -12,9 +12,11 @@ public class FoundationGroup extends PileGroup {
         return "foundation"; //$NON-NLS-1$
     }
 
-    /** @return the {@link Foundation} where the card belongs to, or the first free pile (if it cannot be determined), or {@code null} if adding is not allowed. */
+    /**
+     * @return the {@link Foundation} where the card belongs to, or the first free pile (if it cannot be determined), or {@code null} if adding is not allowed.
+     */
     public Foundation getFoundation(final Card card) {
-        /** The first empty pile. */
+        // The first empty pile.
         Foundation firstFree = null;
 
         for (Widget w : this) {
@@ -34,7 +36,9 @@ public class FoundationGroup extends PileGroup {
         return firstFree;
     }
 
-    /** @return the {@link Foundation} where the suit belongs to, or the first free pile (if it cannot be determined) */
+    /**
+     * @return The {@link Foundation} where the suit belongs to, or the first free pile (if it cannot be determined).
+     */
     /*public Foundation getFoundation(final int suit) {
 		// Here suit is assumed as building-rule!
 		Foundation firstFree = null; // The first empty pile
@@ -55,4 +59,5 @@ public class FoundationGroup extends PileGroup {
 		assert firstFree != null : "Every suit belongs to a foundation-pile that must not be null!"; //$NON-NLS-1$
 		return firstFree;
 	}*/
+
 }

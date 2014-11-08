@@ -159,7 +159,9 @@ public class MyCardGames implements EntryPoint {
 		};
 	}-*/;
 
-    /** http://stackoverflow.com/questions/9571557/gwt-fullscreen */
+    /**
+     * http://stackoverflow.com/questions/9571557/gwt-fullscreen
+     */
     private native void requestFullscreen() /*-{
 		var element = $doc.documentElement;
 		if (element.requestFullscreen) {

@@ -110,16 +110,15 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
         if (widgets.isEmpty()) {
             return false;
         }
-        /*
-         * if (!acceptsAdd((Card)widgets.get(0))) return false;
-         */
+        
+//        if (!acceptsAdd((Card)widgets.get(0))) return false;
+         
 
         int topPos = 0;
         int leftPos = 0;
         int zIndex = 1;
         if (getChildren().size() > 0) {
-            // Card lastCard = (Card)cards.lastElement();
-            Card lastCard = getLastCard();
+            final Card lastCard = getLastCard();
 
             if (cardGame.getGameMode() != GameMode.DEAL && cgVisibility == CGVisibility.ALL) {
                 lastCard.showFront();
@@ -130,8 +129,7 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
             zIndex = DOM.getIntStyleAttribute(lastCard.getElement(), "zIndex") + 1;
 
             if (layout == CGLayout.CASCADE) {
-                // Margin is dependent on the visibility (front/back) of the
-                // previous card
+                // Margin is dependent on the visibility (front/back) of the previous card
                 int tempOffset = (lastCard.isFrontShowing() ? MARGIN_FRONT : MARGIN_BACK);
                 switch (buildingDirection) {
                 case LEFT:
@@ -223,18 +221,15 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
         }
 
         if (card.isFrontShowing()) {
-            /*
-             * if (!DNDManager.isDragSource(card)) new CGDragSource(card);
-             */
+//            if (!DNDManager.isDragSource(card)) new CGDragSource(card);
             if (!DNDManager.isDropTarget(card)) {
                 final CGSimpleDropController dropController = new CGSimpleDropController(card);
                 DNDManager.registerDropController(dropController);
             }
         }
 
-        /*
-         * if (!cards.addAll(widgets)) { return false; }
-         */
+
+//        if (!cards.addAll(widgets)) { return false; }
 
         listeners.fireAdd();
 
@@ -250,9 +245,7 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
             return false;
         }
 
-        /*
-         * if (!cards.removeAll(widgets)) { return false; }
-         */
+//        if (!cards.removeAll(widgets)) { return false; }
 
         for (int i = widgets.size(); i > 0; i--) {
             final Card cardToRemove = widgets.get(i - 1);
@@ -265,7 +258,7 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
 
         if (getChildren().size() > 0) {
             LOG.log(Level.INFO, "Pile is not empty."); //$NON-NLS-1$
-            // Card lastCard = (Card)cards.lastElement();
+//            final Card lastCard = (Card)cards.lastElement();
             final Card lastCard = getLastCard();
             LOG.log(Level.INFO, "cgVisibility: " + cgVisibility.name() + "."); //$NON-NLS-1$ //$NON-NLS-2$
             switch (cgVisibility) {
@@ -326,30 +319,30 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
         return true;
     }
 
-    //	public boolean acceptsRemoveFrom(Card card) {
-    //		// If back side is shown
-    //		if (card.isBackShowing()) {
-    //			return false;
-    //		}
-    //		// If last card
-    //		if (getChildren().indexOf(card) + 1 == getChildren().size()) {
-    //			return true;
-    //		}
-    //		Card prevCard = card;
-    //		for (int i = getChildren().indexOf(card) + 1; i < getChildren().size(); i++) {
-    //			Card myCard = (Card) getChildren().get(i);
-    //			if (!correctOrder(prevCard, myCard)) {
-    //				return false;
-    //			}
-    //			prevCard = myCard;
-    //		}
-    //		// Wenn Stapel leer und es wird das abgefragt ist ein Fehler aufgetreten
-    //		if (getChildren().size() == 0) {
-    //			System.err.println("Can't drag from an empty pile!");
-    //			return false;
-    //		}
-    //		return true;
-    //	}
+//    public boolean acceptsRemoveFrom(final Card card) {
+//        // If back side is shown
+//        if (card.isBackShowing()) {
+//            return false;
+//        }
+//        // If last card
+//        if (getChildren().indexOf(card) + 1 == getChildren().size()) {
+//            return true;
+//        }
+//        Card prevCard = card;
+//        for (int i = getChildren().indexOf(card) + 1; i < getChildren().size(); i++) {
+//            Card myCard = (Card) getChildren().get(i);
+//            if (!correctOrder(prevCard, myCard)) {
+//                return false;
+//            }
+//            prevCard = myCard;
+//        }
+//        // If the pile is empty and acceptsRemoveFrom is called there may be some error!
+//        if (getChildren().size() == 0) {
+//            System.err.println("Can't drag from an empty pile!");
+//            return false;
+//        }
+//        return true;
+//    }
 
     public boolean acceptsAdd(final Card card) {
         final List<Card> cards = new ArrayList<Card>();
@@ -357,7 +350,9 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
         return acceptsAddAll(cards);
     }
 
-    /** Basic acceptsAdd function. */
+    /**
+     * Basic acceptsAdd function.
+     */
     public boolean acceptsAddAll(final List<Card> cards) {
         if (cards.isEmpty()) {
             LOG.log(Level.INFO, "List of cards must not be empty!");
@@ -426,7 +421,9 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
         return acceptsRemoveAll(cards);
     }
 
-    /** Basic acceptsRemove function. */
+    /**
+     * Basic acceptsRemove function.
+     */
     public boolean acceptsRemoveAll(final List<Card> cards) {
         if (cards.isEmpty()) {
             LOG.log(Level.INFO, "List of cards must not be empty!"); //$NON-NLS-1$
@@ -466,12 +463,16 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
         }
     }
 
-    /** Basic acceptsDrag function. */
+    /**
+     * Basic acceptsDrag function.
+     */
     public boolean acceptsDragAll(final List<Card> cards) {
         return acceptsRemoveAll(cards);
     }
 
-    /** Basic acceptsDrop function. */
+    /**
+     * Basic acceptsDrop function.
+     */
     public boolean acceptsDropAll(final List<Card> cards) {
         return acceptsAddAll(cards);
     }
@@ -496,9 +497,9 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
         }
     }
 
-    //	public void shuffle() {
-    //		Collections.shuffle(cards);
-    //	}
+//    public void shuffle() {
+//        Collections.shuffle(cards);
+//    }
 
     public int getCardCount() {
         return getChildren().size();
@@ -524,11 +525,13 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
         NULL, // every card allowed
         NONE, // no card allowed
         FUNC, // check function to decide
-        ACE, // convenience value (for sotaire)
-        KING; // convenience value (for sotaire)
+        ACE, // convenience value (for solitaire)
+        KING; // convenience value (for solitaire)
     }
 
-    /** Decides when removal of cards is allowed. */
+    /**
+     * Decides when removal of cards is allowed.
+     */
     public enum CGRemoveRule {
         ANY, // always
         TOP, // only top card
@@ -540,7 +543,9 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
         LEFT, RIGHT, TOP, BOTTOM;
     }
 
-    /** to be overwritten if CGEmptyStart.FUNC is set */
+    /**
+     * to be overwritten if CGEmptyStart.FUNC is set
+     */
     public boolean acceptsFirstCard(final Card card) {
         return false;
     }
@@ -554,8 +559,7 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
     }
 
     /**
-     * sets the maximum number of cards that may be on a stack (-1 means
-     * infinite)
+     * Sets the maximum number of cards that may be on a stack (-1 means infinite).
      */
     public void setLimit(int limit) {
         this.limit = limit;

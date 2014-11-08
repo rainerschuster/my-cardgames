@@ -5,11 +5,11 @@ package com.rainerschuster.cardgames.client;
  */
 public abstract class CardValues {
 
-    //private CardGame cardGame;
+//    private CardGame cardGame;
     private Deck deck;
 
     public CardValues(/*CardGame cardGame, */Deck deck) {
-        //this.cardGame = cardGame;
+//        this.cardGame = cardGame;
         this.deck = deck;
     }
 

@@ -13,7 +13,9 @@ public abstract class BuildingBySteps extends Building {
 
     private int direction = 0;
     private int suit = 0;
-    /** Wrap means "ace on king" (ascending) or "king on ace" (descending) */
+    /**
+     * Wrap means "ace on king" (ascending) or "king on ace" (descending).
+     */
     private boolean wrap = false;
 
     public BuildingBySteps(int direction, int suit, boolean wrap) {
@@ -135,15 +137,25 @@ public abstract class BuildingBySteps extends Building {
     }
 
     public static class Suit {
-        /** any suit allowed */
+        /**
+         * any suit allowed
+         */
         public static final int NULL = 0;
-        /** same suit */
+        /**
+         * same suit
+         */
         public static final int SUIT = 1;
-        /** same color (only black aut red) */
+        /**
+         * same color (only black aut red)
+         */
         public static final int COLOR = 2;
-        /** alternating color (black on red or red on black) */
+        /**
+         * alternating color (black on red or red on black)
+         */
         public static final int ALTERNATING = 3;
-        /** other suit */
+        /**
+         * other suit
+         */
         public static final int OTHERSUIT = 4;
     }
 
