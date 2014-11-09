@@ -103,7 +103,9 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
     }
 
     // Precondition: checked with acceptsAdd
-    /** Convenience-method to reduce DnD (un)register overhead */
+    /**
+     * Convenience-method to reduce DnD (un)register overhead.
+     */
     public boolean addAllCards(final List<Card> widgets) {
         // Empty list means nothing to do
         // TODO Return true or false or move code to acceptsAdd?
@@ -236,7 +238,9 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
     }
 
     // Precondition: checked with acceptsRemove
-    /** Convenience-method to reduce DnD (un)register overhead */
+    /**
+     * Convenience-method to reduce DnD (un)register overhead.
+     */
     public boolean removeAllCards(final List<Card> widgets) {
         // Empty list means nothing to do
         if (widgets.isEmpty()) {
@@ -486,8 +490,7 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
 
     public Card getLastCard() {
         if (getChildren().size() > 0) {
-            final Card lastCard = (Card) getChildren().get(
-                    getChildren().size() - 1);
+            final Card lastCard = (Card) getChildren().get(getChildren().size() - 1);
             LOG.log(Level.INFO, "Last card is " + lastCard.getElement().getId() + "."); //$NON-NLS-1$ //$NON-NLS-2$
             return lastCard;
         } else {
@@ -513,7 +516,7 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
     }
 
     /**
-     * Decides how piled cards are layed out.
+     * Decides how piled cards are laid out.
      */
     public enum CGLayout {
         /**
