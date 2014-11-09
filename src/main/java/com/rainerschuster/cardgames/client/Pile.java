@@ -112,7 +112,6 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
         }
         
 //        if (!acceptsAdd((Card)widgets.get(0))) return false;
-         
 
         int topPos = 0;
         int leftPos = 0;
@@ -513,30 +512,85 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
         return getChildren().indexOf(card);
     }
 
+    /**
+     * Decides how piled cards are layed out.
+     */
     public enum CGLayout {
-        STACK, CASCADE;
-    }
-
-    public enum CGVisibility {
-        ALL, NONE, TOP;
-    }
-
-    public enum CGEmptyStart {
-        NULL, // every card allowed
-        NONE, // no card allowed
-        FUNC, // check function to decide
-        ACE, // convenience value (for solitaire)
-        KING; // convenience value (for solitaire)
+        /**
+         * Cards are drawn on top of each other so that only the top-most card can directly be seen.
+         * Note that this does not necessarily mean that it shows the front side.
+         */
+        STACK,
+        /**
+         * Cards have a margin so that each card on the stack can be seen.
+         */
+        CASCADE;
     }
 
     /**
-     * Decides when removal of cards is allowed.
+     * Decides if the font or the back each card on the pile is visible.
+     */
+    public enum CGVisibility {
+        /**
+         * All cards on the pile show the front side.
+         */
+        ALL,
+        /**
+         * No card on the pile shows the front side (i.e., all cards show the back side).
+         */
+        NONE,
+        /**
+         * The top-most card on the pile shows the front side, all others show the back side.
+         */
+        TOP;
+    }
+
+    /**
+     * Decides which (bottom-most) card is allowed on an empty pile.
+     */
+    public enum CGEmptyStart {
+        /**
+         * every card allowed
+         */
+        NULL,
+        /**
+         * no card allowed
+         */
+        NONE,
+        /**
+         * check function to decide
+         */
+        FUNC,
+        /**
+         * convenience value (for solitaire)
+         */
+        ACE,
+        /**
+         * convenience value (for solitaire)
+         */
+        KING;
+    }
+
+    /**
+     * Decides if removal of cards is allowed.
      */
     public enum CGRemoveRule {
-        ANY, // always
-        TOP, // only top card
-        BUILDING, // check function to decide
-        NONE; // never
+        /**
+         * always
+         */
+        ANY,
+        /**
+         * top card only
+         */
+        TOP,
+        /**
+         * check function to decide
+         */
+        BUILDING,
+        /**
+         * never
+         */
+        NONE;
     }
 
     public enum CGBuildingDirection {
@@ -544,7 +598,7 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
     }
 
     /**
-     * to be overwritten if CGEmptyStart.FUNC is set
+     * To be overwritten if CGEmptyStart.FUNC is set!
      */
     public boolean acceptsFirstCard(final Card card) {
         return false;
