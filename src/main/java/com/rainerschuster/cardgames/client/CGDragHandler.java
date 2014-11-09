@@ -28,11 +28,15 @@ public class CGDragHandler extends DragHandlerAdapter {
             final Card card = (Card) sender;
 
             final Pile pile = card.getPile();
+            final List<Card> additionalCards = new ArrayList<Card>();
             for (int i = pile.getCardIndex(card) + 1; i < pile.getCardCount(); i++) {
                 // add drag object
                 LOG.log(Level.INFO, "Toggle card #" + i + "."); //$NON-NLS-1$ //$NON-NLS-2$
-                event.getContext().selectedWidgets.add(pile.getCard(i));
-//                event.getContext().dragController.toggleSelection(pile.getCard(i));
+                final Card additionalCard = pile.getCard(i);
+                if (event.getContext().selectedWidgets.add(additionalCard)) {
+                    additionalCards.add(additionalCard);
+                }
+//                event.getContext().dragController.toggleSelection(additionalCard);
             }
 
             final List<Card> cards = new ArrayList<Card>();
@@ -44,6 +48,7 @@ public class CGDragHandler extends DragHandlerAdapter {
             }
             if (!pile.acceptsDragAll(cards)) {
                 LOG.log(Level.INFO, "Pile does not accept to drag all selected cards!"); //$NON-NLS-1$
+                event.getContext().selectedWidgets.removeAll(additionalCards);
                 throw new VetoDragException();
             }
         } else {
@@ -57,13 +62,14 @@ public class CGDragHandler extends DragHandlerAdapter {
         LOG.log(Level.INFO, "onDragEnd"); //$NON-NLS-1$
 
         final DragContext context = event.getContext();
+        Pile oldPile = null;
+        Pile newPile = null;
         if (context.vetoException == null) {
             final Card sender = (Card)context.selectedWidgets.get(0);
 
             LOG.log(Level.INFO, "Getting previous pile"); //$NON-NLS-1$
-            final Pile oldPile = sender.getPile();
+            oldPile = sender.getPile();
             LOG.log(Level.INFO, "Previous pile " + oldPile.getElement().getId() + "."); //$NON-NLS-1$ //$NON-NLS-2$
-            Pile newPile;
             final Widget dropTarget = context.finalDropController.getDropTarget();
             if (dropTarget instanceof Card) {
                 newPile = ((Card)dropTarget).getPile();

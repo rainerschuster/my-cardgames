@@ -1,14 +1,15 @@
 package com.rainerschuster.cardgames.client;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.dom.client.Style.Overflow;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.Widget;
 import com.rainerschuster.cardgames.client.Deck.Rank;
 import com.rainerschuster.cardgames.client.dnd.DNDManager;
 import com.rainerschuster.cardgames.client.games.CardGame;
@@ -33,7 +34,9 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
 
     // private Vector cards;
     private CGLayout layout;
-    /** maximum number of cards that may be on a stack (-1 means infinite) */
+    /**
+     * Maximum number of cards that may be on a stack (-1 means infinite).
+     */
     private int limit = -1; // TODO What about other negative numbers? => currently < 0 means infinite
     private CGVisibility cgVisibility;
     private CGEmptyStart cgEmptyStart;
@@ -46,6 +49,8 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
 
     private PileListenerCollection listeners = new PileListenerCollection();
     private CardListenerCollection cardListeners = new CardListenerCollection();
+
+    private List<Card> dealOriginal = new ArrayList<Card>();
 
     private Pile(CardGame cardGame) {
         super();
@@ -115,122 +120,17 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
         
 //        if (!acceptsAdd((Card)widgets.get(0))) return false;
 
-        int topPos = 0;
-        int leftPos = 0;
-        int zIndex = 1;
-        if (getChildren().size() > 0) {
-            final Card lastCard = getLastCard();
-
-            if (cardGame.getGameMode() != GameMode.DEAL && cgVisibility == CGVisibility.ALL) {
-                lastCard.showFront();
-            } else {
-                lastCard.showBack();
-            }
-
-            zIndex = DOM.getIntStyleAttribute(lastCard.getElement(), "zIndex") + 1;
-
-            if (layout == CGLayout.CASCADE) {
-                // Margin is dependent on the visibility (front/back) of the previous card
-                int tempOffset = (lastCard.isFrontShowing() ? MARGIN_FRONT : MARGIN_BACK);
-                switch (buildingDirection) {
-                case LEFT:
-                    leftPos = DOM.getIntStyleAttribute(lastCard.getElement(), "marginLeft") - tempOffset;
-                    break;
-                case RIGHT:
-                    leftPos = DOM.getIntStyleAttribute(lastCard.getElement(), "marginLeft") + tempOffset;
-                    break;
-                case TOP:
-                    topPos = DOM.getIntStyleAttribute(lastCard.getElement(), "marginTop") - tempOffset;
-                    break;
-                case BOTTOM:
-                    topPos = DOM.getIntStyleAttribute(lastCard.getElement(), "marginTop") + tempOffset;
-                    break;
-                default:
-                    // Default value, to prohibit default!
-                    break;
-                }
-            }
-            if (DNDManager.isDropTarget(lastCard)) {
-                DNDManager.unregisterDropController(DNDManager.getDropTarget(lastCard));
-            }
-        } else {
-            // Pile is empty
-            if (DNDManager.isDropTarget(this)) {
-                DNDManager.unregisterDropController(DNDManager.getDropTarget(this));
-            }
-        }
-
         for (Card card : widgets) {
             LOG.log(Level.INFO, "Card is " + card.getElement().getId() + "."); //$NON-NLS-1$ //$NON-NLS-2$
-
-            final Style style = card.getElement().getStyle();
-            style.setZIndex(zIndex);
-            style.setMarginTop(topPos, Style.Unit.PX);
-            style.setMarginLeft(leftPos, Style.Unit.PX);
-
-            LOG.log(Level.INFO, "marginTop: " + topPos + "."); //$NON-NLS-1$ //$NON-NLS-2$
-
-            if (cardGame.getGameMode() != GameMode.DEAL) {
-                switch (cgVisibility) {
-                case ALL:
-                    card.showFront();
-                    break;
-                case TOP:
-                case NONE:
-                    card.showBack();
-                    if (DNDManager.isDropTarget(card)) {
-                        DNDManager.unregisterDropController(DNDManager.getDropTarget(card));
-                    }
-                    break;
-                default:
-                    assert false;
-                    break;
-                }
-            }
             add(card);
             card.setPile(this);
-
-            zIndex++;
-            LOG.log(Level.INFO, "Layout: " + layout.name() + "."); //$NON-NLS-1$ //$NON-NLS-2$
-            if (layout == CGLayout.CASCADE) {
-                // position for next card
-                switch (buildingDirection) {
-                case LEFT:
-                    leftPos -= card.isFrontShowing() ? MARGIN_FRONT : MARGIN_BACK;
-                    break;
-                case RIGHT:
-                    leftPos += card.isFrontShowing() ? MARGIN_FRONT : MARGIN_BACK;
-                    break;
-                case TOP:
-                    topPos -= card.isFrontShowing() ? MARGIN_FRONT : MARGIN_BACK;
-                    break;
-                case BOTTOM:
-                    topPos += card.isFrontShowing() ? MARGIN_FRONT : MARGIN_BACK;
-                    break;
-                default:
-                    // Default value, to prohibit default!
-                    break;
-                }
+            if (cardGame.getGameMode() == GameMode.DEAL) {
+                dealOriginal.add(card);
             }
         }
 
-        final Card card = widgets.get(widgets.size() - 1);
-
-        // parameters for last card
-        if (cardGame.getGameMode() != GameMode.DEAL && cgVisibility == CGVisibility.TOP) {
-            card.showFront();
-        }
-
-        if (card.isFrontShowing()) {
-//            if (!DNDManager.isDragSource(card)) new CGDragSource(card);
-            if (!DNDManager.isDropTarget(card)) {
-                final CGSimpleDropController dropController = new CGSimpleDropController(card);
-                DNDManager.registerDropController(dropController);
-            }
-        }
-
-
-//        if (!cards.addAll(widgets)) { return false; }
+        LOG.log(Level.INFO, "Redraw after add.");
+        redraw();
 
         listeners.fireAdd();
 
@@ -242,6 +142,7 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
      * Convenience-method to reduce DnD (un)register overhead.
      */
     public boolean removeAllCards(final List<Card> widgets) {
+        LOG.log(Level.INFO, "Attempting to remove cards from pile " + getElement().getId() + "!"); //$NON-NLS-1$ //$NON-NLS-2$
         // Empty list means nothing to do
         if (widgets.isEmpty()) {
             LOG.log(Level.INFO, "Cannot remove because list is empty!"); //$NON-NLS-1$
@@ -255,40 +156,27 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
             if (!remove(cardToRemove)) {
                 LOG.log(Level.INFO, "Could not remove card " + cardToRemove.getElement().getId() + "!"); //$NON-NLS-1$ //$NON-NLS-2$
                 // This was removed since gwt-dnd removed the card before!
+                if (dealOriginal.contains(cardToRemove)) {
+                    LOG.log(Level.INFO, "Remove dealx card " + cardToRemove + "!"); //$NON-NLS-1$ //$NON-NLS-2$
+                    dealOriginal.remove(cardToRemove);
+                }
                 // return false;
+            } else {
+                if (cardGame.getGameMode() != GameMode.DEAL) {
+                    if (dealOriginal.contains(cardToRemove)) {
+                        LOG.log(Level.INFO, "Remove deal card " + cardToRemove + "!"); //$NON-NLS-1$ //$NON-NLS-2$
+                        dealOriginal.remove(cardToRemove);
+                    }
+                }
             }
+        }
+        if (getChildren().size() > 0) {
+            final Card lastCard = getLastCard();
+            dealOriginal.remove(lastCard);
         }
 
-        if (getChildren().size() > 0) {
-            LOG.log(Level.INFO, "Pile is not empty."); //$NON-NLS-1$
-//            final Card lastCard = (Card)cards.lastElement();
-            final Card lastCard = getLastCard();
-            LOG.log(Level.INFO, "cgVisibility: " + cgVisibility.name() + "."); //$NON-NLS-1$ //$NON-NLS-2$
-            switch (cgVisibility) {
-            case ALL:
-            case TOP:
-                lastCard.showFront();
-                if (!DNDManager.isDropTarget(lastCard)) {
-                    final CGSimpleDropController dropController = new CGSimpleDropController(lastCard);
-                    DNDManager.registerDropController(dropController);
-                }
-                break;
-            case NONE:
-                lastCard.showBack();
-                break;
-            default:
-                assert false;
-                break;
-            }
-        } else {
-            LOG.log(Level.INFO, "Pile is empty => declare pile as drop target.");
-            // Pile is empty => declare pile as drop target
-            if (!DNDManager.isDropTarget(this)) {
-                final CGSimpleDropController dropController = new CGSimpleDropController(
-                        this);
-                DNDManager.registerDropController(dropController);
-            }
-        }
+        LOG.log(Level.INFO, "Redraw after remove.");
+        redraw();
 
         LOG.log(Level.INFO, "Fire remove.");
         listeners.fireRemove();
@@ -296,7 +184,6 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
     }
 
     public boolean moveTo(final Pile newPile, final Card card) {
-        LOG.log(Level.INFO, "moveTo");
         LOG.log(Level.INFO, "moveTo: remove card");
         if (!removeCard(card)) {
             LOG.log(Level.INFO, "Could not remove card from old pile in moveTo!");
@@ -346,6 +233,98 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
 //        }
 //        return true;
 //    }
+
+    /**
+     * TODO JavaDoc
+     */
+    public void redraw() {
+        int topPos = 0;
+        int leftPos = 0;
+        int zIndex = 1;
+
+        for (Iterator<Widget> it = getChildren().iterator(); it.hasNext();) {
+            final Card card = (Card) it.next();
+//        for (Card card : widgets) {
+            LOG.log(Level.INFO, "Card is " + card.getElement().getId() + "."); //$NON-NLS-1$ //$NON-NLS-2$
+
+            final Style style = card.getElement().getStyle();
+            style.setZIndex(zIndex);
+            style.setTop(topPos, Style.Unit.PX);
+            style.setLeft(leftPos, Style.Unit.PX);
+
+            LOG.log(Level.INFO, "marginTop: " + topPos + "."); //$NON-NLS-1$ //$NON-NLS-2$
+
+            if (cardGame.getGameMode() != GameMode.DEAL && !dealOriginal.contains(card)) {
+                switch (cgVisibility) {
+                case ALL:
+                    card.showFront();
+                    break;
+                case TOP:
+                case NONE:
+                    card.showBack();
+                    if (DNDManager.isDropTarget(card)) {
+                        DNDManager.unregisterDropController(DNDManager.getDropTarget(card));
+                    }
+                    break;
+                default:
+                    assert false;
+                    break;
+                }
+            }
+
+            // HERE WAS ADD
+
+            zIndex++;
+            LOG.log(Level.INFO, "Layout: " + layout.name() + "."); //$NON-NLS-1$ //$NON-NLS-2$
+            if (layout == CGLayout.CASCADE) {
+                // position for next card
+                switch (buildingDirection) {
+                case LEFT:
+                    leftPos -= card.isFrontShowing() ? MARGIN_FRONT : MARGIN_BACK;
+                    break;
+                case RIGHT:
+                    leftPos += card.isFrontShowing() ? MARGIN_FRONT : MARGIN_BACK;
+                    break;
+                case TOP:
+                    topPos -= card.isFrontShowing() ? MARGIN_FRONT : MARGIN_BACK;
+                    break;
+                case BOTTOM:
+                    topPos += card.isFrontShowing() ? MARGIN_FRONT : MARGIN_BACK;
+                    break;
+                default:
+                    // Default value, to prohibit default!
+                    break;
+                }
+            }
+        }
+
+        final Card card = getLastCard();
+        if (card != null) {
+
+            // Parameters for the last card
+            if (cardGame.getGameMode() != GameMode.DEAL && cgVisibility == CGVisibility.TOP) {
+                card.showFront();
+            }
+
+            if (card.isFrontShowing()) {
+                if (!DNDManager.isDropTarget(card)) {
+                    final CGSimpleDropController dropController = new CGSimpleDropController(card);
+                    DNDManager.registerDropController(dropController);
+                }
+            }
+
+            if (DNDManager.isDropTarget(this)) {
+                LOG.log(Level.INFO, "Made non-empty pile " + getElement().getId() + " no drop target."); //$NON-NLS-1$ //$NON-NLS-2$
+                DNDManager.unregisterDropController(DNDManager.getDropTarget(this));
+            }
+        } else {
+            if (!DNDManager.isDropTarget(this)) {
+                LOG.log(Level.INFO, "Made empty pile " + getElement().getId() + " drop target."); //$NON-NLS-1$ //$NON-NLS-2$
+                final CGSimpleDropController dropController = new CGSimpleDropController(this);
+                DNDManager.registerDropController(dropController);
+            }
+        }
+    }
 
     public boolean acceptsAdd(final Card card) {
         final List<Card> cards = new ArrayList<Card>();
@@ -539,7 +518,7 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
          */
         ALL,
         /**
-         * No card on the pile shows the front side (i.e., all cards show the back side).
+         * No card on the pile shows the front side (i.e., all cards show the back side). This is the default visibility of {@link Stock}.
          */
         NONE,
         /**
@@ -597,7 +576,7 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
     }
 
     /**
-     * If the layout value {@link CGLayout.CASCADE} is set, this decides in which direction the layout is built.
+     * If the layout value {@link CGLayout#CASCADE} is set, this decides in which direction the layout is built.
      */
     public enum CGBuildingDirection {
         /**
@@ -619,7 +598,7 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
     }
 
     /**
-     * To be overwritten if CGEmptyStart.FUNC is set!
+     * To be overwritten if {@link CGEmptyStart#FUNC} is set!
      */
     public boolean acceptsFirstCard(final Card card) {
         return false;

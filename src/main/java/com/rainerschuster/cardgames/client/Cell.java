@@ -3,6 +3,8 @@ package com.rainerschuster.cardgames.client;
 import com.rainerschuster.cardgames.client.games.CardGame;
 
 /**
+ * A cell is a pile with maximum 1 card allowed.
+ * 
  * @author Rainer Schuster
  */
 public class Cell extends Pile {

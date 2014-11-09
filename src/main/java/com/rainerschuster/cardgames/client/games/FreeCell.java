@@ -302,7 +302,9 @@ public class FreeCell extends CardGame {
 		return count;
 	}*/
 
-    /** @return next available "free cell" (checks cell and tableau piles) */
+    /**
+     * @return Next available "free cell" (checks cell and tableau piles).
+     */
     public Pile getNextFreeCell() {
         // Search in cells
         for (Iterator<Widget> it = cells.iterator(); it.hasNext();) {
@@ -323,7 +325,9 @@ public class FreeCell extends CardGame {
         return null;
     }
 
-    /** @return number of "free cells" (checks cell and tableau piles) */
+    /**
+     * @return Number of "free cells" (checks cell and tableau piles).
+     */
     public int getFreeCellCount() {
         return cells.getEmptyPileCount() + tableaus.getEmptyPileCount();
     }
