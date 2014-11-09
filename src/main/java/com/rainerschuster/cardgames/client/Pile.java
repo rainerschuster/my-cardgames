@@ -550,23 +550,23 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
      */
     public enum CGEmptyStart {
         /**
-         * every card allowed
+         * Every card is allowed.
          */
         NULL,
         /**
-         * no card allowed
+         * No card is allowed.
          */
         NONE,
         /**
-         * check function to decide
+         * Check function to decide. This means that the method {@link Pile#acceptsFirstCard(Card)} must be overwritten.
          */
         FUNC,
         /**
-         * convenience value (for solitaire)
+         * An "ace" must be the first card on an empty pile. This is a convenience value (for solitaire).
          */
         ACE,
         /**
-         * convenience value (for solitaire)
+         * A "king" must be the first card on an empty pile. This is a convenience value (for solitaire).
          */
         KING;
     }
