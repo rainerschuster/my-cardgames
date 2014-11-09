@@ -579,19 +579,19 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
      */
     public enum CGRemoveRule {
         /**
-         * always
+         * Removal is always allowed.
          */
         ANY,
         /**
-         * top card only
+         * Top card may be removed only.
          */
         TOP,
         /**
-         * check function to decide
+         * Check buildingRemove to decide.
          */
         BUILDING,
         /**
-         * never
+         * Removal is never allowed.
          */
         NONE;
     }
