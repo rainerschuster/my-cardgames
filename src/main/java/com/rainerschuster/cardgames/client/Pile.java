@@ -593,8 +593,26 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
         NONE;
     }
 
+    /**
+     * If the layout value {@link CGLayout.CASCADE} is set, this decides in which direction the layout is built.
+     */
     public enum CGBuildingDirection {
-        LEFT, RIGHT, TOP, BOTTOM;
+        /**
+         * Cascade cards from right to left.
+         */
+        LEFT,
+        /**
+         * Cascade cards from left to right.
+         */
+        RIGHT,
+        /**
+         * Cascade cards from bottom to top (i.e., up).
+         */
+        TOP,
+        /**
+         * Cascade cards from top to bottom (i.e., down).
+         */
+        BOTTOM;
     }
 
     /**
