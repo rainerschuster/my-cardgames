@@ -167,6 +167,21 @@ public class SpiderSolitaire extends CardGame {
         stock.addAllCards(allCards.subList(54, allCards.size()));
     }
 
+    @Override
+    public void start() {
+        super.start();
+        tableau1.redraw();
+        tableau2.redraw();
+        tableau3.redraw();
+        tableau4.redraw();
+        tableau5.redraw();
+        tableau6.redraw();
+        tableau7.redraw();
+        tableau8.redraw();
+        tableau9.redraw();
+        tableau10.redraw();
+    }
+
     private void dealTableauCards(final List<Card> deck, final int begin, final int end, final Tableau target) {
         target.addAllCards(deck.subList(begin, end));
 

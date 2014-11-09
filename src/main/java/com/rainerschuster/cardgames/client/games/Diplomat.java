@@ -87,6 +87,19 @@ public class Diplomat extends CardGame {
         stock.addAllCards(allCards.subList(40, allCards.size()));
     }
 
+    @Override
+    public void start() {
+        super.start();
+        tableau1.redraw();
+        tableau2.redraw();
+        tableau3.redraw();
+        tableau4.redraw();
+        tableau5.redraw();
+        tableau6.redraw();
+        tableau7.redraw();
+        tableau8.redraw();
+    }
+
     private void dealTableauCards(final List<Card> deck, final int begin, final Tableau target) {
         final List<Card> subList = deck.subList(begin, begin + 5);
         target.addAllCards(subList);
