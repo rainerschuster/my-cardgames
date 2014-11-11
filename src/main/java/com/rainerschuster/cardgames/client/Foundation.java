@@ -7,18 +7,6 @@ import com.rainerschuster.cardgames.client.games.CardGame;
  */
 public class Foundation extends Pile {
 
-    //static final Building defaultBuildingAdd = new BuildingInSequence(Building.Direction.UP, Building.Suit.NULL, false);
-    //static final Building defaultBuildingRemove = new BuildingInSequence(Building.Direction.UP, Building.Suit.NULL, false);
-
-    /*static {
-		defaultBuildingAdd = new BuildingInSequence();
-		defaultBuildingAdd.setDirection(Building.Direction.UP);
-		defaultBuildingAdd.setSuit(Building.Suit.SUIT);
-		defaultBuildingAdd.setWrap(false);
-
-		defaultBuildingRemove = defaultBuildingAdd;
-	}*/
-
     public Foundation(CardGame cardGame, String id, CGLayout layout, CGVisibility visibility, CGEmptyStart emptyStart, Building buildingAdd, CGRemoveRule ruleRemove) {
         super(cardGame, id, layout, visibility, emptyStart, buildingAdd, ruleRemove);
     }

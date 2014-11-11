@@ -62,11 +62,6 @@ public class MyCardGames implements EntryPoint {
         // Inject the contents of the CSS file
         MyResources.INSTANCE.css().ensureInjected();
 
-        //	    ContactsServiceAsync rpcService = GWT.create(ContactsService.class);
-        //	    HandlerManager eventBus = new HandlerManager(null);
-        //	    AppController appViewer = new AppController(rpcService, eventBus);
-        //	    appViewer.go(RootPanel.get());
-
         this.table = new Table();
         final DockPanel body = new DockPanel();
         body.setWidth("100%");
@@ -87,7 +82,7 @@ public class MyCardGames implements EntryPoint {
         solitaireGCMenu.addItem("Spider Solitaire", new CardGameCommand(new SpiderSolitaire(table)));
         solitaireGCMenu.addItem("Yukon", new CardGameCommand(new Yukon(table)));
         gamesMenu.addItem(messages.menuSelectGameSolitaire(), solitaireGCMenu);
-        //		gamesMenu.addItem(messages.menuSelectGameTest(), new CardGameCommand(new TestGame(table)));
+//        gamesMenu.addItem(messages.menuSelectGameTest(), new CardGameCommand(new TestGame(table)));
         menu.addItem(messages.menuSelectGame(), gamesMenu);
 
         // View
@@ -142,11 +137,11 @@ public class MyCardGames implements EntryPoint {
 
         RootPanel.get().add(body);
 
-        //		final PickupDragController dragController = new PickupDragController(RootPanel.get(), false);
+//        final PickupDragController dragController = new PickupDragController(RootPanel.get(), false);
         this.dragController = new PickupDragController(table, false);
         // https://code.google.com/p/gwt-dnd/issues/detail?id=52
         dragController.setBehaviorDragStartSensitivity(3);
-        //		dragController.setBehaviorMultipleSelection(true);
+        dragController.setBehaviorMultipleSelection(false);
         DNDManager.setDragController(dragController);
 
         final CGDragHandler dragHandler = new CGDragHandler();

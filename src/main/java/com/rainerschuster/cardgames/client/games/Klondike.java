@@ -263,7 +263,9 @@ public class Klondike extends CardGame {
                 && (foundation4.getCardCount() == 13);
     }
 
-    /** @return how many cards could be "cleaned up" in one take (loops until nothing can be cleaned up anymore) */
+    /**
+     * @return How many cards could be "cleaned up" in one take (loops until nothing can be cleaned up anymore).
+     */
     public int cleanUpTrick() {
         int count = 0;
         int temp;
@@ -274,7 +276,9 @@ public class Klondike extends CardGame {
         return count;
     }
 
-    /** @return how many cards could be "cleaned up" in one round/loop */
+    /**
+     * @return How many cards could be "cleaned up" in one round/loop.
+     */
     private int cleanUpRoundTrick() {
         int count = 0;
         count += cleanUpTrickStack(waste);
@@ -288,7 +292,9 @@ public class Klondike extends CardGame {
         return count;
     }
 
-    /** @return how many cards could be "cleaned up" at a pile */
+    /**
+     * @return How many cards could be "cleaned up" at a pile.
+     */
     private int cleanUpTrickStack(final Pile pile) {
         int count = 0;
         boolean flag = true;

@@ -13,18 +13,6 @@ import com.rainerschuster.cardgames.client.games.CardGame;
  */
 public class Stock extends Pile implements HasClickHandlers {
 
-    //static final Building defaultBuildingAdd = new BuildingInSequence(Building.Direction.NULL, Building.Suit.NULL, false);
-    //static final Building defaultBuildingRemove = new BuildingInSequence(Building.Direction.NULL, Building.Suit.NULL, false);
-
-    /*static {
-		defaultBuildingAdd = new BuildingInSequence();
-		defaultBuildingAdd.setDirection(Building.Direction.NULL);
-		defaultBuildingAdd.setSuit(Building.Suit.NULL);
-		defaultBuildingAdd.setWrap(true);
-
-		defaultBuildingRemove = defaultBuildingAdd;
-	}*/
-
     private Pile moveTarget = null;
 
     public Stock(CardGame cardGame, String id, CGLayout layout, CGVisibility visibility, CGEmptyStart emptyStart, Building buildingAdd, CGRemoveRule ruleRemove) {
