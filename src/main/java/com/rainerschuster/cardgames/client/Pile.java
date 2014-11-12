@@ -1,6 +1,7 @@
 package com.rainerschuster.cardgames.client;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
@@ -85,18 +86,12 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
 
     // Precondition: checked with acceptsAdd
     public boolean addCard(final Card card) {
-        // if (!acceptsAdd(card)) {return false};
-        final List<Card> cards = new ArrayList<Card>();
-        cards.add(card);
-        return addAllCards(cards);
+        return addAllCards(Collections.singletonList(card));
     }
 
     // Precondition: checked with acceptsRemove
     public boolean removeCard(final Card card) {
-        // if (!acceptsRemove(card)) {return false};
-        final List<Card> cards = new ArrayList<Card>();
-        cards.add(card);
-        return removeAllCards(cards);
+        return removeAllCards(Collections.singletonList(card));
     }
 
     public void removeAllFrom(final Card card) {
