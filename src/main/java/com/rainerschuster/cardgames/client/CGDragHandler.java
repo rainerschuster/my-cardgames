@@ -17,6 +17,9 @@ public class CGDragHandler extends DragHandlerAdapter {
 
     private static final Logger LOG = Logger.getLogger(CGDragHandler.class.getName());
 
+    /* (non-Javadoc)
+     * @see com.allen_sauer.gwt.dnd.client.DragHandlerAdapter#onPreviewDragStart(com.allen_sauer.gwt.dnd.client.DragStartEvent)
+     */
     @Override
     public void onPreviewDragStart(final DragStartEvent event) throws VetoDragException {
         LOG.log(Level.INFO, "onPreviewDragStart"); //$NON-NLS-1$
@@ -57,6 +60,9 @@ public class CGDragHandler extends DragHandlerAdapter {
         }
     }
 
+    /* (non-Javadoc)
+     * @see com.allen_sauer.gwt.dnd.client.DragHandlerAdapter#onDragEnd(com.allen_sauer.gwt.dnd.client.DragEndEvent)
+     */
     @Override
     public void onDragEnd(final DragEndEvent event) {
         LOG.log(Level.INFO, "onDragEnd"); //$NON-NLS-1$

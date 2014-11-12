@@ -153,10 +153,16 @@ public class Card extends FocusPanel {
         return cardGame.getCardValues().getCardValue(this);
     }
 
+    /**
+     * @return {@code true} if the color is black, i.e., the suit is Clubs or Spades.
+     */
     public boolean isBlack() {
         return (suit == Suit.CLUBS) || (suit == Suit.SPADES);
     }
 
+    /**
+     * @return {@code true} if the color is red, i.e., the suit is Diamonds or Hearts.
+     */
     public boolean isRed() {
         return (suit == Suit.DIAMONDS) || (suit == Suit.HEARTS);
     }

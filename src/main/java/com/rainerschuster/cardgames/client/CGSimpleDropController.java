@@ -18,12 +18,18 @@ public class CGSimpleDropController extends SimpleDropController {
         super(dropTarget);
     }
 
+    /* (non-Javadoc)
+     * @see com.allen_sauer.gwt.dnd.client.drop.AbstractDropController#onDrop(com.allen_sauer.gwt.dnd.client.DragContext)
+     */
     @Override
     public void onDrop(final DragContext context) {
         LOG.log(Level.INFO, "onDrop"); //$NON-NLS-1$
         super.onDrop(context);
     }
 
+    /* (non-Javadoc)
+     * @see com.allen_sauer.gwt.dnd.client.drop.AbstractDropController#onPreviewDrop(com.allen_sauer.gwt.dnd.client.DragContext)
+     */
     @Override
     public void onPreviewDrop(final DragContext context) throws VetoDragException {
         LOG.log(Level.INFO, "onPreviewDrop"); //$NON-NLS-1$
