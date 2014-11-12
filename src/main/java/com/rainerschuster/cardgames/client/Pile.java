@@ -84,15 +84,30 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
     }
 
     // Precondition: checked with acceptsAdd
+    /**
+     * Adds the specified card to the pile. Note that you have to check if adding is allowed with {@link #acceptsAdd} before!
+     * @param card The card to add.
+     * @return {@code true} if adding the card was successful.
+     */
     public boolean addCard(final Card card) {
         return addAllCards(Collections.singletonList(card));
     }
 
     // Precondition: checked with acceptsRemove
+    /**
+     * Removes the specified card from the pile. Note that you have to check if removing is allowed with {@link #acceptsRemove} before!
+     * @param card The card to remove.
+     * @return {@code true} if removing the card was successful.
+     */
     public boolean removeCard(final Card card) {
         return removeAllCards(Collections.singletonList(card));
     }
 
+    /**
+     * Removes all cards starting with the specified card from the pile. Note that you have to check if removing is allowed with {@link #acceptsRemove} before!
+     * @param card The card from which to remove.
+     * @return {@code true} if removing the cards was successful.
+     */
     public void removeAllFrom(final Card card) {
         final List<Card> cards = new ArrayList<Card>();
         for (int i = getCardIndex(card); i < getCardCount(); i++) {
