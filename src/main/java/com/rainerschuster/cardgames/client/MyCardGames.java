@@ -78,7 +78,8 @@ public class MyCardGames implements EntryPoint {
         final MenuBar solitaireGCMenu = new MenuBar(true);
         solitaireGCMenu.addItem("Diplomat", new CardGameCommand(new Diplomat(table)));
         solitaireGCMenu.addItem("FreeCell", new CardGameCommand(new FreeCell(table)));
-        solitaireGCMenu.addItem("Klondike", new CardGameCommand(new Klondike(table)));
+        final CardGameCommand klondikeCardGameCommand = new CardGameCommand(new Klondike(table));
+        solitaireGCMenu.addItem("Klondike", klondikeCardGameCommand);
         solitaireGCMenu.addItem("Spider Solitaire", new CardGameCommand(new SpiderSolitaire(table)));
         solitaireGCMenu.addItem("Yukon", new CardGameCommand(new Yukon(table)));
         gamesMenu.addItem(messages.menuSelectGameSolitaire(), solitaireGCMenu);
@@ -146,6 +147,9 @@ public class MyCardGames implements EntryPoint {
 
         final CGDragHandler dragHandler = new CGDragHandler();
         DNDManager.addDragHandler(dragHandler);
+
+        // Start Klondike per default
+        klondikeCardGameCommand.execute();
     }
 
     private static native void killContextMenu() /*-{
