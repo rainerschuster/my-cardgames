@@ -467,7 +467,7 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
     }
 
     /**
-     * @return The last (typically the top-most) card on the pile.
+     * @return The last (typically the topmost) card on the pile.
      */
     public Card getLastCard() {
         if (getChildren().size() > 0) {
@@ -508,7 +508,7 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
      */
     public enum CGLayout {
         /**
-         * Cards are drawn on top of each other so that only the top-most card can directly be seen.
+         * Cards are drawn on top of each other so that only the topmost card can directly be seen.
          * Note that this does not necessarily mean that it shows the front side.
          */
         STACK,
@@ -531,13 +531,13 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
          */
         NONE,
         /**
-         * The top-most card on the pile shows the front side, all others show the back side.
+         * The topmost card on the pile shows the front side, all others show the back side.
          */
         TOP;
     }
 
     /**
-     * Decides which (bottom-most) card is allowed on an empty pile.
+     * Decides which (bottommost) card is allowed on an empty pile.
      */
     public enum CGEmptyStart {
         /**
