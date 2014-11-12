@@ -118,18 +118,6 @@ public class MyCardGames implements EntryPoint {
         adsPlaceholder.addStyleName(MyResources.INSTANCE.css().cgSidePlaceholder());
         body.add(adsPlaceholder, DockPanel.EAST);
         body.setCellHorizontalAlignment(adsPlaceholder, HasHorizontalAlignment.ALIGN_RIGHT);
-        /*body.add(new HTMLPanel("<script type=\"text/javascript\"><!--\n" +
-				"google_ad_client = \"pub-3271125680235410\";\n" +
-				"google_alternate_color = \"008000\";\n" +
-				"google_ad_width = 160;\n" +
-				"google_ad_height = 600;\n" +
-				"google_ad_format = \"160x600_as\";\n" +
-				"google_ad_type = \"text_image\";\n" +
-				"google_ad_channel =\"4965460994\";\n" +
-				"//--></script>\n" +
-				"<script type=\"text/javascript\"\n" +
-				"  src=\"http://pagead2.googlesyndication.com/pagead/show_ads.js\">\n" +
-				"</script>"), DockPanel.EAST);*/
 
         body.add(table, DockPanel.CENTER);
         body.setCellWidth(table, "100%");
