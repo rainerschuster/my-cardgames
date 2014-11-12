@@ -179,14 +179,10 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
     }
 
     public boolean moveTo(final Pile newPile, final Card card) {
-        LOG.log(Level.INFO, "moveTo: remove card");
         if (!removeCard(card)) {
-            LOG.log(Level.INFO, "Could not remove card from old pile in moveTo!");
             return false;
         }
-        LOG.log(Level.INFO, "moveTo: add card");
         if (!newPile.addCard(card)) {
-            LOG.log(Level.INFO, "Could not add card to new pile in moveTo!");
             return false;
         }
         return true;
@@ -194,40 +190,13 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
 
     public boolean moveTo(final Pile newPile, final List<Card> cards) {
         if (!removeAllCards(cards)) {
-            LOG.log(Level.INFO, "Could not remove all cards from old pile in moveTo!");
             return false;
         }
         if (!newPile.addAllCards(cards)) {
-            LOG.log(Level.INFO, "Could not add all cards to new pile in moveTo!");
             return false;
         }
         return true;
     }
-
-//    public boolean acceptsRemoveFrom(final Card card) {
-//        // If back side is shown
-//        if (card.isBackShowing()) {
-//            return false;
-//        }
-//        // If last card
-//        if (getChildren().indexOf(card) + 1 == getChildren().size()) {
-//            return true;
-//        }
-//        Card prevCard = card;
-//        for (int i = getChildren().indexOf(card) + 1; i < getChildren().size(); i++) {
-//            Card myCard = (Card) getChildren().get(i);
-//            if (!correctOrder(prevCard, myCard)) {
-//                return false;
-//            }
-//            prevCard = myCard;
-//        }
-//        // If the pile is empty and acceptsRemoveFrom is called there may be some error!
-//        if (getChildren().size() == 0) {
-//            System.err.println("Can't drag from an empty pile!");
-//            return false;
-//        }
-//        return true;
-//    }
 
     /**
      * TODO JavaDoc
@@ -239,7 +208,6 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
 
         for (Iterator<Widget> it = getChildren().iterator(); it.hasNext();) {
             final Card card = (Card) it.next();
-//        for (Card card : widgets) {
             LOG.log(Level.INFO, "Card is " + card.getElement().getId() + "."); //$NON-NLS-1$ //$NON-NLS-2$
 
             final Style style = card.getElement().getStyle();
@@ -322,9 +290,7 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
     }
 
     public boolean acceptsAdd(final Card card) {
-        final List<Card> cards = new ArrayList<Card>();
-        cards.add(card);
-        return acceptsAddAll(cards);
+        return acceptsAddAll(Collections.singletonList(card));
     }
 
     /**
@@ -393,9 +359,7 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
     }
 
     public boolean acceptsRemove(final Card card) {
-        List<Card> cards = new ArrayList<Card>();
-        cards.add(card);
-        return acceptsRemoveAll(cards);
+        return acceptsRemoveAll(Collections.singletonList(card));
     }
 
     /**
@@ -473,15 +437,11 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
         }
     }
 
-//    public void shuffle() {
-//        Collections.shuffle(cards);
-//    }
-
     public int getCardCount() {
         return getChildren().size();
     }
 
-    public Card getCard(int index) {
+    public Card getCard(final int index) {
         return (Card) getChildren().get(index);
     }
 
