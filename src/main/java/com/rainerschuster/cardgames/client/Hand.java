@@ -10,6 +10,10 @@ import com.google.gwt.user.client.ui.Widget;
 import com.rainerschuster.cardgames.client.games.CardGame;
 
 /**
+ * <blockquote cite="http://en.wikipedia.org/w/index.php?title=Glossary_of_card_game_terms&oldid=613941263">
+ * The cards held by one player.
+ * </blockquote>
+ * 
  * @author Rainer Schuster
  */
 public class Hand extends Pile {

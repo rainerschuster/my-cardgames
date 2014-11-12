@@ -5,6 +5,10 @@ import java.util.List;
 import com.rainerschuster.cardgames.client.games.CardGame;
 
 /**
+ * <blockquote cite="http://en.wikipedia.org/w/index.php?title=Glossary_of_Patience_terms&oldid=626298777">
+ * The area where the cards from the stock go when they are brought into play.
+ * </blockquote>
+ * 
  * @author Rainer Schuster
  */
 public class Waste extends Pile {

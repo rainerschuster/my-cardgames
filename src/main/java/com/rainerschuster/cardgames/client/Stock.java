@@ -9,6 +9,10 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.rainerschuster.cardgames.client.games.CardGame;
 
 /**
+ * <blockquote cite="http://en.wikipedia.org/w/index.php?title=Glossary_of_card_game_terms&oldid=613941263">
+ * A pile of cards, face down, which are left over after setting up the rest of the game (ie. dealing hands, setting up other layout areas).
+ * </blockquote>
+ * 
  * @author Rainer Schuster
  */
 public class Stock extends Pile implements HasClickHandlers {

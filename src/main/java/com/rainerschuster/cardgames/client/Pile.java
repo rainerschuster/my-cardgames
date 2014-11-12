@@ -23,6 +23,10 @@ import com.rainerschuster.cardgames.client.ui.SourcesCardEvents;
 import com.rainerschuster.cardgames.client.ui.SourcesPileEvents;
 
 /**
+ * <blockquote cite="http://en.wikipedia.org/w/index.php?title=Glossary_of_card_game_terms&oldid=613941263">
+ * A set of cards placed on a surface so that they partially or completely overlap.
+ * </blockquote>
+ * 
  * @author Rainer Schuster
  */
 public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCardEvents {
