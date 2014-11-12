@@ -68,10 +68,10 @@ public class MyCardGames implements EntryPoint {
 
         // Menu
         final MenuBar menu = new MenuBar();
-        //		// Game
-        //		final MenuBar gameMenu = new MenuBar(true);
-        //		//gameMenu.addItem("New Game", newGameCmd);
-        //		menu.addItem("Game", gameMenu);
+//        // Game
+//        final MenuBar gameMenu = new MenuBar(true);
+////        gameMenu.addItem("New Game", newGameCmd);
+//        menu.addItem("Game", gameMenu);
 
         // Select Game
         final MenuBar gamesMenu = new MenuBar(true);
