@@ -74,7 +74,6 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
         this.cgEmptyStart = emptyStart;
         this.buildingAdd = buildingAdd;
         this.cgRuleRemove = ruleRemove;
-        // this.buildingRemove = buildingRemove;
     }
 
     public Pile(CardGame cardGame, String id, CGLayout layout,
@@ -113,8 +112,6 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
             return false;
         }
         
-//        if (!acceptsAdd((Card)widgets.get(0))) return false;
-
         for (Card card : widgets) {
             LOG.log(Level.INFO, "Card is " + card.getElement().getId() + "."); //$NON-NLS-1$ //$NON-NLS-2$
             add(card);
@@ -144,18 +141,15 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
             return false;
         }
 
-//        if (!cards.removeAll(widgets)) { return false; }
-
         for (int i = widgets.size(); i > 0; i--) {
             final Card cardToRemove = widgets.get(i - 1);
+            // TODO Rethink this because gwt-dnd removed the card before!
             if (!remove(cardToRemove)) {
                 LOG.log(Level.INFO, "Could not remove card " + cardToRemove.getElement().getId() + "!"); //$NON-NLS-1$ //$NON-NLS-2$
-                // This was removed since gwt-dnd removed the card before!
                 if (dealOriginal.contains(cardToRemove)) {
                     LOG.log(Level.INFO, "Remove dealx card " + cardToRemove + "!"); //$NON-NLS-1$ //$NON-NLS-2$
                     dealOriginal.remove(cardToRemove);
                 }
-                // return false;
             } else {
                 if (cardGame.getGameMode() != GameMode.DEAL) {
                     if (dealOriginal.contains(cardToRemove)) {
@@ -178,6 +172,12 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
         return true;
     }
 
+    /**
+     * Remove the card from this pile and add it to the specified new pile.
+     * @param newPile The pile on which the card should be moved.
+     * @param card The card to move.
+     * @return {@code true} if both removing and adding was successful.
+     */
     public boolean moveTo(final Pile newPile, final Card card) {
         if (!removeCard(card)) {
             return false;
@@ -188,6 +188,12 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
         return true;
     }
 
+    /**
+     * Remove the cards from this pile and add it to the specified new pile.
+     * @param newPile The pile on which the cards should be moved.
+     * @param cards The cards to move.
+     * @return {@code true} if both removing and adding was successful.
+     */
     public boolean moveTo(final Pile newPile, final List<Card> cards) {
         if (!removeAllCards(cards)) {
             return false;
@@ -199,7 +205,8 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
     }
 
     /**
-     * TODO JavaDoc
+     * Redraw the pile according to the rules and the current state of the cards.
+     * Cards that were not changed since they were dealt remain as they are.
      */
     public void redraw() {
         int topPos = 0;
@@ -289,12 +296,19 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
         }
     }
 
+    /**
+     * Acceptance check if the specified card may be added to the pile.
+     * @param card The card to check.
+     * @return {@code true} if the acceptance check was successful.
+     */
     public boolean acceptsAdd(final Card card) {
         return acceptsAddAll(Collections.singletonList(card));
     }
 
     /**
-     * Basic acceptsAdd function.
+     * Acceptance check if the specified cards may be added to the pile.
+     * @param cards The cards to check.
+     * @return {@code true} if the acceptance check was successful.
      */
     public boolean acceptsAddAll(final List<Card> cards) {
         if (cards.isEmpty()) {
@@ -358,12 +372,19 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
         return result;
     }
 
+    /**
+     * Acceptance check if the specified card may be removed from the pile.
+     * @param card The card to check.
+     * @return {@code true} if the acceptance check was successful.
+     */
     public boolean acceptsRemove(final Card card) {
         return acceptsRemoveAll(Collections.singletonList(card));
     }
 
     /**
-     * Basic acceptsRemove function.
+     * Acceptance check if the specified cards may be removed from the pile.
+     * @param cards The cards to check.
+     * @return {@code true} if the acceptance check was successful.
      */
     public boolean acceptsRemoveAll(final List<Card> cards) {
         if (cards.isEmpty()) {
@@ -426,6 +447,9 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
         cardListeners.fireCardDoubleClick(sender);
     }
 
+    /**
+     * @return The last (typically the top-most) card on the pile.
+     */
     public Card getLastCard() {
         if (getChildren().size() > 0) {
             final Card lastCard = (Card) getChildren().get(getChildren().size() - 1);
@@ -437,14 +461,25 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
         }
     }
 
+    /**
+     * @return The number of cards on the pile.
+     */
     public int getCardCount() {
         return getChildren().size();
     }
 
+    /**
+     * @param index Index of the card to get.
+     * @return The card on the pile with the specified index.
+     */
     public Card getCard(final int index) {
         return (Card) getChildren().get(index);
     }
 
+    /**
+     * @param card The card for which to determine the index.
+     * @return The index of the specified card.
+     */
     public int getCardIndex(final Card card) {
         return getChildren().indexOf(card);
     }
