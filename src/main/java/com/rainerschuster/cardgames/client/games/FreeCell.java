@@ -1,6 +1,5 @@
 package com.rainerschuster.cardgames.client.games;
 
-import java.util.Iterator;
 import java.util.List;
 
 import com.google.gwt.core.client.GWT;
@@ -320,16 +319,16 @@ public class FreeCell extends CardGame {
      */
     public Pile getNextFreeCell() {
         // Search in cells
-        for (Iterator<Widget> it = cells.iterator(); it.hasNext();) {
-            final Pile pile = (Pile) it.next();
+        for (Widget widget : cells) {
+            final Pile pile = (Pile) widget;
             if (pile.getCardCount() == 0) {
                 return pile;
             }
         }
 
         // Search in tableaus
-        for (Iterator<Widget> it = tableaus.iterator(); it.hasNext();) {
-            final Pile pile = (Pile) it.next();
+        for (Widget widget : tableaus) {
+            final Pile pile = (Pile) widget;
             if (pile.getCardCount() == 0) {
                 return pile;
             }

@@ -61,7 +61,7 @@ public class Deck {
     }
 
     public List<Card> newDeck(CardGame cardGame, int[] ranks, int[] suits) {
-        final List<Card> protoDeck = new ArrayList<Card>();
+        final List<Card> protoDeck = new ArrayList<>();
         for (int suit = 0; suit < Suit.values().length; suit++) {
             for (int rank = 0; rank < Rank.values().length; rank++) {
                 protoDeck.add(new Card(cardGame, Rank.values()[rank], Suit.values()[suit]));

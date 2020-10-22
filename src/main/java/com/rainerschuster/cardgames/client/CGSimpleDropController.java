@@ -53,7 +53,7 @@ public class CGSimpleDropController extends SimpleDropController {
             }
 
             if (testDeck != null) {
-                final List<Card> cards = new ArrayList<Card>();
+                final List<Card> cards = new ArrayList<>();
 //                cards.add((Card) sender);
 //                cards.addAll((Collection<? extends Card>) context.selectedWidgets);
                 for (Widget w : context.selectedWidgets) {

@@ -2,7 +2,6 @@ package com.rainerschuster.cardgames.client;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -55,7 +54,7 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
     private PileListenerCollection listeners = new PileListenerCollection();
     private CardListenerCollection cardListeners = new CardListenerCollection();
 
-    private List<Card> dealOriginal = new ArrayList<Card>();
+    private List<Card> dealOriginal = new ArrayList<>();
 
     private Pile(CardGame cardGame) {
         super();
@@ -113,7 +112,7 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
      * @return {@code true} if removing the cards was successful.
      */
     public void removeAllFrom(final Card card) {
-        final List<Card> cards = new ArrayList<Card>();
+        final List<Card> cards = new ArrayList<>();
         for (int i = getCardIndex(card); i < getCardCount(); i++) {
             cards.add(getCard(i));
         }
@@ -232,8 +231,8 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
         int leftPos = 0;
         int zIndex = 1;
 
-        for (Iterator<Widget> it = getChildren().iterator(); it.hasNext();) {
-            final Card card = (Card) it.next();
+        for (Widget widget : getChildren()) {
+            final Card card = (Card) widget;
             LOG.log(Level.INFO, "Card is " + card.getElement().getId() + "."); //$NON-NLS-1$ //$NON-NLS-2$
 
             final Style style = card.getElement().getStyle();
@@ -347,7 +346,7 @@ public class Pile extends AbsolutePanel implements SourcesPileEvents, SourcesCar
 
         List<Card> list;
         if (getCardCount() > 0) {
-            list = new ArrayList<Card>();
+            list = new ArrayList<>();
             list.add(getLastCard());
             list.addAll(cards);
         } else {

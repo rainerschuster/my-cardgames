@@ -1,6 +1,5 @@
 package com.rainerschuster.cardgames.client.games;
 
-import java.util.Iterator;
 import java.util.List;
 
 import com.google.gwt.core.client.GWT;
@@ -110,10 +109,10 @@ public class SpiderSolitaire extends CardGame {
 
     public void gameDeal() {
         setGameMode(GameMode.DEAL);
-        for (Iterator<Widget> iter = tableaus.iterator(); iter.hasNext();) {
+        for (Widget widget : tableaus) {
             if (stock.getCardCount() > 0) {
                 final Card lastCard = stock.getLastCard();
-                stock.moveTo((Tableau) iter.next(), lastCard);
+                stock.moveTo((Tableau) widget, lastCard);
                 lastCard.showFront();
             }
         }

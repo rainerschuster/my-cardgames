@@ -34,7 +34,7 @@ public final class Utils {
      * @return A random subset of m items from the specified list.
      */
     public static <T> List<T> floydList(final List<T> items, final int m) {
-        final List<T> result = new ArrayList<T>(m);
+        final List<T> result = new ArrayList<>(m);
         final int n = items.size();
         for (int i = n - m; i < n; i++) {
             final int position = RANDOM.nextInt(i + 1);

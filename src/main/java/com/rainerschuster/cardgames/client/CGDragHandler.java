@@ -31,7 +31,7 @@ public class CGDragHandler extends DragHandlerAdapter {
             final Card card = (Card) sender;
 
             final Pile pile = card.getPile();
-            final List<Card> additionalCards = new ArrayList<Card>();
+            final List<Card> additionalCards = new ArrayList<>();
             for (int i = pile.getCardIndex(card) + 1; i < pile.getCardCount(); i++) {
                 // add drag object
                 LOG.log(Level.INFO, "Toggle card #" + i + "."); //$NON-NLS-1$ //$NON-NLS-2$
@@ -42,7 +42,7 @@ public class CGDragHandler extends DragHandlerAdapter {
 //                event.getContext().dragController.toggleSelection(additionalCard);
             }
 
-            final List<Card> cards = new ArrayList<Card>();
+            final List<Card> cards = new ArrayList<>();
 //            cards.add(card);
 //            cards.addAll((Collection<? extends Card>)getDragObjects());
             for (Widget w : event.getContext().selectedWidgets) {
@@ -83,7 +83,7 @@ public class CGDragHandler extends DragHandlerAdapter {
                 newPile = (Pile)dropTarget;
             }
             // TODO if possible get rid of this dirty cast hack
-            final List<Card> cards = new ArrayList<Card>(context.selectedWidgets.size());
+            final List<Card> cards = new ArrayList<>(context.selectedWidgets.size());
 //            cards.addAll((Collection<? extends Card>) widgets);
             for (Widget w : context.selectedWidgets) {
                 LOG.log(Level.INFO, "Card widget " + w.getElement().getId() + "."); //$NON-NLS-1$ //$NON-NLS-2$
@@ -93,7 +93,7 @@ public class CGDragHandler extends DragHandlerAdapter {
         }
 
         // clear drag objects
-        final List<Widget> selected = new ArrayList<Widget>(context.selectedWidgets);
+        final List<Widget> selected = new ArrayList<>(context.selectedWidgets);
         for (Widget w : selected) {
             LOG.log(Level.INFO, "Unselecting widget " + w.getElement().getId() + "."); //$NON-NLS-1$ //$NON-NLS-2$
 //            event.getContext().dragController.toggleSelection(w);

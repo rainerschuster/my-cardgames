@@ -87,7 +87,7 @@ public class Klondike extends CardGame {
                 LOG.log(Level.INFO, "Click on stock."); //$NON-NLS-1$
                 if (waste.getCardCount() > 0) {
                     // Get back all cards from moveTarget
-                    final List<Card> allCards = new ArrayList<Card>();
+                    final List<Card> allCards = new ArrayList<>();
                     for (int i = 0; i < waste.getCardCount(); i++) {
                         allCards.add(waste.getCard(i));
 //                        allCards.add(moveTarget.getCards().get(i));

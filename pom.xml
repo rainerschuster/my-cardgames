@@ -12,26 +12,29 @@
   <name>My Cardgames</name>
 
   <properties>
-    <!-- Convenience property to set the GWT version -->
-    <gwtVersion>2.7.0</gwtVersion>
 
-    <!-- GWT needs at least java 1.6 -->
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <!-- Setting maven.compiler.source to something different to 1.8
+         needs that you configure the sourceLevel in gwt-maven-plugin since
+         GWT compiler 2.8 requires 1.8 (see gwt-maven-plugin block below) -->
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
 
+    <!-- Don't let your Mac use a crazy non-standard encoding -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
 
   <prerequisites>
-    <maven>3</maven>
+    <maven>3.6.3</maven>
   </prerequisites>
 
   <dependencyManagement>
     <dependencies>
+      <!-- ensure all GWT deps use the same version (unless overridden) -->
       <dependency>
         <groupId>com.google.gwt</groupId>
         <artifactId>gwt</artifactId>
-        <version>${gwtVersion}</version>
+        <version>2.9.0</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -57,7 +60,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
+      <version>4.13.1</version>
       <scope>test</scope>
     </dependency>
 	<!-- <dependency>
@@ -68,7 +71,7 @@
 	<dependency>
 		<groupId>com.allen-sauer.gwt.dnd</groupId>
 		<artifactId>gwt-dnd</artifactId>
-		<version>3.3.2</version>
+		<version>3.3.4</version>
 	</dependency>
   </dependencies>
 
@@ -80,37 +83,46 @@
 
       <!-- GWT Maven Plugin -->
       <plugin>
-        <groupId>org.codehaus.mojo</groupId>
+        <groupId>net.ltgt.gwt.maven</groupId>
         <artifactId>gwt-maven-plugin</artifactId>
-        <version>2.7.0</version>
+        <version>1.0.0</version>
         <executions>
           <execution>
-            <id>css-generation</id>
-            <phase>generate-sources</phase>
             <goals>
-              <goal>css</goal>
-            </goals>
-          </execution>
-          <execution>
-            <goals>
-              <goal>i18n</goal>
               <goal>compile</goal>
               <goal>test</goal>
-              <goal>generateAsync</goal>
             </goals>
           </execution>
         </executions>
-        <!-- Plugin configuration. There are many available options, see 
-          gwt-maven-plugin documentation at codehaus.org -->
         <configuration>
-          <runTarget>MyCardGames.html</runTarget>
-          <modules>
-            <module>com.rainerschuster.cardgames.MyCardGames</module>
-          </modules>
-          <i18nMessagesBundle>com.rainerschuster.cardgames.client.Messages</i18nMessagesBundle>
-          <cssFiles>
-            <cssFile>com/rainerschuster/cardgames/client/MyCss.css</cssFile>
-          </cssFiles>
+          <moduleName>com.rainerschuster.cardgames.MyCardGames</moduleName>
+          <moduleShortName>MyCardGames</moduleShortName>
+          <failOnError>true</failOnError>
+          <!-- GWT compiler 2.8 requires 1.8, hence define sourceLevel here if you use
+               a different source language for java compilation -->
+          <sourceLevel>1.8</sourceLevel>
+          <!-- Compiler configuration -->
+          <compilerArgs>
+            <!-- Ask GWT to create the Story of Your Compile (SOYC) (gwt:compile) -->
+            <arg>-compileReport</arg>
+            <arg>-XcompilerMetrics</arg>
+          </compilerArgs>
+          <!-- DevMode configuration -->
+          <warDir>${project.build.directory}/${project.build.finalName}</warDir>
+          <classpathScope>compile+runtime</classpathScope>
+          <!-- URL(s) that should be opened by DevMode (gwt:devmode). -->
+          <startupUrls>
+            <startupUrl>MyCardGames.html</startupUrl>
+          </startupUrls>
+        </configuration>
+      </plugin>
+
+      <!-- Skip normal test execution, we use gwt:test instead -->
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.22.2</version>
+        <configuration>
+          <skip>true</skip>
         </configuration>
       </plugin>
     </plugins>

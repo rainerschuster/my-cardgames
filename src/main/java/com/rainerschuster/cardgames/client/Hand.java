@@ -54,7 +54,7 @@ public class Hand extends Pile {
     @Override
     public boolean addAllCards(final List<Card> widgets) {
         super.addAllCards(widgets);
-        final List<Card> list = new ArrayList<Card>();
+        final List<Card> list = new ArrayList<>();
         for (Iterator<Widget> iter = getChildren().iterator(); iter.hasNext();) {
             list.add((Card) iter.next());
             iter.remove();
@@ -67,7 +67,7 @@ public class Hand extends Pile {
     public boolean removeAllCards(final List<Card> widgets) {
         // After removing sorting is not necessary, only the empty spaces have to be filled
         if (super.removeAllCards(widgets)) {
-            final List<Card> list = new ArrayList<Card>();
+            final List<Card> list = new ArrayList<>();
             for (Iterator<Widget> iter = getChildren().iterator(); iter.hasNext();) {
                 list.add((Card) iter.next());
                 iter.remove();

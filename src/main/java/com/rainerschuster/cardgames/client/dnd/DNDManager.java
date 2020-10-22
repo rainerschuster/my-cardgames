@@ -17,8 +17,8 @@ public final class DNDManager {
 
     private static final Logger LOG = Logger.getLogger(DNDManager.class.getName());
 
-    private static List<DropController> dropControllers = new ArrayList<DropController>();
-    private static List<DragHandler> dragHandlers = new ArrayList<DragHandler>();
+    private static List<DropController> dropControllers = new ArrayList<>();
+    private static List<DragHandler> dragHandlers = new ArrayList<>();
 
     private static PickupDragController dragController = null;
 
